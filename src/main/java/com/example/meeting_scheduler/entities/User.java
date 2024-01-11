@@ -36,6 +36,6 @@ public class User implements Serializable {
     @Column(name="password")
     private String password;
 
-    @ManyToMany
-    private List<Meeting> meetings;
+    @OneToMany
+    private List<MeetingParticipation> meetings;
 }

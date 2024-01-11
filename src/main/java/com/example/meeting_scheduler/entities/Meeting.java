@@ -44,4 +44,7 @@ public class Meeting implements Serializable {
 
     @OneToMany
     private List<MeetingProposal> proposals;
+
+    @OneToMany
+    private List<MeetingParticipation> participations;
 }
