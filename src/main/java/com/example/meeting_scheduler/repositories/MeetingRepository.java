@@ -7,6 +7,8 @@ import java.util.UUID;
 
 public interface MeetingRepository extends JpaRepository<Meeting, UUID> {
 
+    Meeting findByMeetingId(UUID id);
+
 
 
 }

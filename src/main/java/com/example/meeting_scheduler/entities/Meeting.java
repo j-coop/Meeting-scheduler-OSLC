@@ -42,9 +42,9 @@ public class Meeting implements Serializable {
     @Column(name="chosenProposal")
     private int chosenProposal;
 
-    @OneToMany
+    @OneToMany(mappedBy = "meeting")
     private List<MeetingProposal> proposals;
 
-    @OneToMany
+    @OneToMany(mappedBy = "meeting")
     private List<MeetingParticipation> participations;
 }

@@ -36,6 +36,6 @@ public class MeetingProposal implements Serializable {
     @Column(name="endTime")
     private Time endTime;
 
-    @OneToMany
+    @OneToMany(mappedBy = "meetingProposal")
     private List<ProposalResponse> responses;
 }
