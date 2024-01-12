@@ -19,13 +19,13 @@ public class User implements Serializable {
     @Column(name="userId")
     private UUID userId;
 
-    @Column(name="login")
+    @Column(name="login", unique = true)
     private String login;
 
     @Column(name="fullName")
     private String fullName;
 
-    @Column(name="email")
+    @Column(name="email", unique = true)
     private String email;
 
     @Column(name="timezone")
