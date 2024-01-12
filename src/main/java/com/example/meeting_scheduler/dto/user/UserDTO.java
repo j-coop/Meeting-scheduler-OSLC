@@ -1,8 +1,5 @@
 package com.example.meeting_scheduler.dto.user;
 
-import com.example.meeting_scheduler.entities.MeetingParticipation;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
