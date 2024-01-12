@@ -19,7 +19,7 @@ import java.util.UUID;
 public class MeetingParticipation implements Serializable {
     @Id
     @Column(name = "id")
-    private UUID id;
+    private UUID participationId;
 
     @ManyToOne
     private User user;

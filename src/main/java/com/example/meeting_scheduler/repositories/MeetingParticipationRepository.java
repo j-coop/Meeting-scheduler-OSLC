@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface MeetingParticipationRepository extends JpaRepository<MeetingParticipation, UUID> {
 
-    List<MeetingParticipation> findAllById(UUID id);
+    MeetingParticipation findByParticipationId(UUID id);
 
     List<MeetingParticipation> findAllByUser(User user);
 
