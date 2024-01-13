@@ -29,4 +29,8 @@ public class MeetingParticipation implements Serializable {
 
     @Column(name="userStatus")
     private ParticipationStatus userStatus;
+
+    public MeetingParticipation(String id) {
+        this.participationId = UUID.fromString(id);
+    }
 }

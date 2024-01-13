@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -28,14 +30,18 @@ public class MeetingProposal implements Serializable {
     private UUID proposalId;
 
     @Column(name="date")
-    private Date date;
+    private LocalDate date;
 
     @Column(name="startTime")
-    private Time startTime;
+    private LocalTime startTime;
 
     @Column(name="endTime")
-    private Time endTime;
+    private LocalTime endTime;
 
     @OneToMany(mappedBy = "meetingProposal")
     private List<ProposalResponse> responses;
+
+    public MeetingProposal(String id) {
+        this.proposalId = UUID.fromString(id);
+    }
 }

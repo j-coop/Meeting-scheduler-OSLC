@@ -23,7 +23,7 @@ class Meeting:
         self.title = fake.sentence()
         self.description = fake.paragraph()
         self.organiser = organizer_id
-        self.status = random.choice(["SCHEDULED", "IN_PROGRESS", "COMPLETED"])
+        self.status = random.choice(["SCHEDULED", "PROPOSED", "COMPLETED", "CANCELLED"])
         self.meetingRecap = fake.text() if self.status == "COMPLETED" else None
         self.chosenProposal = str(uuid.uuid4()) if self.status == "COMPLETED" else None
         self.proposals = [str(uuid.uuid4()) for _ in range(random.randint(1, 3))]

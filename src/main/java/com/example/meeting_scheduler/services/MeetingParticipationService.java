@@ -5,10 +5,12 @@ import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.entities.enums.ParticipationStatus;
 import com.example.meeting_scheduler.repositories.MeetingParticipationRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class MeetingParticipationService {
     private final MeetingParticipationRepository meetingParticipationRepository;
 
@@ -34,5 +36,9 @@ public class MeetingParticipationService {
 
     public List<MeetingParticipation> findAllByUserAndUserStatus(User user, ParticipationStatus ps) {
         return meetingParticipationRepository.findAllByUserAndUserStatus(user, ps);
+    }
+
+    public void saveMeetingParticipation(MeetingParticipation meetingParticipation) {
+        this.meetingParticipationRepository.save(meetingParticipation);
     }
 }
