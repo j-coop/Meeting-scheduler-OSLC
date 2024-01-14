@@ -14,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @ToString
 public class Meeting implements Serializable {
     @Id

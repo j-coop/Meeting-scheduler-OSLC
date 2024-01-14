@@ -1,10 +1,13 @@
 package com.example.meeting_scheduler.services;
 
+import com.example.meeting_scheduler.entities.Meeting;
+import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,13 +52,21 @@ public class UserService {
     @Transactional
     public User addUser(String login, String fullName, String email, String timezone, String password) {
         User user = User.builder()
+                .userId(UUID.randomUUID())
                 .login(login)
                 .fullName(fullName)
                 .email(email)
                 .timezone(timezone)
                 .password(password)
+                .meetings(new ArrayList<>())
                 .build();
         this.saveUser(user);
         return user;
+    }
+
+    @Transactional
+    public void addMeetingParticipation(User user, MeetingParticipation meetingParticipation) {
+        user.getMeetings().add(meetingParticipation);
+        this.saveUser(user);
     }
 }

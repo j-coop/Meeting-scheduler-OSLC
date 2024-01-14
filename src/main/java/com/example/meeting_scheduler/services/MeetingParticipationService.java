@@ -1,5 +1,6 @@
 package com.example.meeting_scheduler.services;
 
+import com.example.meeting_scheduler.dto.participation.ParticipationCreateDTO;
 import com.example.meeting_scheduler.entities.Meeting;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
@@ -14,9 +15,16 @@ import java.util.UUID;
 @Service
 public class MeetingParticipationService {
     private final MeetingParticipationRepository meetingParticipationRepository;
+    private final UserService userService;
 
-    public MeetingParticipationService(MeetingParticipationRepository meetingParticipationRepository) {
+
+    public MeetingParticipationService(
+            MeetingParticipationRepository meetingParticipationRepository,
+            UserService userService
+    )
+    {
         this.meetingParticipationRepository = meetingParticipationRepository;
+        this.userService = userService;
     }
 
     @Transactional
@@ -48,4 +56,18 @@ public class MeetingParticipationService {
     public void saveMeetingParticipation(MeetingParticipation meetingParticipation) {
         this.meetingParticipationRepository.save(meetingParticipation);
     }
+
+    @Transactional
+    public MeetingParticipation addMeetingParticipation(ParticipationCreateDTO dto, Meeting meeting) {
+        User user = userService.findByUserId(dto.getUserId());
+        if (user == null) return null;
+
+        return MeetingParticipation.builder()
+                .participationId(UUID.randomUUID())
+                .user(user)
+                .meeting(meeting)
+                .userStatus(ParticipationStatus.INVITED)
+                .build();
+    }
+
 }

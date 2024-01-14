@@ -14,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Builder
 public class MeetingParticipation implements Serializable {
     @Id
     @Column(name = "id")

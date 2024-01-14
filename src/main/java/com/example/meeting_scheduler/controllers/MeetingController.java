@@ -2,9 +2,14 @@ package com.example.meeting_scheduler.controllers;
 
 
 import com.example.meeting_scheduler.dto.dto_builders.MeetingDTOsBuilder;
+import com.example.meeting_scheduler.dto.dto_builders.ParticipationDTOsBuilder;
 import com.example.meeting_scheduler.dto.dto_builders.ProposalDTOsBuilder;
+import com.example.meeting_scheduler.dto.meeting.MeetingCreateDTO;
 import com.example.meeting_scheduler.dto.meeting.MeetingDTO;
 import com.example.meeting_scheduler.dto.meeting.MeetingsDTO;
+import com.example.meeting_scheduler.dto.participation.ParticipationCreateDTO;
+import com.example.meeting_scheduler.dto.participation.ParticipationsDTO;
+import com.example.meeting_scheduler.dto.proposal.ProposalCreateDTO;
 import com.example.meeting_scheduler.dto.proposal.ProposalsDTO;
 import com.example.meeting_scheduler.entities.Meeting;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
@@ -17,11 +22,9 @@ import com.example.meeting_scheduler.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -79,6 +82,62 @@ public class MeetingController {
         return ResponseEntity.ok(ProposalDTOsBuilder.proposalsToDTO(proposals));
     }
 
+    @GetMapping("/{id}/participations")
+    public ResponseEntity<ParticipationsDTO> getMeetingParticipations(@PathVariable UUID id) {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        List<MeetingParticipation> participations = meetingParticipationService.findAllByMeeting(meeting);
+        return ResponseEntity.ok(ParticipationDTOsBuilder.participationsToDTO(participations));
+    }
 
+    @PostMapping
+    public ResponseEntity<Void> addMeeting(@RequestBody MeetingCreateDTO meetingCreateDTO) {
+        Meeting meeting = meetingService.addMeeting(meetingCreateDTO);
+        return ResponseEntity.created(URI.create("/meetings/"+meeting.getMeetingId())).build();
+    }
+
+    @PostMapping("/{id}/proposals")
+    public ResponseEntity<Void> addMeetingProposal(
+            @PathVariable UUID id,
+            @RequestBody ProposalCreateDTO proposalCreateDTO
+    )
+    {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        MeetingProposal meetingProposal = meetingProposalService.addMeetingProposal(proposalCreateDTO, meeting);
+        return ResponseEntity.created(URI.create("/meetings/"+
+                meeting.getMeetingId()+"/proposals/"+meetingProposal.getProposalId())).build();
+    }
+
+    @PostMapping("/{id}/participations")
+    public ResponseEntity<Void> addMeetingParticipation(
+            @PathVariable UUID id,
+            @RequestBody ParticipationCreateDTO createDTO
+    )
+    {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        MeetingParticipation meetingParticipation = meetingParticipationService.addMeetingParticipation(createDTO, meeting);
+        if (meetingParticipation == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        // Add participation to meeting's list
+        meetingService.addMeetingParticipation(meeting, meetingParticipation);
+        // Add participation to user's list
+        User user = userService.findByUserId(createDTO.getUserId());
+        userService.addMeetingParticipation(user, meetingParticipation);
+
+        meetingParticipationService.saveMeetingParticipation(meetingParticipation);
+
+        return ResponseEntity.created(URI.create("/meetings/"+
+                meeting.getMeetingId()+"/participations/"+meetingParticipation.getParticipationId())).build();
+    }
 
 }
