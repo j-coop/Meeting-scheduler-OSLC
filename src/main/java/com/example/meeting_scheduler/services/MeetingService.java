@@ -25,6 +25,7 @@ public class MeetingService {
         this.meetingRepository.save(meeting);
     }
 
+    @Transactional
     public void deleteMeeting(Meeting meeting) {
         this.meetingRepository.delete(meeting);
     }

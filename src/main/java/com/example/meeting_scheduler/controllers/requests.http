@@ -15,7 +15,7 @@ Accept: application/json
 
 
 ###
-GET http://localhost:8080/meetings/
+GET http://localhost:8080/meetings/9a6de1aa-f694-4607-95e2-1b86f05160eb/proposals
 Accept: application/json
 
 ###

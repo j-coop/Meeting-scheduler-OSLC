@@ -31,6 +31,7 @@ public class UserService {
         return userRepository.findByLogin(login);
     }
 
+    @Transactional
     public List<User> findByFullName(String fullName) {
         return userRepository.findByFullName(fullName);
     }
@@ -40,10 +41,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
 
+    @Transactional
     public User addUser(String login, String fullName, String email, String timezone, String password) {
         User user = User.builder()
                 .login(login)

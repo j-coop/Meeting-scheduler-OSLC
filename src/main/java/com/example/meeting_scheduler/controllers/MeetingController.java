@@ -1,13 +1,17 @@
 package com.example.meeting_scheduler.controllers;
 
 
+import com.example.meeting_scheduler.dto.dto_builders.MeetingDTOsBuilder;
+import com.example.meeting_scheduler.dto.dto_builders.ProposalDTOsBuilder;
 import com.example.meeting_scheduler.dto.meeting.MeetingDTO;
 import com.example.meeting_scheduler.dto.meeting.MeetingsDTO;
+import com.example.meeting_scheduler.dto.proposal.ProposalsDTO;
 import com.example.meeting_scheduler.entities.Meeting;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.MeetingProposal;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.services.MeetingParticipationService;
+import com.example.meeting_scheduler.services.MeetingProposalService;
 import com.example.meeting_scheduler.services.MeetingService;
 import com.example.meeting_scheduler.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 @RestController()
@@ -30,14 +33,17 @@ public class MeetingController {
     private final MeetingService meetingService;
     private final MeetingParticipationService meetingParticipationService;
     private final UserService userService;
+    private final MeetingProposalService meetingProposalService;
 
     public MeetingController(MeetingService meetingService,
                              MeetingParticipationService meetingParticipationService,
-                             UserService userService)
+                             UserService userService,
+                             MeetingProposalService meetingProposalService)
     {
         this.meetingService = meetingService;
         this.meetingParticipationService = meetingParticipationService;
         this.userService = userService;
+        this.meetingProposalService = meetingProposalService;
     }
 
     @GetMapping("/{id}")
@@ -46,7 +52,7 @@ public class MeetingController {
         if (meeting == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        MeetingDTO meetingDTO = meetingToDTO(meeting);
+        MeetingDTO meetingDTO = MeetingDTOsBuilder.meetingToDTO(meeting);
         return ResponseEntity.ok(meetingDTO);
     }
 
@@ -60,40 +66,19 @@ public class MeetingController {
         List<Meeting> meetings = participations.stream()
                 .map(MeetingParticipation::getMeeting)
                 .toList();
-        return ResponseEntity.ok(meetingsToDTO(meetings));
+        return ResponseEntity.ok(MeetingDTOsBuilder.meetingsToDTO(meetings));
     }
 
-    private MeetingDTO meetingToDTO(Meeting meeting) {
-        if (meeting == null) return null;
-        MeetingDTO meetingDTO = new MeetingDTO();
-        meetingDTO.setMeetingId(meeting.getMeetingId());
-        meetingDTO.setTitle(meeting.getTitle());
-        meetingDTO.setDescription(meeting.getDescription());
-        meetingDTO.setOrganiser(meeting.getOrganiser());
-        meetingDTO.setStatus(meeting.getStatus());
-        meetingDTO.setMeetingRecap(meeting.getMeetingRecap());
-        meetingDTO.setChosenProposal(meeting.getChosenProposal());
-        meetingDTO.setMeetingProposals(meeting.getProposals().stream()
-                .map(MeetingProposal::getProposalId)
-                .collect(Collectors.toList()));
-        meetingDTO.setMeetingParticipations(meeting.getParticipations().stream()
-                .map(MeetingParticipation::getParticipationId)
-                .collect(Collectors.toList()));
-        return meetingDTO;
+    @GetMapping("/{id}/proposals")
+    public ResponseEntity<ProposalsDTO> getMeetingProposals(@PathVariable UUID id) {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        List<MeetingProposal> proposals = meetingProposalService.findAllByMeeting(meeting);
+        return ResponseEntity.ok(ProposalDTOsBuilder.proposalsToDTO(proposals));
     }
 
-    private MeetingsDTO meetingsToDTO(List<Meeting> meetings) {
-        if (meetings == null) return null;
-        List<MeetingsDTO.Meeting> meetings1 =  meetings.stream()
-                .map(meeting -> new MeetingsDTO.Meeting(
-                        meeting.getMeetingId(),
-                        meeting.getTitle(),
-                        meeting.getDescription(),
-                        meeting.getOrganiser(),
-                        meeting.getStatus(),
-                        meeting.getChosenProposal()
-                )).toList();
-        return new MeetingsDTO(meetings1);
-    }
+
 
 }

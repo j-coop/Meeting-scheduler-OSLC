@@ -19,6 +19,7 @@ public class MeetingParticipationService {
         this.meetingParticipationRepository = meetingParticipationRepository;
     }
 
+    @Transactional
     public MeetingParticipation findByParticipationId(UUID id) {
         return meetingParticipationRepository.findByParticipationId(id);
     }
@@ -28,14 +29,17 @@ public class MeetingParticipationService {
         return meetingParticipationRepository.findAllByUser(user);
     }
 
+    @Transactional
     public List<MeetingParticipation> findAllByMeeting(Meeting meeting) {
         return meetingParticipationRepository.findAllByMeeting(meeting);
     }
 
+    @Transactional
     public List<MeetingParticipation> findAllByMeetingAndUserStatus(Meeting meeting, ParticipationStatus ps) {
         return meetingParticipationRepository.findAllByMeetingAndUserStatus(meeting, ps);
     }
 
+    @Transactional
     public List<MeetingParticipation> findAllByUserAndUserStatus(User user, ParticipationStatus ps) {
         return meetingParticipationRepository.findAllByUserAndUserStatus(user, ps);
     }
