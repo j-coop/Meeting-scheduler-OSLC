@@ -1,0 +1,161 @@
+[
+  {
+    "userId": "3387e9ce-4fd9-44d2-8edd-bbecbf84afab",
+    "login": "kdonaldson",
+    "fullName": "Bobby Hughes",
+    "email": "gnewton@example.org",
+    "timezone": "America/Montevideo",
+    "password": "j@40_)TzH0",
+    "meetings": [
+      "30c79f5c-348c-4977-822e-953b13f8b0ff",
+      "9d13e96b-809d-4853-8c5d-d49d42c44d11",
+      "78913c9a-fdd5-4bb4-92b5-7048ff2e868d",
+      "ff52004b-d73a-40cd-8111-2728a483bab3",
+      "3c986e42-62c0-461b-a96a-860966579bfe",
+      "fd4603ac-3dff-4f44-bb84-d2cde35fc372",
+      "700aa539-9c15-4708-996b-d8a259aca027",
+      "48ce45f4-8062-47cc-bd4e-2c993191c411",
+      "d5eeebb7-4652-4cfb-be23-8fd6d7254aa3"
+    ]
+  },
+  {
+    "userId": "5bcb6043-0962-4ad4-8f4f-6cf9c950870a",
+    "login": "ygardner",
+    "fullName": "Christopher Navarro",
+    "email": "osmith@example.net",
+    "timezone": "Africa/Conakry",
+    "password": "XOcd8CLpp*",
+    "meetings": [
+      "6d306b4f-ed8d-4f82-aa8e-1ce93caa8f28",
+      "4b82372c-74cf-48cf-a20a-94887657b41f"
+    ]
+  },
+  {
+    "userId": "bf25c351-9e6b-4ba6-88b0-efcff7059703",
+    "login": "johnduran",
+    "fullName": "Theresa Gamble",
+    "email": "mcknightedgar@example.com",
+    "timezone": "Pacific/Kiritimati",
+    "password": "5+30DL4v)&",
+    "meetings": [
+      "4254da8d-8d2b-4103-ba37-74425c0422ab",
+      "3ff83f20-e472-4858-ac6d-f31d3eaa769a",
+      "62118c5c-0c64-49b9-8ce0-2d73138f17e3",
+      "9d82ba48-7d16-4126-84a7-cc1d410b45ad",
+      "24a7e7ea-734e-4c1e-8475-c5551d47f317"
+    ]
+  },
+  {
+    "userId": "b3352776-c8b8-4369-ae2e-90f31c33a201",
+    "login": "smithjeffrey",
+    "fullName": "Erin Weaver",
+    "email": "sheila49@example.com",
+    "timezone": "Asia/Makassar",
+    "password": "ymT#O3Qn6H",
+    "meetings": [
+      "ee5470b3-a831-4c3b-8126-939de761ccee",
+      "8dc33f1e-81c6-4aa7-97e1-96f245b0aec8",
+      "eddd23be-2185-402f-8905-2ed1003d577e",
+      "c461de93-7b34-4690-b24d-fe345f591686"
+    ]
+  },
+  {
+    "userId": "f82b7046-56cc-4e62-9ed5-c15540d68d0b",
+    "login": "brownshelly",
+    "fullName": "Hannah Davis",
+    "email": "elizabethgriffin@example.org",
+    "timezone": "Pacific/Efate",
+    "password": "#ESUbu5^u2",
+    "meetings": [
+      "9763f547-66ae-4960-90ae-0b3e3f9eca0c",
+      "38966a55-3565-421e-aef8-5c4cf2cb478d",
+      "11bc25a9-b3da-422f-b2cb-d90170609bf6",
+      "e3c885d6-f497-4a1e-ba6b-b0047a234ef9",
+      "b15e56d0-f10e-4723-be3a-91250fde6a70",
+      "5769ece7-ed80-447f-8263-f0c5757445dc",
+      "4f3c821c-ebbf-4dd4-b53a-5588c6d53f58"
+    ]
+  },
+  {
+    "userId": "5b817e49-f03e-4b69-9c6a-5036276f1c30",
+    "login": "clayton69",
+    "fullName": "Daniel Adams",
+    "email": "fgarner@example.net",
+    "timezone": "Africa/Asmera",
+    "password": "O&e4#TCkN3",
+    "meetings": [
+      "87ed751b-43cc-404b-a433-e61619de36d5",
+      "0298a25d-9b0d-43eb-947d-46b91d6dbbb2",
+      "3e04da8d-81a8-4fd8-9f34-6c2d5c16fe11",
+      "a62b8109-b478-4886-8979-622fb09b735c",
+      "19f4358e-8024-4ca2-b9e6-dd6651fff789",
+      "0d7ed646-0add-4ddf-a739-56f5df7f3644"
+    ]
+  },
+  {
+    "userId": "9ddbed16-b985-44c3-b9b0-f2484593803d",
+    "login": "christophercabrera",
+    "fullName": "Steven Bullock",
+    "email": "blane@example.com",
+    "timezone": "America/Barbados",
+    "password": "_6U5lD9zvm",
+    "meetings": [
+      "52480dd0-decf-4588-af4c-ba77f0456010",
+      "32b665d7-fc88-4a44-99bf-4a9e13d3a15f",
+      "a1eaadb1-3bd0-43a0-9a58-dc78b5cc0fab",
+      "5408c0c8-ab93-4fcd-bd84-24c46c16cc3a"
+    ]
+  },
+  {
+    "userId": "9ce85031-9af2-4b58-a0db-5fc01618b045",
+    "login": "robinsondeborah",
+    "fullName": "Lydia Fisher",
+    "email": "dbutler@example.org",
+    "timezone": "Asia/Singapore",
+    "password": "#cH6BKz6IH",
+    "meetings": [
+      "f16def18-b473-42af-b994-5471bb5c309a",
+      "29ee50fa-796e-4975-a035-a8cce8399959",
+      "a37ede54-5bbd-4eec-a01a-e874324a527c",
+      "bf90fda5-0773-4a94-a9f0-6d497a42c1f9",
+      "bac8dfcd-0fe2-4ced-93e8-2673bf2cefcf",
+      "93e73c48-a719-4de3-b916-648328fa8378"
+    ]
+  },
+  {
+    "userId": "ee889b8a-307f-4cd0-998d-9648184a98c5",
+    "login": "garrettlamb",
+    "fullName": "Catherine Sharp",
+    "email": "brandonclark@example.net",
+    "timezone": "Asia/Tokyo",
+    "password": "+ikAsfqid5",
+    "meetings": [
+      "cd77f6b2-2f44-459a-9187-975bfb76f1ed",
+      "ca0000ac-a1de-4ea5-aba8-2a05d93fd1e2",
+      "5bb6ea04-e960-4c2c-848e-da0507dd37db",
+      "516e5efc-1327-4033-ab84-f90dcebffee3",
+      "140ea9dd-81d5-4f0b-99f1-5a7fa61f52a8",
+      "c1263b11-f32e-41e9-ba72-9cfb01b00328",
+      "c76a21f5-61d2-4477-80b4-20a4c7af8c14",
+      "dfd07380-4f23-4fe3-97fe-478a9ca3a2ad",
+      "0b6b1cb8-0795-4051-84ad-6591d409682b",
+      "1a7e831e-34ca-4c06-83e9-92da7b713c43"
+    ]
+  },
+  {
+    "userId": "49492121-7063-4a78-b060-fdef06972851",
+    "login": "yolanda63",
+    "fullName": "Paul Aguilar",
+    "email": "milesadam@example.com",
+    "timezone": "Indian/Antananarivo",
+    "password": "9^QY2EXmCI",
+    "meetings": [
+      "8182d385-5e39-425d-9ab3-546ee8a6d46e",
+      "bd154835-6b8d-4a59-92a7-3f1732b3ec2f",
+      "74b48ccb-75ca-4160-8ecd-fb4a7b190256",
+      "d8e00333-0a40-4e61-af7c-be5c098ad560",
+      "6baba4cf-037e-47db-9d77-2e213a46ab26",
+      "271919b2-d0ed-4ae3-b0d9-fc84322b2b6c"
+    ]
+  }
+]

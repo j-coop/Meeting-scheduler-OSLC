@@ -20,7 +20,7 @@ public class MeetingDTO {
     private UUID organiser;
     private MeetingStatus status;
     private String meetingRecap;
-    private UUID chosenProposal;
+    private int chosenProposal;
     private List<UUID> meetingProposals;
     private List<UUID> meetingParticipations;
 }

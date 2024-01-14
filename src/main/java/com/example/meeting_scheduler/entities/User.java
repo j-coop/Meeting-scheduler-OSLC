@@ -14,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@ToString
 public class User implements Serializable {
     @Id
     @Column(name="userId")
@@ -34,6 +35,6 @@ public class User implements Serializable {
     @Column(name="password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MeetingParticipation> meetings;
 }

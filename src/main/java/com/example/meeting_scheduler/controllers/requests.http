@@ -1,0 +1,21 @@
+GET http://localhost:8080/users/login/Carlitos
+Accept: application/json
+
+<> 2024-01-13T235954.200.json
+<> 2024-01-13T235833.200.json
+
+
+
+###
+GET http://localhost:8080/meetings/user/Carlitos
+Accept: application/json
+
+<> 2024-01-13T235956.200.json
+<> 2024-01-13T235840.404.json
+
+
+###
+GET http://localhost:8080/meetings/
+Accept: application/json
+
+###

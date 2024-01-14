@@ -2,10 +2,7 @@ package com.example.meeting_scheduler.entities;
 
 import com.example.meeting_scheduler.entities.enums.MeetingStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Meeting implements Serializable {
     @Id
     @Column(name="meetingId")
@@ -40,11 +38,11 @@ public class Meeting implements Serializable {
 
     // id of the chosen proposal
     @Column(name="chosenProposal")
-    private UUID chosenProposal;
+    private int chosenProposal;
 
     @OneToMany(mappedBy = "meeting")
     private List<MeetingProposal> proposals;
 
-    @OneToMany(mappedBy = "meeting")
+    @OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MeetingParticipation> participations;
 }
