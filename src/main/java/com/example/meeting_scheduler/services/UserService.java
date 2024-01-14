@@ -2,6 +2,7 @@ package com.example.meeting_scheduler.services;
 
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +16,17 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public User findByUserId(UUID id) {
         return userRepository.findByUserId(id);
     }
 
+    @Transactional
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    @Transactional
     public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
@@ -31,6 +35,7 @@ public class UserService {
         return userRepository.findByFullName(fullName);
     }
 
+    @Transactional
     public void saveUser(User user) {
         userRepository.save(user);
     }

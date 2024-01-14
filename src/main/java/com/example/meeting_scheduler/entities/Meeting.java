@@ -43,6 +43,6 @@ public class Meeting implements Serializable {
     @OneToMany(mappedBy = "meeting")
     private List<MeetingProposal> proposals;
 
-    @OneToMany(mappedBy = "meeting")
+    @OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MeetingParticipation> participations;
 }

@@ -115,7 +115,6 @@ public class DataInitializer {
         }
 
         for (int i = 0; i < num_meetings; i++) {
-            meetingIDs[i] = UUID.randomUUID();
             meetingProposals[i] = generateMeetingProposals(meetings[i]);
             meetingParticipations[i] = generateMeetingParticipations(meetings[i], users);
         }
@@ -131,6 +130,7 @@ public class DataInitializer {
             meetingService.saveMeeting(meeting);
             System.out.println(meeting.toString());
         }
+
     }
 
     private List<MeetingProposal> generateMeetingProposals(Meeting meeting) {
@@ -185,13 +185,13 @@ public class DataInitializer {
             participation.setParticipationId(UUID.randomUUID());
             participation.setUserStatus(ParticipationStatus.INVITED);
 
+            // Save participation
+            meetingParticipationService.saveMeetingParticipation(participation);
+
             // Add participation to meeting's list
             meeting.getParticipations().add(participation);
             // Add participation to user's list
             user.getMeetings().add(participation);
-
-            // Save participation
-            meetingParticipationService.saveMeetingParticipation(participation);
 
             participations.add(participation);
         }

@@ -5,6 +5,7 @@ import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.entities.enums.ParticipationStatus;
 import com.example.meeting_scheduler.repositories.MeetingParticipationRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class MeetingParticipationService {
         return meetingParticipationRepository.findByParticipationId(id);
     }
 
+    @Transactional
     public List<MeetingParticipation> findAllByUser(User user) {
         return meetingParticipationRepository.findAllByUser(user);
     }
@@ -38,6 +40,7 @@ public class MeetingParticipationService {
         return meetingParticipationRepository.findAllByUserAndUserStatus(user, ps);
     }
 
+    @Transactional
     public void saveMeetingParticipation(MeetingParticipation meetingParticipation) {
         this.meetingParticipationRepository.save(meetingParticipation);
     }
