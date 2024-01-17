@@ -1,0 +1,19 @@
+{
+    "userId": "uniqueUserId",
+    "login": "user app nickname",
+    "fullName": "user full name",
+    "email": "user@example.com",
+    "timezone": "user's UTC timezone",
+    "password": "hashedPassword",
+    "meetings":
+        [
+            {
+                "meetingId": "meeting's id",
+                "userStatus": "invited/joined/preferences_set"
+            },
+            {
+                "meetingId": "meeting's id",
+                "userStatus": "invited/joined/preferences_set"
+            }
+        ]
+}

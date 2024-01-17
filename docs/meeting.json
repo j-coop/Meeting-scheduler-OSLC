@@ -1,0 +1,46 @@
+{
+    "meetingId": "meeting's unique id",
+    "title": "meeting title/name",
+    "description": "description of the meeting",
+    "organiser": "organiser's user id",
+    "status": "proposed/scheduled/cancelled/completed",
+    "meetingRecap": "potential notes after meeting",
+    "chosenProposal": "id of chosen proposal (relevant if already scheduled)",
+    "proposals":
+        [
+            {
+                "proposalId": "unique within meeting",
+                "date": "YYYY-MM-DD",
+                "startTime": "HH:MM",
+                "endTime": "HH:MM",
+                "responses":
+                    [
+                        {
+                            "userId": "participant's user id",
+                            "response": "available/if_must/unavailable"
+                        },
+                        {
+                            "userId": "participant's user id",
+                            "response": "available/if_must/unavailable"
+                        }
+                    ]
+            },
+            {
+                "proposalId": "unique within meeting",
+                "date": "YYYY-MM-DD",
+                "startTime": "HH:MM",
+                "endTime": "HH:MM",
+                "responses":
+                    [
+                        {
+                            "userId": "participant's user id",
+                            "response": "available/if_must/unavailable"
+                        },
+                        {
+                            "userId": "participant's user id",
+                            "response": "available/if_must/unavailable"
+                        }
+                    ]
+            }
+        ]
+}

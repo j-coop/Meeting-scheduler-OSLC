@@ -4,7 +4,9 @@ Accept: application/json
 <> 2024-01-13T235954.200.json
 <> 2024-01-13T235833.200.json
 
-
+###
+GET http://localhost:8080/users/id/8fad63fb-f729-455d-b5cd-ae26b8e05b7b
+Accept: application/json
 
 ###
 GET http://localhost:8080/meetings/user/Carlitos
@@ -15,7 +17,31 @@ Accept: application/json
 
 
 ###
-GET http://localhost:8080/meetings/
+GET http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/proposals
 Accept: application/json
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+###
+GET http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/participations
+Accept: application/json
+
+###
+POST http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/participations
+Content-Type: application/json
+
+{
+  "userId": "8fhd63fb-f729-455d-b5cd-ae26b8e05b7b"
+}
 
 ###
