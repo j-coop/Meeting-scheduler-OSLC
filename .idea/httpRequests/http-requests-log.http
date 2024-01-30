@@ -1,3 +1,264 @@
+POST http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/participations
+Content-Type: application/json
+Content-Length: 54
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "8fhd63fb-f729-455d-b5cd-ae26b8e05b7b"
+}
+
+<> 2024-01-14T190131.400.json
+
+###
+
+GET http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/participations
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T190122.200.json
+
+###
+
+POST http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/participations
+Content-Type: application/json
+Content-Length: 54
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId": "8fad63fb-f729-455d-b5cd-ae26b8e05b7b"
+}
+
+<> 2024-01-14T190115.500.json
+
+###
+
+GET http://localhost:8080/meetings/27ab5d11-cb37-4d08-a546-e1cd44ecc6d8/participations
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T190016.200.json
+
+###
+
+GET http://localhost:8080/meetings/user/Carlitos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T185942.200.json
+
+###
+
+GET http://localhost:8080/users/id/8fad63fb-f729-455d-b5cd-ae26b8e05b7b
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T185851.200.json
+
+###
+
+GET http://localhost:8080/users/login/Carlitos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T185836.200.json
+
+###
+
+GET http://localhost:8080/users/id/3e497b97-6c35-49b9-9905-7d1d6c4edb12
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T161946.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+<> 2024-01-14T161750.500.json
+
+###
+
+POST http://localhost:8080/users/add
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+<> 2024-01-14T161742.404.json
+
+###
+
+POST http://localhost:8080/users/add
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+<> 2024-01-14T161553.500.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+<> 2024-01-14T161049.500.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+<> 2024-01-14T160951.500.json
+
+###
+
+GET http://localhost:8080/users/login/Carlitos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T160937.200.json
+
+###
+
+POST http://localhost:8080/users
+Content-Type: application/json
+Content-Length: 141
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "login": "nole24",
+  "fullName": "Novak Djokovic",
+  "email": "djoker.nole@atp.eu",
+  "timezone": "UTC+0",
+  "password": "djokerNole24"
+}
+
+<> 2024-01-14T160928.500.json
+
+###
+
+GET http://localhost:8080/meetings/9a6de1aa-f694-4607-95e2-1b86f05160eb/proposals
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T135340.200.json
+
+###
+
+GET http://localhost:8080/meetings/user/Carlitos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T135314.200.json
+
+###
+
+GET http://localhost:8080/users/login/Carlitos
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-01-14T135310.200.json
+
+###
+
 GET http://localhost:8080/meetings/user/Carlitos
 Accept: application/json
 Connection: Keep-Alive
@@ -305,96 +566,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2024-01-13T223521.404.json
-
-###
-
-GET http://localhost:8080/meetings/user/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T223407.404.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T223405.200.json
-
-###
-
-GET http://localhost:8080/meetings/user/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T223013.404.json
-
-###
-
-GET http://localhost:8080/meetings/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T222926.404.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T222916.200.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T222905.200.json
-
-###
-
-GET http://localhost:8080/meetings/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T222857.404.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T222851.200.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T213012.200.json
 
 ###
 

@@ -1,5 +1,6 @@
 package com.example.meeting_scheduler.controllers;
 
+import com.example.meeting_scheduler.dto.dto_builders.UserDTOsBuilder;
 import com.example.meeting_scheduler.dto.user.UserCreateDTO;
 import com.example.meeting_scheduler.dto.user.UserDTO;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        UserDTO userDTO = userToDTO(user);
+        UserDTO userDTO = UserDTOsBuilder.userToDTO(user);
         return ResponseEntity.ok(userDTO);
     }
 
@@ -38,7 +40,7 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        UserDTO userDTO = userToDTO(user);
+        UserDTO userDTO = UserDTOsBuilder.userToDTO(user);
         return ResponseEntity.ok(userDTO);
     }
 
@@ -48,33 +50,20 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        UserDTO userDTO = userToDTO(user);
+        UserDTO userDTO = UserDTOsBuilder.userToDTO(user);
         return ResponseEntity.ok(userDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Void> addUser(@RequestBody UserCreateDTO createDTO) {
-        User user = userService.findByEmail(createDTO.getEmail());
-        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        user = userService.findByLogin(createDTO.getLogin());
-        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        return ResponseEntity.badRequest().build();
-    }
-
-
-    private UserDTO userToDTO(User user) {
-        if (user == null) return null;
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(user.getUserId());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setLogin(user.getLogin());
-        userDTO.setFullName(user.getFullName());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setTimezone(user.getTimezone());
-        userDTO.setMeetingParticipations(user.getMeetings().stream()
-                .map(MeetingParticipation::getParticipationId)
-                .collect(Collectors.toList()));
-        return userDTO;
+    public ResponseEntity<Void> addUser(@RequestBody UserCreateDTO userCreateDTO) {
+        User user = userService.addUser(
+                userCreateDTO.getLogin(),
+                userCreateDTO.getFullName(),
+                userCreateDTO.getEmail(),
+                userCreateDTO.getTimezone(),
+                userCreateDTO.getPassword()
+        );
+        return ResponseEntity.created(URI.create("/users/"+user.getUserId())).build();
     }
 
 }
