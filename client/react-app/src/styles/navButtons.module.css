@@ -23,6 +23,7 @@
     background-color: forestgreen;
     color: white;
     border-color: forestgreen;
+    cursor: pointer;
 }
 
 .highlightButton:hover {

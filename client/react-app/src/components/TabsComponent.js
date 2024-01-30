@@ -6,7 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 const TabsComponent = () => {
 
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -17,7 +17,7 @@ const TabsComponent = () => {
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <TabList onChange={handleChange}>
-                        <Tab label="Item One" value="1" sx={{color: "red"}}/>
+                        <Tab label="Item One" value="1"/>
                         <Tab label="Item Two" value="2" />
                         <Tab label="Item Three" value="3" />
                     </TabList>

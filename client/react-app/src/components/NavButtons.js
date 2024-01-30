@@ -1,5 +1,6 @@
 import styles from "../styles/navButtons.module.css"
 import {useAuth} from "../context/AuthContext";
+import HighlightButton from "./HighlightButton";
 
 
 function LoggedInterface() {
@@ -7,7 +8,7 @@ function LoggedInterface() {
     return (
         <>
             <button className={styles.plainButton} onClick={logout}>Log out</button>
-            <button className={styles.highlightButton}>Account</button>
+            <HighlightButton value="Account"/>
         </>
     )
 }
@@ -17,7 +18,7 @@ function NotLoggedInterface() {
     return (
         <>
             <button className={styles.plainButton} onClick={login}>Log in</button>
-            <button className={styles.highlightButton}>Sign up</button>
+            <HighlightButton value="Sign up"/>
         </>
     )
 }

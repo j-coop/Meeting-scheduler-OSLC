@@ -1,0 +1,36 @@
+.banner {
+    width: 100%;
+    padding-left: 8%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    height: 500px;
+}
+
+.bannerLeft {
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+
+.bannerLeft button {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.bannerRight {
+    float: left;
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mainPhoto {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s linear;
+}
+
+.mainPhoto:hover {
+    transform: scale(1.05);
+}
