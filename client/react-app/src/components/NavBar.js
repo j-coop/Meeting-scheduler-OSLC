@@ -1,15 +1,12 @@
 import {Link} from "react-router-dom";
-import logo from "../resources/logo.png"
 import styles from "../styles/nav.module.css"
 import NavButtons from "./NavButtons";
-
-const appName = "MeetIT";
+import Logo from "./Logo";
 
 const NavBar = () => {
     return (
         <nav>
-            <img alt={"logo"} src={logo} className={styles.appLogo}/>
-            <div className={styles.appName}>{appName}</div>
+            <Logo/>
             <div className={styles.navMenu}>
                 <ul>
                     <li>

@@ -1,15 +1,13 @@
 package com.example.meeting_scheduler.controllers;
 
+import com.example.meeting_scheduler.dto.user.UserCreateDTO;
 import com.example.meeting_scheduler.dto.user.UserDTO;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<UserDTO> getStudentById(@PathVariable UUID id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable UUID id) {
         User user = userService.findByUserId(id);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -35,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/login/{login}")
-    public ResponseEntity<UserDTO> getStudentByLogin(@PathVariable String login) {
+    public ResponseEntity<UserDTO> getUserByLogin(@PathVariable String login) {
         User user = userService.findByLogin(login);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -45,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<UserDTO> getStudentByEmail(@PathVariable String email) {
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         User user = userService.findByEmail(email);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -53,6 +51,16 @@ public class UserController {
         UserDTO userDTO = userToDTO(user);
         return ResponseEntity.ok(userDTO);
     }
+
+    @PostMapping
+    public ResponseEntity<Void> addUser(@RequestBody UserCreateDTO createDTO) {
+        User user = userService.findByEmail(createDTO.getEmail());
+        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        user = userService.findByLogin(createDTO.getLogin());
+        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.badRequest().build();
+    }
+
 
     private UserDTO userToDTO(User user) {
         if (user == null) return null;
@@ -68,4 +76,5 @@ public class UserController {
                 .collect(Collectors.toList()));
         return userDTO;
     }
+
 }

@@ -6,7 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 const TabsComponent = () => {
 
-    const [value, setValue] = useState(1);
+    const [value, setValue] = useState("1");
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
