@@ -1,0 +1,44 @@
+.navButtons {
+    height: 70px;
+    float: right;
+}
+
+.navButtons button {
+    height: 40px;
+    padding: 0 10px;
+    margin-top: 15px;
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.plainButton {
+    border: none;
+    background-color: white;
+    color: forestgreen;
+}
+
+.highlightButton {
+    border-radius: 20px;
+    background-color: forestgreen;
+    color: white;
+    border-color: forestgreen;
+    cursor: pointer;
+}
+
+.highlightButton:hover {
+    background-color: #197919;
+    border-color: #197919;
+}
+
+.createMeetingButton {
+    border-radius: 20px;
+    background-color: rgba(131, 160, 225, 0.74);
+    color: white;
+    border-color: #3f537e;
+}
+
+.createMeetingButton:hover {
+    background-color: rgba(114, 141, 203, 0.74);
+    border-color: #304064;
+}

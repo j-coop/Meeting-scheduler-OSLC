@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<UserDTO> getStudentById(@PathVariable UUID id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable UUID id) {
         User user = userService.findByUserId(id);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/login/{login}")
-    public ResponseEntity<UserDTO> getStudentByLogin(@PathVariable String login) {
+    public ResponseEntity<UserDTO> getUserByLogin(@PathVariable String login) {
         User user = userService.findByLogin(login);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<UserDTO> getStudentByEmail(@PathVariable String email) {
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         User user = userService.findByEmail(email);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
