@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
@@ -56,7 +57,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Void> addUser(@RequestBody UserCreateDTO userCreateDTO) {
-        User user = userService.addUser(
+        User user = userService.findByEmail(userCreateDTO.getEmail());
+        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        user = userService.findByLogin(userCreateDTO.getLogin());
+        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+
+        user = userService.addUser(
                 userCreateDTO.getLogin(),
                 userCreateDTO.getFullName(),
                 userCreateDTO.getEmail(),
