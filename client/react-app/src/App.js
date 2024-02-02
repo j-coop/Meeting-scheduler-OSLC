@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import CreateMeeting from "./pages/CreateMeeting";
 
 function App() {
+
     return (
         <BrowserRouter>
             <Routes>

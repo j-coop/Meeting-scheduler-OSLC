@@ -2,23 +2,41 @@ import styles from "../styles/navButtons.module.css"
 import {useAuth} from "../context/AuthContext";
 import HighlightButton from "./HighlightButton";
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import SignInPopup from "./SignInPopup";
 
 
 function LoggedInterface() {
-    const {isLoggedIn, login, logout} = useAuth();
+    const {userLogin, logout} = useAuth();
     return (
         <>
             <button className={styles.plainButton} onClick={logout}>Log out</button>
-            <HighlightButton value="Account"/>
+            <HighlightButton value={userLogin}/>
         </>
     )
 }
 
 function NotLoggedInterface() {
-    const {isLoggedIn, login, logout} = useAuth();
+
+    const [signInOpen, setSignInOpen] = useState(false);
+
+    const handleSignInOpen = () => {
+        setSignInOpen(true);
+    };
+
+    const handleSignInClose = () => {
+        setSignInOpen(false);
+    };
+
     return (
         <>
-            <button className={styles.plainButton} onClick={login}>Log in</button>
+            <button
+                className={styles.plainButton}
+                onClick={signInOpen ? handleSignInClose : handleSignInOpen}
+            >
+                Log in
+            </button>
+            <SignInPopup open={signInOpen} onClose={handleSignInClose} />
             <HighlightButton value="Sign up"/>
         </>
     )
@@ -35,7 +53,17 @@ function CreateMeetingButton() {
 }
 
 const NavButtons = () => {
-    const {isLoggedIn, login, logout} = useAuth();
+    const {isLoggedIn, login} = useAuth();
+
+    useEffect(() => {
+        // Check if a valid login token exists in localStorage
+        const token = localStorage.getItem('token');
+        const userData = localStorage.getItem('userData');
+
+        if (token && userData) {
+            login(token, userData);
+        }
+    }, []);
 
     return (
         <div className={styles.navButtons}>

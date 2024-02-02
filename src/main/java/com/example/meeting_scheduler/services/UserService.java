@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -67,6 +68,13 @@ public class UserService {
                 .build();
         this.saveUser(user);
         return user;
+    }
+
+    @Transactional
+    public boolean checkLogin(String login, String password) {
+        User user = userRepository.findByLogin(login);
+        if (user == null) return false;
+        return Objects.equals(user.getPassword(), password);
     }
 
     @Transactional

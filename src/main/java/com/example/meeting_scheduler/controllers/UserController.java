@@ -71,6 +71,19 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UUID> checkLogin(
+            @RequestParam String login,
+            @RequestParam String password
+    )
+    {
+        if (userService.checkLogin(login, password)) {
+            // return sign in token
+            return ResponseEntity.ok(UUID.randomUUID());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     public ResponseEntity<Void> addUser(@RequestBody UserCreateDTO userCreateDTO) {
         User user = userService.findByEmail(userCreateDTO.getEmail());
