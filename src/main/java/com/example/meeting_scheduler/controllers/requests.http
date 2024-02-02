@@ -3,6 +3,9 @@ Accept: application/json
 
 <> 2024-01-13T235954.200.json
 <> 2024-01-13T235833.200.json
+###
+GET http://localhost:8080/users?search=a
+Accept: application/json
 
 ###
 GET http://localhost:8080/users/id/8fad63fb-f729-455d-b5cd-ae26b8e05b7b

@@ -40,6 +40,11 @@ public class UserService {
     }
 
     @Transactional
+    public List<User> findByLoginSearch(String search) {
+        return userRepository.findByLoginContaining(search);
+    }
+
+    @Transactional
     public void saveUser(User user) {
         userRepository.save(user);
     }

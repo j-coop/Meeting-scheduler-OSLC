@@ -3,6 +3,7 @@ package com.example.meeting_scheduler.controllers;
 import com.example.meeting_scheduler.dto.dto_builders.UserDTOsBuilder;
 import com.example.meeting_scheduler.dto.user.UserCreateDTO;
 import com.example.meeting_scheduler.dto.user.UserDTO;
+import com.example.meeting_scheduler.dto.user.UsersDTO;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.services.UserService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,20 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping
+    public ResponseEntity<UsersDTO> getUsers(@RequestParam String search) {
+        try {
+            List<User> users = userService.findByLoginSearch(search);
+            if (users == null) {
+                users = List.of();
+            }
+            return ResponseEntity.ok(UserDTOsBuilder.usersToUsersDTO(users));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @GetMapping("/id/{id}")
