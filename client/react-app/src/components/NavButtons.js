@@ -1,6 +1,7 @@
 import styles from "../styles/navButtons.module.css"
 import {useAuth} from "../context/AuthContext";
 import HighlightButton from "./HighlightButton";
+import {Link} from "react-router-dom";
 
 
 function LoggedInterface() {
@@ -25,9 +26,11 @@ function NotLoggedInterface() {
 
 function CreateMeetingButton() {
     return (
-        <button className={styles.createMeetingButton}>
-            <span style={{fontWeight: "bold"}}>+</span> Create Meeting
-        </button>
+        <Link to={"/create"}>
+            <button className={styles.createMeetingButton}>
+                <span style={{fontWeight: "bold"}}>+</span> Create Meeting
+            </button>
+        </Link>
     )
 }
 

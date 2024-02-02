@@ -2,6 +2,7 @@ import Logo from "../components/Logo";
 import styles from "../styles/signup.module.css"
 import {useState} from "react";
 import config from "../config";
+import { useNavigate } from 'react-router-dom';
 
 function signUp() {
 
@@ -17,13 +18,15 @@ const SignUp = () => {
         "repeat_password": ""
     });
 
+    const navigate = useNavigate();
+
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (inputs.password !== inputs.repeat_password) {
@@ -46,11 +49,14 @@ const SignUp = () => {
             },
             body: JSON.stringify(body)
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.ok) {
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
                     alert("Created");
+                    navigate("/");
+                }
+                else if (response.status === 409) {
+                    alert("Account with this email or login already exists");
                 }
             })
             .catch(error => {

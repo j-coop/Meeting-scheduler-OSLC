@@ -4,6 +4,7 @@ import React from "react";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
+import CreateMeeting from "./pages/CreateMeeting";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
+                    <Route path="create" element={<CreateMeeting/>}/>
                 </Route>
                 <Route path="/signup" element={<SignUp/>}/>
             </Routes>
