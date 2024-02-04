@@ -3,11 +3,17 @@ import {ToggleButton, ToggleButtonGroup} from "@mui/lab";
 import UserSearch from "../components/UserSearch";
 import {useState} from "react";
 import styles from "../styles/createMeeting.module.css"
+import {momentLocalizer} from "react-big-calendar";
+import moment from "moment";
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import WeekCalendar from "../components/WeekCalendar";
 
 
 const CreateMeeting = () => {
 
     const [durationValue, setDurationValue] = useState('30min');
+
+    const localizer = momentLocalizer(moment)
 
     const handleChange = (
         event,
@@ -51,6 +57,11 @@ const CreateMeeting = () => {
                 </div>
             </div>
 
+
+            <br/>
+            <br/>
+
+            <WeekCalendar localizer={localizer}/>
 
             <br/>
             <br/>
