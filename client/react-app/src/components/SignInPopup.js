@@ -10,6 +10,27 @@ const SignInPopup = ({ open, onClose }) => {
 
     const {login} = useAuth();
 
+    const getUserData = async (login) => {
+        try {
+            const response = await fetch(config.apiUrl+'/users/login/'+login, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                return await response.json();
+            } else {
+                console.log("User data error");
+                return {};
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return {};
+        }
+    };
+
     const handleSignIn = async () => {
 
         fetch(config.apiUrl+'/users/login?login='+userLogin+'&password='+userPassword, {
@@ -23,8 +44,10 @@ const SignInPopup = ({ open, onClose }) => {
                 if (response.ok) {
                     alert("Logged in successfully");
                     let token = await response.json();
-                    console.log(token);
-                    login(token, userLogin);
+                    // get logged user's data
+                    let data = await getUserData(userLogin);
+                    console.log(data.email);
+                    login(token, userLogin, data);
                 } else {
                     alert("Wrong credentials");
                 }

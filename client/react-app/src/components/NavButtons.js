@@ -61,7 +61,8 @@ const NavButtons = () => {
         const userData = localStorage.getItem('userData');
 
         if (token && userData) {
-            login(token, userData);
+            let parsedData= JSON.parse(userData);
+            login(token, parsedData.login, parsedData);
         }
     }, []);
 

@@ -92,7 +92,12 @@ const UserSearch = () => {
             <List>
                 {searchResults.slice(0,5).map(result => (
                     <ListItem>
-                        <UserCard login={result.login} email={result.email} name={result.fullName}/>
+                        <UserCard
+                            login={result.login}
+                            email={result.email}
+                            name={result.fullName}
+                            addPresent={true}
+                        />
                     </ListItem>
                 ))}
             </List>

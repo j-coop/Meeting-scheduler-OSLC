@@ -1,10 +1,12 @@
-import {Avatar, Card, Chip, Fab, Stack, Switch, Typography} from "@mui/material";
+import {Avatar, Card, Chip, Fab, Stack, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
 
 const UserCard = (props) => {
 
     const active = true;
+
+    const addPresent = props.addPresent;
 
     return (
         <Card sx={{ p: 2.5 }}>
@@ -23,10 +25,13 @@ const UserCard = (props) => {
                         {props.email}
                     </Typography>
                 </div>
-                <Switch sx={{ ml: 'auto' }} />
-                <Fab disabled color="neutral" aria-label="add">
-                    <AddIcon />
-                </Fab>
+                {
+                    addPresent ?
+                        <Fab disabled color="neutral" aria-label="add">
+                            <AddIcon />
+                        </Fab>
+                        :<></>
+                }
             </Stack>
         </Card>
     )
