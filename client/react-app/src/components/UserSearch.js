@@ -86,7 +86,7 @@ const UserSearch = () => {
                     inputProps={{ 'aria-label': 'search' }}
                     value={searchQuery}
                     onChange={handleInputChange}
-                    autoFocus={true} // not ideal honestly
+                    //autoFocus={true} // not ideal honestly
                 />
             </Search>
             <List>

@@ -1,31 +1,40 @@
 import React, { Fragment, useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Calendar, Views, DateLocalizer } from 'react-big-calendar'
-import events from '../resources/events'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import styles from '../styles/createMeeting.module.css'
 
-export default function WeekCalendar({ localizer }) {
-    const [myEvents, setEvents] = useState(events)
+export default function WeekCalendar({ localizer, duration }) {
+    const [myEvents, setEvents] = useState([])
 
     const handleSelectSlot = useCallback(
         ({ start, end }) => {
-            const title = window.prompt('New Event name')
-            if (title) {
-                setEvents((prev) => [...prev, { start, end, title }])
+            if (start > Date.now()) {
+                end = new Date(start.valueOf()+duration*60*1000);
+                setEvents((prev) => [...prev, { start, end }]);
             }
         },
         [setEvents]
     )
 
     const handleSelectEvent = useCallback(
-        (event) => window.alert(event.title),
-        []
+        (clickedEvent) => {
+            const updatedEvents = myEvents.filter(event => event !== clickedEvent);
+            setEvents(updatedEvents);
+        },
+        [myEvents, setEvents]
     )
 
-    const { defaultDate, scrollToTime } = useMemo(
+    const { defaultDate, scrollToTime, formats } = useMemo(
         () => ({
-            defaultDate: new Date(2015, 3, 12),
+            defaultDate: Date.now(),
             scrollToTime: new Date(1970, 1, 1, 6),
+            formats: {
+                dayFormat: (date, culture, localizer) =>
+                    localizer.format(date, 'ddd DD.MM', culture),
+                timeGutterFormat: (date, culture, localizer) =>
+                    localizer.format(date, 'HH:00', culture),
+            },
         }),
         []
     )
@@ -42,7 +51,36 @@ export default function WeekCalendar({ localizer }) {
                     onSelectSlot={handleSelectSlot}
                     selectable
                     scrollToTime={scrollToTime}
+                    views={['week']}
+                    timeslots={4}
+                    step={15}
+                    length={60}
+                    min={new Date(0, 0, 0, 8, 0, 0)}
+                    max={new Date(0, 0, 0, 22, 0, 0)}
                     style={{height: "600px", width: "100%"}}
+                    formats={formats}
+                    messages={
+                        {
+                            date: 'Date',
+                            time: 'Time',
+                            event: 'Event',
+                            allDay: '',
+                            week: 'Week',
+                            work_week: 'Work Week',
+                            day: 'Day',
+                            month: 'Month',
+                            previous: '< Back',
+                            next: 'Next >',
+                            yesterday: 'Yesterday',
+                            tomorrow: 'Tomorrow',
+                            today: 'Today',
+                            agenda: 'Agenda',
+
+                            noEventsInRange: 'There are no events in this range.',
+
+                            showMore: total => `+${total} more`,
+                        }
+                    }
                 />
             </div>
         </Fragment>

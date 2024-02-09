@@ -11,7 +11,7 @@ import WeekCalendar from "../components/WeekCalendar";
 
 const CreateMeeting = () => {
 
-    const [durationValue, setDurationValue] = useState('30min');
+    const [durationValue, setDurationValue] = useState('30');
 
     const localizer = momentLocalizer(moment)
 
@@ -39,13 +39,24 @@ const CreateMeeting = () => {
                     aria-label="Platform"
                     style={{marginTop: "10px"}}
                 >
-                    <ToggleButton value="15min">15 min</ToggleButton>
-                    <ToggleButton value="30min">30 min</ToggleButton>
-                    <ToggleButton value="60min">60 min</ToggleButton>
-                    <ToggleButton value="120min">120 min</ToggleButton>
+                    <ToggleButton value="15">15 min</ToggleButton>
+                    <ToggleButton value="30">30 min</ToggleButton>
+                    <ToggleButton value="60">60 min</ToggleButton>
+                    <ToggleButton value="120">120 min</ToggleButton>
                     <ToggleButton value="custom">Custom</ToggleButton>
                 </ToggleButtonGroup>
             </label>
+
+
+            <br/>
+            <br/>
+
+            <WeekCalendar localizer={localizer} duration={parseInt(durationValue)} key={durationValue}/>
+
+            <br/>
+            <br/>
+
+
             <h2>Participants: </h2>
 
             <div className={styles.userAdding}>
@@ -57,11 +68,7 @@ const CreateMeeting = () => {
                 </div>
             </div>
 
-
-            <br/>
-            <br/>
-
-            <WeekCalendar localizer={localizer}/>
+            <button className={styles.createMeetingButton}>Create Meeting</button>
 
             <br/>
             <br/>

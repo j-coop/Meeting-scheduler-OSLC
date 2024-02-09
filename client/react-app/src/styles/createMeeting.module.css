@@ -7,6 +7,7 @@
 
 .userAdding {
     width: 100%;
+    height: 400px;
 }
 
 .searchBox {
@@ -17,4 +18,26 @@
 .usersAdded {
     width: 50%;
     float: left;
+}
+
+.createMeetingButton {
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.rbc-time-view .rbc-row {
+    min-height: 0;
+}
+
+.rbc-time-view .rbc-row div:nth-child(1) {
+    height: 0 !important;
+}
+
+.rbc-time-header > .rbc-row:nth-of-type(2) {
+    display: none !important;
 }
