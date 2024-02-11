@@ -5,6 +5,9 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import CreateMeeting from "./pages/CreateMeeting";
+import Account from "./pages/Account";
+import Meetings from "./pages/Meetings";
+import Users from "./pages/Users";
 
 function App() {
 
@@ -14,6 +17,9 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="create" element={<CreateMeeting/>}/>
+                    <Route path="account" element={<Account/>}/>
+                    <Route path="meetings" element={<Meetings/>}/>
+                    <Route path="users" element={<Users/>}/>
                 </Route>
                 <Route path="/signup" element={<SignUp/>}/>
             </Routes>

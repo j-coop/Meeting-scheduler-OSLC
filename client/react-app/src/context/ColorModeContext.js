@@ -1,6 +1,6 @@
 import {createContext, useContext, useMemo, useState} from "react";
 import {blue, green, grey} from "@mui/material/colors";
-import {createTheme, ThemeProvider} from "@mui/material";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 
 
 const ColorModeContext = createContext();
@@ -14,7 +14,12 @@ export const ColorModeProvider = ({children}) => {
                 ? {
                     // palette values for light mode
                     primary: blue,
+                    secondary: green,
                     divider: blue[200],
+                    background: {
+                        default: '#fff',
+                        paper: '#fff',
+                    },
                     text: {
                         primary: '#000',
                         secondary: blue[800],
@@ -22,11 +27,11 @@ export const ColorModeProvider = ({children}) => {
                 }
                 : {
                     // palette values for dark mode
-                    primary: green,
-                    divider: green[700],
+                    primary: blue,
+                    divider: blue[600],
                     background: {
-                        default: green[900],
-                        paper: green[900],
+                        default: '#3C3C3C',
+                        paper: '#3C3C3C',
                     },
                     text: {
                         primary: '#fff',
@@ -54,6 +59,7 @@ export const ColorModeProvider = ({children}) => {
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
+                <CssBaseline />
                 {children}
             </ThemeProvider>
         </ColorModeContext.Provider>

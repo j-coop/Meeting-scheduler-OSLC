@@ -1,15 +1,21 @@
+* {
+    line-height: 1;
+}
+
 .banner {
     width: 100%;
     padding-left: 8%;
     padding-right: 5%;
     box-sizing: border-box;
     height: 500px;
+    line-height: 1;
 }
 
 .bannerLeft {
     float: left;
     width: 40%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .bannerLeft button {
@@ -23,6 +29,7 @@
     width: 60%;
     height: 100%;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .mainPhoto {
@@ -32,5 +39,5 @@
 }
 
 .mainPhoto:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }

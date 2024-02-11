@@ -1,11 +1,12 @@
-import {Button, Popover, Typography} from "@mui/material";
+import {Button, ButtonGroup, Popover, Typography} from "@mui/material";
 import UserCard from "./UserCard";
 import {useAuth} from "../context/AuthContext";
+import {Link} from "react-router-dom";
 
 
 const AccountPopover = (props) => {
 
-    const {userLogin, userEmail, userName} = useAuth();
+    const {userLogin, userEmail, userName, logout} = useAuth();
 
     return (
         <Popover
@@ -28,11 +29,26 @@ const AccountPopover = (props) => {
                 name={userName}
                 addPresent={false}
             />
-            <div>
+            <div
+                style={{
+                    paddingLeft: "10px",
+                    paddingRight: "10px"
+                }}
+            >
                 <Typography>Username: {userLogin}</Typography>
                 <Typography>Email: {userEmail}</Typography>
-                <Button>Settings</Button>
-                <Button>Logout</Button>
+                <ButtonGroup
+                    orientation="vertical"
+                    aria-label="Vertical button group"
+                    fullWidth={true}
+                    variant="text"
+                >
+                    <Link to={"/account"}><Button>Account</Button></Link>
+                    <Link to={"/meetings"}><Button>Meetings</Button></Link>
+                    <Link to={"/users"}><Button>Users</Button></Link>
+                    <Link to={"/settings"}><Button>Settings</Button></Link>
+                    <Button onClick={logout}>Logout</Button>
+                </ButtonGroup>
             </div>
         </Popover>
     )

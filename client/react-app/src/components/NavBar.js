@@ -2,8 +2,12 @@ import {Link} from "react-router-dom";
 import styles from "../styles/nav.module.css"
 import NavButtons from "./NavButtons";
 import Logo from "./Logo";
+import {useAuth} from "../context/AuthContext";
 
 const NavBar = () => {
+
+    const {isLoggedIn} = useAuth();
+
     return (
         <nav>
             <Logo/>
@@ -13,11 +17,21 @@ const NavBar = () => {
                         <Link to="/" className={styles.navLink}>Home</Link>
                     </li>
                     <li>
-                        <Link to="/blogs" className={styles.navLink}>Blogs</Link>
+                        <Link to="/account" className={styles.navLink}>Account</Link>
                     </li>
-                    <li>
-                        <Link to="/contact" className={styles.navLink}>Contact</Link>
-                    </li>
+                    {
+                        isLoggedIn &&
+                        (
+                            <>
+                                <li>
+                                    <Link to="/meetings" className={styles.navLink}>Meetings</Link>
+                                </li>
+                                <li>
+                                    <Link to="/users" className={styles.navLink}>Users</Link>
+                                </li>
+                            </>
+                        )
+                    }
                 </ul>
             </div>
             <NavButtons/>
