@@ -18,8 +18,8 @@ export default function WeekCalendar({ localizer, duration }) {
     )
 
     const handleSelectEvent = useCallback(
-        (clickedEvent) => {
-            const updatedEvents = myEvents.filter(event => event !== clickedEvent);
+        ({ start, end }) => {
+            const updatedEvents = myEvents.filter(event => event !== { start, end });
             setEvents(updatedEvents);
         },
         [myEvents, setEvents]

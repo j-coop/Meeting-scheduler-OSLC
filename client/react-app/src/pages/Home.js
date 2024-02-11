@@ -2,8 +2,12 @@ import TabsComponent from "../components/TabsComponent";
 import styles from "../styles/home.module.css"
 import main_photo from "../resources/image.jpg"
 import HighlightButton from "../components/HighlightButton";
+import {useAuth} from "../context/AuthContext";
 
 const Home = () => {
+
+    const {isLoggedIn} = useAuth();
+
     return (
         <>
             <div className={styles.banner}>
@@ -20,7 +24,10 @@ const Home = () => {
                         times and see how seamlessly you can arrange meetings
                     </div>
                     <div style={{fontSize: "40px"}}>
-                        <HighlightButton value={"Sign up now"} size="40"/>
+                        {
+                            !isLoggedIn &&
+                            <HighlightButton value={"Sign up now"} size="40"/>
+                        }
                     </div>
                 </div>
                 <div className={styles.bannerRight}>

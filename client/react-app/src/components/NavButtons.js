@@ -2,8 +2,11 @@ import styles from "../styles/navButtons.module.css"
 import {useAuth} from "../context/AuthContext";
 import HighlightButton from "./HighlightButton";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import SignInPopup from "./SignInPopup";
+import {FormControlLabel} from "@mui/material";
+import ModeSwitch from "./ModeSwitch";
+import {ColorModeProvider, useColorMode} from "../context/ColorModeContext";
 
 
 function LoggedInterface() {
@@ -52,8 +55,15 @@ function CreateMeetingButton() {
     )
 }
 
+
 const NavButtons = () => {
     const {isLoggedIn, login} = useAuth();
+
+    const colorMode = useColorMode();
+
+    const handleModeChange = () => {
+        colorMode.toggleColorMode();
+    };
 
     useEffect(() => {
         // Check if a valid login token exists in localStorage
@@ -68,6 +78,10 @@ const NavButtons = () => {
 
     return (
         <div className={styles.navButtons}>
+            <FormControlLabel
+                control={<ModeSwitch sx={{ m: 1 }} onClick={handleModeChange}/>}
+                label=""
+            />
             {isLoggedIn ? <LoggedInterface/> : <NotLoggedInterface/>}
             <CreateMeetingButton/>
         </div>
