@@ -41,3 +41,10 @@
 .mainPhoto:hover {
     transform: scale(1.02);
 }
+
+.tabsContainer {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}

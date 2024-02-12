@@ -2,7 +2,6 @@ import React, { Fragment, useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Calendar, Views, DateLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import styles from '../styles/createMeeting.module.css'
 
 export default function WeekCalendar({ localizer, duration }) {
     const [myEvents, setEvents] = useState([])

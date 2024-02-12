@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import {AuthProvider} from "../context/AuthContext";
 import React from 'react'
 import {ColorModeProvider} from "../context/ColorModeContext";
+import Footer from "../components/Footer";
 
 
 const Layout = () => {
@@ -12,7 +13,8 @@ const Layout = () => {
             <AuthProvider>
                 <>
                     <NavBar/>
-                    <Outlet />
+                    <Outlet/>
+                    <Footer/>
                 </>
             </AuthProvider>
         </ColorModeProvider>

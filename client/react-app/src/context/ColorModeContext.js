@@ -18,7 +18,7 @@ export const ColorModeProvider = ({children}) => {
                     divider: blue[200],
                     background: {
                         default: '#fff',
-                        paper: '#fff',
+                        paper: 'rgba(239,246,248)',
                     },
                     text: {
                         primary: '#000',
@@ -31,7 +31,7 @@ export const ColorModeProvider = ({children}) => {
                     divider: blue[600],
                     background: {
                         default: '#3C3C3C',
-                        paper: '#3C3C3C',
+                        paper: '#383838',
                     },
                     text: {
                         primary: '#fff',

@@ -2,11 +2,11 @@ import styles from "../styles/navButtons.module.css"
 import {useAuth} from "../context/AuthContext";
 import HighlightButton from "./HighlightButton";
 import {Link} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import SignInPopup from "./SignInPopup";
 import {FormControlLabel} from "@mui/material";
 import ModeSwitch from "./ModeSwitch";
-import {ColorModeProvider, useColorMode} from "../context/ColorModeContext";
+import {useColorMode} from "../context/ColorModeContext";
 
 
 function LoggedInterface() {
