@@ -3,6 +3,7 @@ import styles from "../styles/home.module.css"
 import main_photo from "../resources/image.jpg"
 import HighlightButton from "../components/HighlightButton";
 import {useAuth} from "../context/AuthContext";
+import ReassurancePanel from "../components/ReassurancePanel";
 
 const Home = () => {
 
@@ -34,6 +35,7 @@ const Home = () => {
                     <img alt={"main-photo"} src={main_photo} className={styles.mainPhoto}/>
                 </div>
             </div>
+            <ReassurancePanel/>
             <TabsComponent/>
         </>
     )

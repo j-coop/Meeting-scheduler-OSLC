@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "../config";
 import {useEffect, useState} from "react";
 import {useAuth} from "../context/AuthContext";
+import MeetingCard from "../components/MeetingCard";
 
 const Meetings = () => {
 
@@ -31,7 +32,11 @@ const Meetings = () => {
             {
                 meetings.map(meeting => (
                     <div>
-                        {meeting.title}
+                        <MeetingCard
+                            title={meeting.title}
+                            description={meeting.description}
+                            status={meeting.status}
+                        />
                         <br/>
                     </div>
                 ))
