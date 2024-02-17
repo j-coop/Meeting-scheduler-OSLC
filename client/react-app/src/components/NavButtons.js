@@ -2,18 +2,19 @@ import styles from "../styles/navButtons.module.css"
 import {useAuth} from "../context/AuthContext";
 import HighlightButton from "./HighlightButton";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import SignInPopup from "./SignInPopup";
-import {FormControlLabel} from "@mui/material";
+import {Button, FormControlLabel, Typography} from "@mui/material";
 import ModeSwitch from "./ModeSwitch";
 import {useColorMode} from "../context/ColorModeContext";
+import LogInOutButton from "./LogInOutButton";
 
 
 function LoggedInterface() {
     const {userLogin, logout} = useAuth();
     return (
         <>
-            <button className={styles.plainButton} onClick={logout}>Log out</button>
+            <LogInOutButton logged={true}/>
             <HighlightButton value={userLogin}/>
         </>
     )
@@ -33,12 +34,7 @@ function NotLoggedInterface() {
 
     return (
         <>
-            <button
-                className={styles.plainButton}
-                onClick={signInOpen ? handleSignInClose : handleSignInOpen}
-            >
-                Log in
-            </button>
+            <LogInOutButton logged={false} signIn={signInOpen} setSignIn={setSignInOpen}/>
             <SignInPopup open={signInOpen} onClose={handleSignInClose} />
             <HighlightButton value="Sign up"/>
         </>
@@ -48,9 +44,29 @@ function NotLoggedInterface() {
 function CreateMeetingButton() {
     return (
         <Link to={"/create"}>
-            <button className={styles.createMeetingButton}>
-                <span style={{fontWeight: "bold"}}>+</span> Create Meeting
-            </button>
+            <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                    borderRadius: "20px"
+                }}
+                style={{
+                    marginTop: 0,
+                    paddingLeft: "15px",
+                    paddingRight: "15px"
+                }}
+            >
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
+                    sx={{
+                        textTransform: 'none',
+                        letterSpacing: '1px'
+                    }}
+                >
+                    <span style={{fontWeight: "bold"}}>+</span> Create Meeting
+                </Typography>
+            </Button>
         </Link>
     )
 }

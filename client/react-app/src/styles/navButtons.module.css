@@ -1,6 +1,7 @@
 .navButtons {
     height: 70px;
     float: right;
+    margin-top: 15px;
 }
 
 .navButtons button {
@@ -24,6 +25,7 @@
     color: white;
     border-color: forestgreen;
     cursor: pointer;
+    margin: 0;
 }
 
 .highlightButton:hover {

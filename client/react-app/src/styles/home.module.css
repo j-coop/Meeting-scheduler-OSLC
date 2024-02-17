@@ -70,14 +70,13 @@ html, body {
 
 .panel {
     padding: 20px;
-    background-color: #f5f5f5;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
 .icon {
     font-size: 64px;
-    color: #007bff; /* Adjust icon color as needed */
     display: block;
     margin: 0 auto;
 }

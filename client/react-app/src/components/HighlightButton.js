@@ -1,8 +1,8 @@
-import styles from "../styles/navButtons.module.css";
 import {Link} from "react-router-dom";
 import {useAuth} from "../context/AuthContext";
 import React from "react";
 import AccountPopover from "./AccountPopover";
+import {Button, Typography} from "@mui/material";
 
 
 function HighlightButton(props) {
@@ -26,9 +26,30 @@ function HighlightButton(props) {
     return (
         <>
             <Link to={isLoggedIn ? null : "/signup"}>
-                <button className={styles.highlightButton} onClick={handleClick}>
-                    {props.value}
-                </button>
+                <Button
+                    onClick={handleClick}
+                    variant="contained"
+                    color="secondary"
+                    sx={{
+                        borderRadius: "20px"
+                    }}
+                    style={{
+                        marginTop: 0,
+                        paddingLeft: "15px",
+                        paddingRight: "15px"
+                    }}
+                >
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        sx={{
+                            textTransform: 'none',
+                            letterSpacing: '1px'
+                        }}
+                    >
+                        {props.value}
+                    </Typography>
+                </Button>
             </Link>
             <AccountPopover
                 id = {id}

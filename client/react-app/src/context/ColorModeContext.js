@@ -1,5 +1,5 @@
 import {createContext, useContext, useMemo, useState} from "react";
-import {blue, green, grey} from "@mui/material/colors";
+import {blue, green, grey, indigo, teal} from "@mui/material/colors";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 
 
@@ -27,7 +27,8 @@ export const ColorModeProvider = ({children}) => {
                 }
                 : {
                     // palette values for dark mode
-                    primary: blue,
+                    primary: indigo,
+                    secondary: teal,
                     divider: blue[600],
                     background: {
                         default: '#3C3C3C',
