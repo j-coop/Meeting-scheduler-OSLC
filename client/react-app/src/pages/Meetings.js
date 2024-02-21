@@ -3,6 +3,8 @@ import config from "../config";
 import {useEffect, useState} from "react";
 import {useAuth} from "../context/AuthContext";
 import MeetingCard from "../components/MeetingCard";
+import styles from "../styles/meetings.module.css"
+import CreateMeetingButton from "../components/CreateMeetingButton";
 
 const Meetings = () => {
 
@@ -29,18 +31,23 @@ const Meetings = () => {
 
     return (
         <>
-            {
-                meetings.map(meeting => (
-                    <div>
-                        <MeetingCard
-                            title={meeting.title}
-                            description={meeting.description}
-                            status={meeting.status}
-                        />
-                        <br/>
-                    </div>
-                ))
-            }
+            <div className={styles.meetingsContainer}>
+                {
+                    meetings.map(meeting => (
+                        <div>
+                            <MeetingCard
+                                title={meeting.title}
+                                description={meeting.description}
+                                status={meeting.status}
+                            />
+                            <br/>
+                        </div>
+                    ))
+                }
+            </div>
+            <div className={styles.addButton}>
+                <CreateMeetingButton />
+            </div>
         </>
     )
 };
