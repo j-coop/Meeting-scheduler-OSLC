@@ -1,10 +1,9 @@
 import UserCard from "./UserCard";
-import {useEffect, useRef, useState} from "react";
+import {useState} from "react";
 import {alpha, debounce, InputBase, List, ListItem, styled} from "@mui/material";
 import axios from "axios";
 import config from "../config";
 import SearchIcon from '@mui/icons-material/Search';
-import {focus} from "@testing-library/user-event/dist/focus";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -49,7 +48,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const UserSearch = () => {
+const UserSearch = (props) => {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -69,7 +68,7 @@ const UserSearch = () => {
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
-        debouncedSearch().then();
+        debouncedSearch()
     };
 
     return (
@@ -94,6 +93,8 @@ const UserSearch = () => {
                             email={result.email}
                             name={result.fullName}
                             addPresent={true}
+                            chosen={props.chosen}
+                            setChosen={props.setChosen}
                         />
                     </ListItem>
                 ))}

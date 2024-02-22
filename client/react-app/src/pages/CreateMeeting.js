@@ -1,24 +1,27 @@
-import {Button, ButtonGroup, TextField} from "@mui/material";
+import {Button, List, ListItem, TextField, Typography} from "@mui/material";
 import {ToggleButton, ToggleButtonGroup} from "@mui/lab";
 import UserSearch from "../components/UserSearch";
-import {useState} from "react";
+import React, {useState} from "react";
 import styles from "../styles/createMeeting.module.css"
 import {momentLocalizer} from "react-big-calendar";
 import moment from "moment";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import WeekCalendar from "../components/WeekCalendar";
+import UserCard from "../components/UserCard";
 
 
 const CreateMeeting = () => {
 
-    const [durationState, setDurationState] = useState('30 min')
+    const [durationState, setDurationState] = useState('30 min');
     const [durationValue, setDurationValue] = useState(30);
 
-    const [customInputValue, setCustomInputValue] = useState(0)
+    const [chosenUsers, setChosenUsers] = useState([]);
+
+    const [customInputValue, setCustomInputValue] = useState(0);
 
     const [isCustom, setIsCustom] = useState(false);
 
-    const localizer = momentLocalizer(moment)
+    const localizer = momentLocalizer(moment);
 
 
     const handleChange = (
@@ -103,14 +106,62 @@ const CreateMeeting = () => {
 
             <div className={styles.userAdding}>
                 <div className={styles.searchBox}>
-                    {UserSearch()}
+                    <UserSearch chosen={chosenUsers} setChosen={setChosenUsers}/>
                 </div>
                 <div className={styles.usersAdded}>
-                    <h2>Users added to meeting:</h2>
+                    <div className={styles.usersAddedCaption}>
+                        <h2>Users added to meeting:</h2>
+                    </div>
+                    <div className={styles.usersAddedContent}>
+                        <List>
+                            {chosenUsers.map(user => (
+                                <ListItem key={user.login}>
+                                    <UserCard
+                                        login={user.login}
+                                        email={user.email}
+                                        name={user.name}
+                                        addPresent={false}
+                                        chosen={null}
+                                        setChosen={null}
+                                        width="70%"
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </div>
                 </div>
             </div>
 
-            <button className={styles.createMeetingButton}>Create Meeting</button>
+            <div className={styles.createMeetingButton}>
+            <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                        borderRadius: "20px"
+                    }}
+                    style={{
+                        marginTop: 0,
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        paddingLeft: "150px",
+                        paddingRight: "150px",
+                        paddingTop: "10px",
+                        paddingBottom: "10px",
+                    }}
+                >
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        sx={{
+                            textTransform: 'none',
+                            letterSpacing: '2px',
+                            fontSize: "1.2em"
+                        }}
+                    >
+                        Create Meeting
+                    </Typography>
+                </Button>
+            </div>
 
             <br/>
             <br/>

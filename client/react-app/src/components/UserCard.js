@@ -1,5 +1,6 @@
 import {Avatar, Card, Chip, Fab, Stack, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import {useState} from "react";
 
 
 const UserCard = (props) => {
@@ -8,8 +9,20 @@ const UserCard = (props) => {
 
     const addPresent = props.addPresent;
 
+    const [added, setAdded] = useState(false);
+
+    const addUser = () => {
+        setAdded(true);
+        let userData = {
+            login: props.login,
+            email: props.email,
+            name: props.name
+        }
+        props.setChosen([...props.chosen, userData]);
+    }
+
     return (
-        <Card sx={{ p: 2.5 }}>
+        <Card sx={{ p: 2.5, width: (props.width ? props.width : "100%") }}>
             <Stack direction="row" alignItems="center" spacing={2} useFlexGap>
                 <Avatar variant="rounded" src="avatar.jpg" />
                 <div>
@@ -17,7 +30,7 @@ const UserCard = (props) => {
                         <Typography fontWeight="semiBold">{props.name}</Typography>
                         <Chip
                             size="small"
-                            color={active ? 'success' : 'default'}
+                            color={active ? 'secondary' : 'default'}
                             label={props.login}
                         />
                     </Stack>
@@ -27,7 +40,16 @@ const UserCard = (props) => {
                 </div>
                 {
                     addPresent ?
-                        <Fab disabled color="neutral" aria-label="add">
+                        <Fab
+                            disabled={added}
+                            color="neutral"
+                            aria-label="add"
+                            size="medium"
+                            onClick={addUser}
+                            style = {{
+                                float: "right"
+                            }}
+                        >
                             <AddIcon />
                         </Fab>
                         :<></>
