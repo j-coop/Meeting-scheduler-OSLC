@@ -57,6 +57,8 @@ public class MeetingService {
                 .proposals(new ArrayList<>())
                 .build();
 
+        this.saveMeeting(meeting);
+
         // Add organizer's participation
         ParticipationCreateDTO createDTO = new ParticipationCreateDTO(dto.getOrganiser());
         MeetingParticipation mp = meetingParticipationService.addMeetingParticipation(createDTO, meeting);

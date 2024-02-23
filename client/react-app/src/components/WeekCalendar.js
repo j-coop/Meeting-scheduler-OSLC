@@ -3,14 +3,18 @@ import PropTypes from 'prop-types'
 import { Calendar, Views, DateLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-export default function WeekCalendar({ localizer, duration }) {
-    const [myEvents, setEvents] = useState([])
+export default function WeekCalendar({ localizer, duration, proposals, setProposals }) {
+    //const [myEvents, setEvents] = useState([])
+
+    const myEvents = proposals;
+    const setEvents = setProposals;
 
     const handleSelectSlot = useCallback(
         ({ start, end }) => {
             if (start > Date.now()) {
                 end = new Date(start.valueOf()+duration*60*1000);
                 setEvents((prev) => [...prev, { start, end }]);
+                console.log({ start, end })
             }
         },
         [setEvents]

@@ -45,7 +45,6 @@ public class MeetingProposalService {
         MeetingProposal meetingProposal = MeetingProposal.builder()
                 .proposalId(UUID.randomUUID())
                 .meeting(meeting)
-                .date(dto.getDate())
                 .startTime(dto.getStartTime())
                 .endTime(dto.getEndTime())
                 .responses(new ArrayList<>())

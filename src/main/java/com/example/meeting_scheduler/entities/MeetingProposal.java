@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -27,14 +28,12 @@ public class MeetingProposal implements Serializable {
     @Column(name="proposalId")
     private UUID proposalId;
 
-    @Column(name="date")
-    private LocalDate date;
 
     @Column(name="startTime")
-    private LocalTime startTime;
+    private ZonedDateTime startTime;
 
     @Column(name="endTime")
-    private LocalTime endTime;
+    private ZonedDateTime endTime;
 
     @OneToMany(mappedBy = "meetingProposal")
     private List<ProposalResponse> responses;
