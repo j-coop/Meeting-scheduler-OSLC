@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Component
@@ -144,15 +145,15 @@ public class DataInitializer {
             proposal.setProposalId(UUID.randomUUID());
             proposal.setMeeting(meeting);
 
-            // Generate a random date (within the next 30 days)
-            LocalDate randomDate = LocalDate.now().plusDays(random.nextInt(30));
-
             // Generate a random hour and minute
             int randomHour = random.nextInt(24);
             int randomMinute = random.nextInt(60);
 
-            proposal.setDate(randomDate);
-            LocalTime startTime = LocalTime.of(randomHour, randomMinute);
+            ZonedDateTime startTime = ZonedDateTime.now()
+                    .plusDays(random.nextInt(30))
+                    .plusHours(randomHour)
+                    .plusMinutes(randomMinute);
+
             proposal.setStartTime(startTime);
             proposal.setEndTime(startTime.plusHours(random.nextInt(2) + 1));
 

@@ -15,6 +15,7 @@ public class ClientCorsFilter extends CorsFilter {
         corsConfiguration.addAllowedOrigin("*");  // Allow all origins (replace with your specific origins)
         corsConfiguration.addAllowedMethod("*");  // Allow all HTTP methods
         corsConfiguration.addAllowedHeader("*");  // Allow all headers
+        corsConfiguration.addExposedHeader("*");
         corsConfiguration.addAllowedOrigin("http://localhost:3000");
         corsConfiguration.setAllowCredentials(true);
 

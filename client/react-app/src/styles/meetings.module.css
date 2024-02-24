@@ -1,8 +1,6 @@
 .meetingsContainer {
     padding-left: 20%;
     padding-right: 20%;
-    max-height: 70vh;
-    overflow: auto;
     margin-bottom: 20px;
 }
 

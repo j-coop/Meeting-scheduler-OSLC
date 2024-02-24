@@ -29,26 +29,28 @@ const Layout = () => {
             }
         };
 
-        adjustContentHeight();
-        window.addEventListener('resize', adjustContentHeight);
+        //adjustContentHeight();
+        //window.addEventListener('resize', adjustContentHeight);
         
-    }, []);
+    }, );
 
     return (
         <ColorModeProvider>
             <AuthProvider>
                 <>
-                    <div className="navbar">
-                        <NavBar/>
-                    </div>
-                    <div className="page-container">
-                        <div className="content">
-                            <Outlet/>
+                    <div className={styles.contentsWrapper}>
+                        <div className="navbar">
+                            <NavBar/>
                         </div>
-                        <footer className="footer">
-                            <Footer/>
-                        </footer>
+                        <div className={styles.pageContainer}>
+                            <div className={styles.content}>
+                                <Outlet/>
+                            </div>
+                        </div>
                     </div>
+                    <footer className={styles.footer}>
+                        <Footer/>
+                    </footer>
                 </>
             </AuthProvider>
         </ColorModeProvider>
