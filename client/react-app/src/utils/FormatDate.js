@@ -1,7 +1,7 @@
 
 
 // Function to pad numbers with leading zeros
-function pad(number) {
+export function pad(number) {
     if (number < 10) {
         return '0' + number;
     }
@@ -9,7 +9,7 @@ function pad(number) {
 }
 
 // Function to format date-time into ISO-8601 format with timezone
-function formatDateTime(dateTime) {
+export function formatDateTime(dateTime) {
     const year = dateTime.getFullYear();
     const month = pad(dateTime.getMonth() + 1);
     const day = pad(dateTime.getDate());

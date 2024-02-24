@@ -50,10 +50,11 @@ public class MeetingProposalService {
                 .responses(new ArrayList<>())
                 .build();
 
+        this.saveMeetingProposal(meetingProposal);
+
         // Add proposal to meeting's list
         meetingService.addMeetingProposal(meeting, meetingProposal);
 
-        this.saveMeetingProposal(meetingProposal);
         return meetingProposal;
     }
 }

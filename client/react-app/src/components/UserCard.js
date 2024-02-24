@@ -14,6 +14,7 @@ const UserCard = (props) => {
     const addUser = () => {
         setAdded(true);
         let userData = {
+            id: props.id,
             login: props.login,
             email: props.email,
             name: props.name

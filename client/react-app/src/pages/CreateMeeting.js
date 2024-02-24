@@ -9,7 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import WeekCalendar from "../components/WeekCalendar";
 import UserCard from "../components/UserCard";
 import config from "../config";
-import formatDateTime from "../utils/FormatDate"
+import {formatDateTime} from "../utils/FormatDate"
 
 
 const CreateMeeting = () => {
@@ -56,7 +56,7 @@ const CreateMeeting = () => {
     }
 
     const addMeetingProposals = (meetingId) => {
-        for (let proposal in proposals) {
+        for (let proposal of proposals) {
             let proposalStartTime = new Date(proposal.start);
             let proposalEndTime = new Date(proposal.end);
 
@@ -89,6 +89,35 @@ const CreateMeeting = () => {
         }
     }
 
+    const addMeetingParticipations = (meetingId) => {
+        for (let i=0; i<chosenUsers.length; i++) {
+            let user = chosenUsers[i];
+            let userId = user.id;
+            let data = {
+                userId: userId
+            };
+
+            fetch(config.apiUrl+'/meetings/'+meetingId+'/participations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Added meeting participation successfully")
+                    }
+                    else {
+                        console.log("Participation addition failure");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    }
+
     const handleMeetingCreate = () => {
 
         let data = {
@@ -106,11 +135,11 @@ const CreateMeeting = () => {
         })
             .then(response => {
                 if (response.ok) {
-                    console.log(response.headers)
-                    let meetingId = response.headers.get('Location');
-                    console.log(meetingId);
-                    meetingId = meetingId.split('/')[-1];
-                    console.log(meetingId);
+                    let _meetingId = response.headers.get("Location").split('/');
+                    let meetingId = _meetingId[_meetingId.length - 1];
+                    // adding meeting participations
+                    addMeetingParticipations(meetingId);
+                    // adding meeting proposals
                     addMeetingProposals(meetingId);
                     alert("Meeting created");
                 }

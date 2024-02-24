@@ -89,6 +89,7 @@ const UserSearch = (props) => {
                 {searchResults.slice(0,3).map(result => (
                     <ListItem key={result.login}>
                         <UserCard
+                            id={result.id}
                             login={result.login}
                             email={result.email}
                             name={result.fullName}
