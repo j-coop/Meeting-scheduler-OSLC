@@ -13,6 +13,14 @@ const ParticipantTile = (props) => {
                     <Typography variant="body2" color="text.secondary">
                         {props.login}
                     </Typography>
+                    {
+                        props.owner &&
+                        <Chip
+                            size="small"
+                            color="primary"
+                            label="OWNER"
+                        />
+                    }
                 </Stack>
             </Card>
         </>

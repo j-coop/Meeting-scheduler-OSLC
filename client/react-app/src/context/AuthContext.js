@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) => {
     const [userLogin, setUserLogin] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userName, setUserName] = useState("");
+    const [userId, setUserId] = useState("");
 
     const login = (token, login, data) => {
         localStorage.setItem('token', token);
@@ -18,6 +19,7 @@ export const AuthProvider = ({children}) => {
         setUserLogin(login);
         setUserEmail(data.email);
         setUserName(data.fullName);
+        setUserId(data.userId);
     };
 
     const logout = () => {
@@ -27,7 +29,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{isLoggedIn, userLogin, userEmail, userName, login, logout}}>
+        <AuthContext.Provider value={{isLoggedIn, userLogin, userEmail, userName, userId, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

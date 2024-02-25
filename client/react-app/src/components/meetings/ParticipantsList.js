@@ -10,6 +10,7 @@ import MeetingCard from "./MeetingCard";
 const ParticipantsList = (props) => {
 
     let meetingId = props.id;
+    let ownerId = props.ownerId;
 
     const [participants, setParticipants] = useState([]);
 
@@ -37,6 +38,7 @@ const ParticipantsList = (props) => {
                             <ParticipantTile
                                 login={participant.userLogin}
                                 status={participant.userStatus}
+                                owner={(ownerId === participant.userId)}
                             />
                             <br/>
                         </div>

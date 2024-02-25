@@ -25,3 +25,25 @@ export function formatDateTime(dateTime) {
 
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}${offsetSign}${pad(offsetHours)}:${pad(offsetMinutesAbs)}`;
 }
+
+// Function to format ISO-8601 format with timezone to neat string to display
+export function formatISO8601(dateTimeString) {
+    // Split the date-time string into its components
+    const [datePart, timePart] = dateTimeString.split('T');
+    const [year, month, day] = datePart.split('-');
+    const [time, timezone] = timePart.split(/([-+]\d+:\d+|Z)$/);
+
+    // Format the date and time parts
+    const formattedDate = `${day}/${month}/${year}`;
+    const formattedTime = time.slice(0, 5); // Extract hours and minutes only
+
+    // Format the timezone
+    let formattedTimezone = 'UTC';
+    if (timezone !== 'Z') {
+        const [_, sign, hoursOffset, minutesOffset] = timezone.match(/([-+])(\d+):?(\d+)?/);
+        formattedTimezone = `${sign}${hoursOffset.padStart(2, '0')}:${(minutesOffset || '00').padStart(2, '0')}`;
+    }
+
+    // Construct the final formatted string
+    return `${formattedDate} ${formattedTime} ${formattedTimezone}`;
+}

@@ -4,11 +4,16 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AddIcon from "@mui/icons-material/Add";
 import {useState} from "react";
 import MeetingPanel from "./MeetingPanel";
+import {useAuth} from "../../context/AuthContext";
 
 
 const MeetingCard = (props) => {
 
+    const meetingData = props.meetingData;
+
     const [open, setOpen] = useState(false);
+
+    const {userId} = useAuth();
 
     const switchOpen = () => {
         if (open) {
@@ -23,7 +28,7 @@ const MeetingCard = (props) => {
 
     let color;
     let label;
-    switch (props.status) {
+    switch (meetingData.status) {
         case "PROPOSED":
             color = "default";
             label = "Proposed"
@@ -59,15 +64,23 @@ const MeetingCard = (props) => {
             >
                 <div>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
-                        <Typography fontWeight="semiBold">{props.title}</Typography>
+                        <Typography fontWeight="semiBold">{meetingData.title}</Typography>
                         <Chip
                             size="small"
                             color={color}
                             label={label}
                         />
+                        {
+                            userId === meetingData.organiser &&
+                            <Chip
+                                size="small"
+                                color="primary"
+                                label="OWNER"
+                            />
+                        }
                     </Stack>
                     <Typography variant="body2" color="text.secondary">
-                        {props.description}
+                        {meetingData.description}
                     </Typography>
                 </div>
                 <div>
@@ -77,7 +90,7 @@ const MeetingCard = (props) => {
                 </div>
             </Stack>
             {
-                open ? <MeetingPanel id={props.id}/> : <></>
+                open ? <MeetingPanel meetingData={meetingData}/> : <></>
             }
         </Card>
     )

@@ -7,7 +7,7 @@ const Footer = () => {
 
     return (
         <Fragment>
-            <Box width={"100%"} sx={{bgcolor: "background.paper"}}>
+            <Box width={"100%"} sx={{bgcolor: "background.paper", marginTop: "20px"}}>
                 <Typography align={"right"}>MeetIt@2024 Jakub Bednarz ETI PG</Typography>
             </Box>
         </Fragment>

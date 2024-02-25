@@ -32,10 +32,7 @@ const Meetings = () => {
                     meetings.map(meeting => (
                         <div>
                             <MeetingCard
-                                id={meeting.id}
-                                title={meeting.title}
-                                description={meeting.description}
-                                status={meeting.status}
+                                meetingData={meeting}
                             />
                             <br/>
                         </div>
