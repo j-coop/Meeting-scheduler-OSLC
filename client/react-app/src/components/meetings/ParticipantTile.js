@@ -1,5 +1,4 @@
-import {Avatar, Card, Chip, Fab, Stack, Typography} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import {Avatar, Card, Chip, Stack, Typography} from "@mui/material";
 
 
 const ParticipantTile = (props) => {

@@ -1,7 +1,6 @@
-import {Avatar, Card, Chip, Fab, Stack, Typography} from "@mui/material";
+import {Card, Chip, Stack, Typography} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import AddIcon from "@mui/icons-material/Add";
 import {useState} from "react";
 import MeetingPanel from "./MeetingPanel";
 import {useAuth} from "../../context/AuthContext";
@@ -50,10 +49,8 @@ const MeetingCard = (props) => {
     return (
         <Card
             sx={{
-                p: 2.5,
-                cursor: "pointer"
+                p: 2.5
             }}
-            onClick={switchOpen}
         >
             <Stack
                 direction="row"
@@ -61,6 +58,10 @@ const MeetingCard = (props) => {
                 spacing={2}
                 useFlexGap
                 justifyContent="space-between" // makes icon stick to the right
+                onClick={switchOpen}
+                sx={{
+                    cursor: "pointer"
+                }}
             >
                 <div>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>

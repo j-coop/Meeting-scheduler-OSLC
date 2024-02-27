@@ -1,10 +1,8 @@
 import {List} from "@mui/material";
 import ParticipantTile from "./ParticipantTile";
 import {useEffect, useState} from "react";
-import {useAuth} from "../../context/AuthContext";
 import axios from "axios";
 import config from "../../config";
-import MeetingCard from "./MeetingCard";
 
 
 const ParticipantsList = (props) => {

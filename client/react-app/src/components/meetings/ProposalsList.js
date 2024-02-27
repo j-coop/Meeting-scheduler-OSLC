@@ -2,13 +2,14 @@ import {useEffect, useState} from "react";
 import config from "../../config";
 import axios from "axios";
 import {List} from "@mui/material";
-import ParticipantTile from "./ParticipantTile";
 import ProposalTile from "./ProposalTile";
 
 
 const ProposalsList = (props) => {
 
     let meetingId = props.id;
+    let isOwner = props.owner;
+    let status = props.status;
 
     const [proposals, setProposals] = useState([]);
 
@@ -35,6 +36,8 @@ const ProposalsList = (props) => {
                         <div>
                             <ProposalTile
                                 proposalData={proposal}
+                                owner={isOwner}
+                                status={status}
                             />
                             <br/>
                         </div>

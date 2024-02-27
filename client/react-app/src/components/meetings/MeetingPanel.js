@@ -1,11 +1,15 @@
 import ParticipantsList from "./ParticipantsList";
 import styles from "../../styles/meetingPanel.module.css"
 import ProposalsList from "./ProposalsList";
+import MeetingActionsPanel from "./MeetingActionsPanel";
+import {useAuth} from "../../context/AuthContext";
 
 
 const MeetingPanel = (props) => {
 
     const meetingData = props.meetingData;
+
+    const {userId} = useAuth();
 
     return (
         <div className={styles.container}>
@@ -13,10 +17,18 @@ const MeetingPanel = (props) => {
 
             <div className={styles.left}>
                 <div className={styles.proposals}>
-                    <ProposalsList id={meetingData.id}/>
+                    <ProposalsList
+                        id={meetingData.id}
+                        status={meetingData.status}
+                        owner={userId === meetingData.organiser}
+                    />
                 </div>
                 <div className={styles.actions}>
-
+                    <hr />
+                    <MeetingActionsPanel
+                        status={meetingData.status}
+                        owner={userId === meetingData.organiser}
+                    />
                 </div>
             </div>
             <div className={styles.right}>
