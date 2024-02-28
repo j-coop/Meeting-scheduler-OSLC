@@ -5,7 +5,7 @@ import {useMeetingContext} from "../../context/MeetingContext";
 
 const MeetingActionsPanel = (props) => {
 
-    let id = props.id;
+    let id = props.meetingData.id;
     let isOwner = props.owner;
 
     const {status, setStatus} = useMeetingContext();
@@ -23,7 +23,6 @@ const MeetingActionsPanel = (props) => {
             .then(response => {
                 if (response.ok) {
                     console.log("meeting cancelled");
-                    props.meetingData.status = "CANCELLED";
                     setStatus("CANCELLED")
                 }
             })
@@ -34,6 +33,23 @@ const MeetingActionsPanel = (props) => {
 
     const handleCompleted = () => {
 
+        let path = config.apiUrl+'/meetings/'+id+'/complete';
+
+        fetch(path, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("meeting marked completed");
+                    setStatus("COMPLETED");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 
     return (
@@ -43,7 +59,7 @@ const MeetingActionsPanel = (props) => {
                 text="Cancel"
                 color="error"
                 handleClick={handleCancel}
-                disabled={!(isOwner && status === ("PROPOSED" || "SCHEDULED"))}
+                disabled={!(isOwner && (status === "PROPOSED" || status === "SCHEDULED"))}
                 disabledText="Only meeting owner can cancel the meeting"
             />
             </span>

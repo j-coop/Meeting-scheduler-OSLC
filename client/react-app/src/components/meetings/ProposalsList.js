@@ -10,7 +10,6 @@ const ProposalsList = (props) => {
     let meetingData = props.meetingData;
     let meetingId = meetingData.id;
     let isOwner = props.owner;
-    let status = meetingData.status;
 
     const [proposals, setProposals] = useState([]);
 

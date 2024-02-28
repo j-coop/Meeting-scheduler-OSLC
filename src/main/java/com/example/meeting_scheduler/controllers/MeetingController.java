@@ -90,6 +90,16 @@ public class MeetingController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{id}/complete")
+    public ResponseEntity<Void> markMeetingCompleted(@PathVariable UUID id) {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        meetingService.markCompleted(meeting);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/user/{login}")
     public ResponseEntity<MeetingsDTO> getMeetingsByUser(@PathVariable String login) {
         User user = userService.findByLogin(login);

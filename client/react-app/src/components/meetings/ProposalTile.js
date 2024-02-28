@@ -1,10 +1,9 @@
-import {Card, Stack, Typography} from "@mui/material";
+import {Card, Chip, Stack, Typography} from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import {formatDuration} from "../../utils/FormatDate";
 import StandardButton from "../StandardButton";
 import ResponsesPanel from "./ResponsesPanel";
 import config from "../../config";
-import {useState} from "react";
 import {useMeetingContext} from "../../context/MeetingContext";
 
 const ProposalTile = (props) => {
@@ -24,7 +23,7 @@ const ProposalTile = (props) => {
 
     let isOwner = props.owner;
 
-    const {status, setStatus} = useMeetingContext();
+    const {status, setStatus, chosen, setChosen} = useMeetingContext();
 
     const handleSchedule = () => {
 
@@ -41,6 +40,7 @@ const ProposalTile = (props) => {
                     console.log("meeting scheduled");
                     meetingData.status = "SCHEDULED";
                     setStatus("SCHEDULED");
+                    setChosen(proposalId);
                 }
             })
             .catch(error => {
@@ -48,13 +48,22 @@ const ProposalTile = (props) => {
             });
     }
 
+    let isChosen = chosen === proposalData.id;
+
     return (
         <div>
             <Card sx={{ p: 2.5, width: (props.width ? props.width : "100%") }}>
                 <Stack direction="row" alignItems="center" spacing={2} useFlexGap>
                     <AccessTimeIcon/>
                     <Typography variant="body2" color="text.secondary">
-                        {durationString}
+                        <span
+                            style={{
+                                textDecoration: (!isChosen && status !== "PROPOSED") ?
+                                    'line-through red' : 'none'
+                            }}
+                        >
+                            {durationString}
+                        </span>
                     </Typography>
                     <ResponsesPanel />
                     {
@@ -63,6 +72,14 @@ const ProposalTile = (props) => {
                             text="Schedule"
                             color="primary"
                             handleClick={handleSchedule}
+                        />
+                    }
+                    {
+                        isChosen &&
+                        <Chip
+                            size="medium"
+                            color="secondary"
+                            label="CHOSEN"
                         />
                     }
                 </Stack>

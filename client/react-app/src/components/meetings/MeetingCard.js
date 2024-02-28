@@ -4,7 +4,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {useEffect, useState} from "react";
 import MeetingPanel from "./MeetingPanel";
 import {useAuth} from "../../context/AuthContext";
-import {MeetingContextProvider, useMeetingContext} from "../../context/MeetingContext";
+import {useMeetingContext} from "../../context/MeetingContext";
 
 
 const MeetingCard = (props) => {
@@ -15,7 +15,7 @@ const MeetingCard = (props) => {
 
     const {userId} = useAuth();
 
-    const {status, setStatus, color, setColor, label, setLabel} = useMeetingContext();
+    const {status, setStatus, color, setColor, label, setLabel, setChosen} = useMeetingContext();
 
     const switchOpen = () => {
         if (open) {
@@ -53,6 +53,7 @@ const MeetingCard = (props) => {
     useEffect(() => {
 
         setStatus(meetingData.status);
+        setChosen(meetingData.chosenProposal);
 
         switch (meetingData.status) {
             case "PROPOSED":

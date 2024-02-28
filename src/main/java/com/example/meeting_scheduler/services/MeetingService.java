@@ -93,4 +93,10 @@ public class MeetingService {
         meeting.setStatus(MeetingStatus.SCHEDULED);
         this.saveMeeting(meeting);
     }
+
+    @Transactional
+    public void markCompleted(Meeting meeting) {
+        meeting.setStatus(MeetingStatus.COMPLETED);
+        this.saveMeeting(meeting);
+    }
 }
