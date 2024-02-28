@@ -3,6 +3,7 @@ import styles from "../../styles/meetingPanel.module.css"
 import ProposalsList from "./ProposalsList";
 import MeetingActionsPanel from "./MeetingActionsPanel";
 import {useAuth} from "../../context/AuthContext";
+import {useState} from "react";
 
 
 const MeetingPanel = (props) => {
@@ -18,24 +19,24 @@ const MeetingPanel = (props) => {
             <div className={styles.left}>
                 <div className={styles.proposals}>
                     <ProposalsList
-                        id={meetingData.id}
-                        status={meetingData.status}
+                        meetingData={meetingData}
                         owner={userId === meetingData.organiser}
                     />
                 </div>
                 <div className={styles.actions}>
                     <hr />
                     <MeetingActionsPanel
-                        id={meetingData.id}
-                        status={meetingData.status}
-                        owner={userId === meetingData.organiser}
                         meetingData={meetingData}
+                        owner={userId === meetingData.organiser}
                     />
                 </div>
             </div>
             <div className={styles.right}>
                 <div className={styles.participants}>
-                    <ParticipantsList id={meetingData.id} ownerId={meetingData.organiser}/>
+                    <ParticipantsList
+                        id={meetingData.id}
+                        ownerId={meetingData.organiser}
+                    />
                 </div>
             </div>
 

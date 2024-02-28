@@ -39,7 +39,7 @@ public class Meeting implements Serializable {
 
     // id of the chosen proposal
     @Column(name="chosenProposal")
-    private int chosenProposal;
+    private UUID chosenProposal;
 
     @OneToMany(mappedBy = "meeting")
     private List<MeetingProposal> proposals;

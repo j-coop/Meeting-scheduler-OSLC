@@ -5,6 +5,7 @@ import {useAuth} from "../context/AuthContext";
 import MeetingCard from "../components/meetings/MeetingCard";
 import styles from "../styles/meetings.module.css"
 import CreateMeetingButton from "../components/CreateMeetingButton";
+import {MeetingContextProvider} from "../context/MeetingContext";
 
 const Meetings = () => {
 
@@ -31,9 +32,11 @@ const Meetings = () => {
                 {
                     meetings.map(meeting => (
                         <div>
-                            <MeetingCard
-                                meetingData={meeting}
-                            />
+                            <MeetingContextProvider>
+                                <MeetingCard
+                                    meetingData={meeting}
+                                />
+                            </MeetingContextProvider>
                             <br/>
                         </div>
                     ))

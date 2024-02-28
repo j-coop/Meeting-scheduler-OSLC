@@ -52,7 +52,7 @@ public class MeetingService {
                 .organiser(dto.getOrganiser())
                 .status(MeetingStatus.PROPOSED)
                 .meetingRecap("")
-                .chosenProposal(-1)
+                .chosenProposal(null)
                 .participations(new ArrayList<>())
                 .proposals(new ArrayList<>())
                 .build();
@@ -84,6 +84,13 @@ public class MeetingService {
     @Transactional
     public void cancelMeeting(Meeting meeting) {
         meeting.setStatus(MeetingStatus.CANCELLED);
+        this.saveMeeting(meeting);
+    }
+
+    @Transactional
+    public void scheduleMeeting(Meeting meeting, UUID chosenProposal) {
+        meeting.setChosenProposal(chosenProposal);
+        meeting.setStatus(MeetingStatus.SCHEDULED);
         this.saveMeeting(meeting);
     }
 }

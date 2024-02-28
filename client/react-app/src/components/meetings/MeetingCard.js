@@ -1,9 +1,10 @@
 import {Card, Chip, Stack, Typography} from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import MeetingPanel from "./MeetingPanel";
 import {useAuth} from "../../context/AuthContext";
+import {MeetingContextProvider, useMeetingContext} from "../../context/MeetingContext";
 
 
 const MeetingCard = (props) => {
@@ -13,6 +14,8 @@ const MeetingCard = (props) => {
     const [open, setOpen] = useState(false);
 
     const {userId} = useAuth();
+
+    const {status, setStatus, color, setColor, label, setLabel} = useMeetingContext();
 
     const switchOpen = () => {
         if (open) {
@@ -25,26 +28,52 @@ const MeetingCard = (props) => {
         }
     }
 
-    let color;
-    let label;
-    switch (meetingData.status) {
-        case "PROPOSED":
-            color = "default";
-            label = "Proposed"
-            break;
-        case "SCHEDULED":
-            color = "success";
-            label = "Scheduled"
-            break;
-        case "COMPLETED":
-            color = "success";
-            label = "Completed"
-            break;
-        case "CANCELLED":
-            color = "error";
-            label = "Cancelled"
-            break;
-    }
+    useEffect(() => {
+
+        switch (status) {
+            case "PROPOSED":
+                setColor("default");
+                setLabel("Proposed");
+                break;
+            case "SCHEDULED":
+                setColor("success");
+                setLabel("Scheduled");
+                break;
+            case "COMPLETED":
+                setColor("success");
+                setLabel("Completed");
+                break;
+            case "CANCELLED":
+                setColor("error");
+                setLabel("Canceled");
+                break;
+        }
+    }, [status]);
+
+    useEffect(() => {
+
+        setStatus(meetingData.status);
+
+        switch (meetingData.status) {
+            case "PROPOSED":
+                setColor("default");
+                setLabel("Proposed");
+                break;
+            case "SCHEDULED":
+                setColor("success");
+                setLabel("Scheduled");
+                break;
+            case "COMPLETED":
+                setColor("success");
+                setLabel("Completed");
+                break;
+            case "CANCELLED":
+                setColor("error");
+                setLabel("Canceled");
+                break;
+        }
+    }, []);
+
 
     return (
         <Card

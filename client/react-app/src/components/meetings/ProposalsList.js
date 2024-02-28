@@ -7,9 +7,10 @@ import ProposalTile from "./ProposalTile";
 
 const ProposalsList = (props) => {
 
-    let meetingId = props.id;
+    let meetingData = props.meetingData;
+    let meetingId = meetingData.id;
     let isOwner = props.owner;
-    let status = props.status;
+    let status = meetingData.status;
 
     const [proposals, setProposals] = useState([]);
 
@@ -37,7 +38,7 @@ const ProposalsList = (props) => {
                             <ProposalTile
                                 proposalData={proposal}
                                 owner={isOwner}
-                                status={status}
+                                meetingData={props.meetingData}
                             />
                             <br/>
                         </div>

@@ -24,7 +24,7 @@ public class MeetingsDTO {
         private String description;
         private UUID organiser;
         private MeetingStatus status;
-        private int chosenProposal;
+        private UUID chosenProposal;
     }
 
     private List<Meeting> meetingsList;

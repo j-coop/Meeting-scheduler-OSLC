@@ -59,6 +59,37 @@ public class MeetingController {
         return ResponseEntity.ok(meetingDTO);
     }
 
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<Void> cancelMeeting(@PathVariable UUID id) {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        meetingService.cancelMeeting(meeting);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/schedule")
+    public ResponseEntity<Void> scheduleMeeting(
+            @PathVariable UUID id,
+            @RequestParam UUID proposalId
+    )
+    {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        MeetingProposal meetingProposal = meetingProposalService.findByProposalId(proposalId);
+        if (meetingProposal == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        if (meetingProposal.getMeeting() != meeting) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        meetingService.scheduleMeeting(meeting, proposalId);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/user/{login}")
     public ResponseEntity<MeetingsDTO> getMeetingsByUser(@PathVariable String login) {
         User user = userService.findByLogin(login);
@@ -139,5 +170,6 @@ public class MeetingController {
         return ResponseEntity.created(URI.create("/meetings/"+
                 meeting.getMeetingId()+"/participations/"+meetingParticipation.getParticipationId())).build();
     }
+
 
 }

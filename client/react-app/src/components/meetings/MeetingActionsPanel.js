@@ -1,12 +1,14 @@
 import StandardButton from "../StandardButton";
 import config from "../../config";
+import {useMeetingContext} from "../../context/MeetingContext";
 
 
 const MeetingActionsPanel = (props) => {
 
     let id = props.id;
-    let status = props.status;
     let isOwner = props.owner;
+
+    const {status, setStatus} = useMeetingContext();
 
     const handleCancel = () => {
 
@@ -22,6 +24,7 @@ const MeetingActionsPanel = (props) => {
                 if (response.ok) {
                     console.log("meeting cancelled");
                     props.meetingData.status = "CANCELLED";
+                    setStatus("CANCELLED")
                 }
             })
             .catch(error => {

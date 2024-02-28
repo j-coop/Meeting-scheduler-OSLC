@@ -104,7 +104,7 @@ public class DataInitializer {
 
         for (int i=0; i<num_meetings; i++) {
             meetings[i] = new Meeting(meetingIDs[i], titles[i], descriptions[i], organizers[i], meetingStatuses[i],
-                    recaps[i], 0, meetingProposals[i], meetingParticipations[i]);
+                    recaps[i], null, meetingProposals[i], meetingParticipations[i]);
         }
 
         // Save users and meetings
@@ -162,6 +162,12 @@ public class DataInitializer {
 
             // Save meeting proposal
             meetingProposalService.saveMeetingProposal(proposal);
+
+            // Set as chosen proposal
+            meeting.setChosenProposal(proposal.getProposalId());
+
+            // Save meeting with chosen proposal
+            meetingService.saveMeeting(meeting);
 
             proposals.add(proposal);
         }
