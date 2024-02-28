@@ -26,8 +26,10 @@ const MeetingPanel = (props) => {
                 <div className={styles.actions}>
                     <hr />
                     <MeetingActionsPanel
+                        id={meetingData.id}
                         status={meetingData.status}
                         owner={userId === meetingData.organiser}
+                        meetingData={meetingData}
                     />
                 </div>
             </div>

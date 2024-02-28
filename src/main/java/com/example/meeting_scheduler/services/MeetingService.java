@@ -80,4 +80,10 @@ public class MeetingService {
         meeting.getParticipations().add(meetingParticipation);
         this.saveMeeting(meeting);
     }
+
+    @Transactional
+    public void cancelMeeting(Meeting meeting) {
+        meeting.setStatus(MeetingStatus.CANCELLED);
+        this.saveMeeting(meeting);
+    }
 }

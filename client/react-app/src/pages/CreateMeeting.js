@@ -10,6 +10,7 @@ import WeekCalendar from "../components/WeekCalendar";
 import UserCard from "../components/UserCard";
 import config from "../config";
 import {formatDateTime} from "../utils/FormatDate"
+import {useNavigate} from "react-router-dom";
 
 
 const CreateMeeting = () => {
@@ -30,6 +31,7 @@ const CreateMeeting = () => {
 
     const localizer = momentLocalizer(moment);
 
+    const navigate = useNavigate();
 
     const handleChange = (
         event,
@@ -141,6 +143,7 @@ const CreateMeeting = () => {
                     addMeetingParticipations(meetingId);
                     // adding meeting proposals
                     addMeetingProposals(meetingId);
+                    navigate("/meetings");
                     alert("Meeting created");
                 }
                 else {
