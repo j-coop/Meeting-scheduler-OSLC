@@ -16,9 +16,6 @@ const ProposalTile = (props) => {
 
     let meetingData = props.meetingData;
 
-    //let startTime = formatISO8601(startString);
-    //let endTime = formatISO8601(endString);
-
     let durationString = formatDuration(startString, endString);
 
     let isOwner = props.owner;
@@ -65,7 +62,7 @@ const ProposalTile = (props) => {
                             {durationString}
                         </span>
                     </Typography>
-                    <ResponsesPanel />
+                    <ResponsesPanel meetingData={meetingData} proposalId={proposalId}/>
                     {
                         isOwner && status === "PROPOSED" &&
                         <StandardButton

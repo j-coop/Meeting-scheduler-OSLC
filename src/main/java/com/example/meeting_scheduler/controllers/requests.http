@@ -56,3 +56,14 @@ Content-Type: application/json
 }
 
 ###
+
+###
+GET http://localhost:8080/meetings/7c2f9193-c6bc-4511-adc8-6d0573d1ca39
+Accept: application/json
+
+###
+###
+GET http://localhost:8080/meetings/7c2f9193-c6bc-4511-adc8-6d0573d1ca39/proposals
+Accept: application/json
+
+###
