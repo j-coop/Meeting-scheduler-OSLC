@@ -13,8 +13,9 @@ const Meetings = () => {
     const {userLogin} = useAuth();
 
     const fetchMeetings = async () => {
+        let path = config.apiUrl+'/meetings/user/'+userLogin+'?includeDeclined=false';
         try {
-            const response = await axios.get(config.apiUrl+'/meetings/user/'+userLogin);
+            const response = await axios.get(path);
             const meetingsList = response.data.meetingsList || [];
             setMeetings(meetingsList);
         } catch (error) {
@@ -24,7 +25,7 @@ const Meetings = () => {
 
     useEffect(() => {
         fetchMeetings();
-    }, [userLogin]);
+    }, [userLogin, meetings]);
 
     return (
         <>

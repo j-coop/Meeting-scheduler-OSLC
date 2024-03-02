@@ -5,17 +5,46 @@ import {useEffect, useState} from "react";
 import MeetingPanel from "./MeetingPanel";
 import {useAuth} from "../../context/AuthContext";
 import {useMeetingContext} from "../../context/MeetingContext";
+import axios from "axios";
+import config from "../../config";
 
 
 const MeetingCard = (props) => {
 
     const meetingData = props.meetingData;
 
+    const meetingId = meetingData.id;
+
     const [open, setOpen] = useState(false);
 
     const {userId} = useAuth();
 
     const {status, setStatus, color, setColor, label, setLabel, setChosen} = useMeetingContext();
+
+    const [participationStatus, setParticipationStatus] = useState("INVITED");
+    const [userParticipationId, setUserParticipationId] = useState("");
+
+    const fetchUserParticipation = async () => {
+        let path = config.apiUrl+'/meetings/'+meetingId+'/participations';
+        try {
+            const response = await axios.get(path);
+            const participationsList = response.data.participationsList || [];
+            for (let participation of participationsList) {
+                if (participation.userId === userId) {
+                    // correct users participation
+                    setParticipationStatus(participation.userStatus);
+                    setUserParticipationId(participation.id);
+                    console.log(participation.userStatus);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserParticipation().then();
+    }, []);
 
     const switchOpen = () => {
         if (open) {
@@ -96,11 +125,21 @@ const MeetingCard = (props) => {
                 <div>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
                         <Typography fontWeight="semiBold">{meetingData.title}</Typography>
-                        <Chip
-                            size="small"
-                            color={color}
-                            label={label}
-                        />
+                        {
+                            participationStatus === "JOINED" ?
+                                <Chip
+                                    size="small"
+                                    color={color}
+                                    label={label}
+                                />
+                                :
+                                <Chip
+                                    size="small"
+                                    color="secondary"
+                                    label="INVITED"
+                                />
+                        }
+
                         {
                             userId === meetingData.organiser &&
                             <Chip
@@ -121,7 +160,15 @@ const MeetingCard = (props) => {
                 </div>
             </Stack>
             {
-                open ? <MeetingPanel meetingData={meetingData}/> : <></>
+                open ?
+                    <MeetingPanel
+                        meetingData={meetingData}
+                        userStatus={participationStatus}
+                        userParticipationId={userParticipationId}
+                        setParticipationStatus={setParticipationStatus}
+                    />
+                    :
+                    <></>
             }
         </Card>
     )
