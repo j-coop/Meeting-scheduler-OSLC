@@ -25,7 +25,7 @@ const Meetings = () => {
 
     useEffect(() => {
         fetchMeetings();
-    }, [userLogin, meetings]);
+    }, [userLogin]);
 
     return (
         <>

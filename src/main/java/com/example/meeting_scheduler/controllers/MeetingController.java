@@ -118,7 +118,7 @@ public class MeetingController {
                     .filter(participation -> participation.getUserStatus() != ParticipationStatus.DECLINED)
                     .map(MeetingParticipation::getMeeting)
                     .toList();
-        } 
+        }
         else {
             meetings = participations.stream()
                     .map(MeetingParticipation::getMeeting)

@@ -3,6 +3,7 @@ package com.example.meeting_scheduler.services;
 import com.example.meeting_scheduler.dto.response.ResponseCreateDTO;
 import com.example.meeting_scheduler.entities.MeetingProposal;
 import com.example.meeting_scheduler.entities.ProposalResponse;
+import com.example.meeting_scheduler.entities.enums.Responses;
 import com.example.meeting_scheduler.repositories.ProposalResponseRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,8 @@ public class ProposalResponseService {
     }
 
     @Transactional
-    public List<ProposalResponse> findAllByMeetingProposalAndUserId(MeetingProposal meetingProposal, UUID userId) {
-        return proposalResponseRepository.findAllByMeetingProposalAndUserId(meetingProposal, userId);
+    public ProposalResponse findByMeetingProposalAndUserId(MeetingProposal meetingProposal, UUID userId) {
+        return proposalResponseRepository.findByMeetingProposalAndUserId(meetingProposal, userId);
     }
 
     @Transactional
@@ -65,4 +66,5 @@ public class ProposalResponseService {
 
         return proposalResponse;
     }
+
 }

@@ -6,6 +6,7 @@ import com.example.meeting_scheduler.dto.response.ResponsesDTO;
 import com.example.meeting_scheduler.entities.Meeting;
 import com.example.meeting_scheduler.entities.MeetingProposal;
 import com.example.meeting_scheduler.entities.ProposalResponse;
+import com.example.meeting_scheduler.entities.enums.Responses;
 import com.example.meeting_scheduler.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,11 +58,12 @@ public class ProposalResponseController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createProposalResponse(
+    public ResponseEntity<Void> addProposalResponse(
             @PathVariable("meetingId") UUID meetingId,
             @PathVariable("proposalId") UUID proposalId,
-            @RequestBody ResponseCreateDTO createDTO
-    )
+            @RequestBody ResponseCreateDTO createDTO,
+            @RequestParam(required = false) Responses prev
+            )
     {
         Meeting meeting = meetingService.findByMeetingId(meetingId);
         if (meeting == null) {
@@ -71,10 +73,33 @@ public class ProposalResponseController {
         if (meetingProposal == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        ProposalResponse proposalResponse =
-                proposalResponseService.addResponse(meetingProposal, createDTO);
-        return ResponseEntity.created(URI.create("/meetings/"+meetingId
-                +"/proposals/"+proposalId+"/responses/"+proposalResponse.getResponseId())).build();
+
+        if (prev != null) {
+            // Check if prev param is valid
+            if (prev != Responses.AVAILABLE && prev != Responses.UNAVAILABLE && prev != Responses.IF_MUST) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+            // Find existing response
+            ProposalResponse existingResponse = proposalResponseService.findByMeetingProposalAndUserId(
+                    meetingProposal,
+                    createDTO.getUserId()
+            );
+            if (existingResponse != null) {
+                // Existing response should be changed
+                existingResponse.setResponse(createDTO.getResponse());
+                proposalResponseService.saveResponse(existingResponse);
+                return ResponseEntity.ok().build();
+            }
+            else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        else {
+            // Create new response entry
+            ProposalResponse proposalResponse = proposalResponseService.addResponse(meetingProposal, createDTO);
+            return ResponseEntity.created(URI.create("/meetings/"+meetingId
+                    +"/proposals/"+proposalId+"/responses/"+proposalResponse.getResponseId())).build();
+        }
     }
 
 }

@@ -19,17 +19,21 @@ const ResponsesPanel = ({meetingData, proposalId}) => {
         UNAVAILABLE: 0
     });
 
-    const [activeOption, setActiveOption] = useState(null);
+    const [chosenOption, setChosenOption] = useState(null);
 
     const [responses, setResponses] = useState([]);
 
-    const sendVote = (option) => {
+    let proposed = meetingData.status === "PROPOSED";
 
-        let path = config.apiUrl+'/meetings/'+meetingId+'/proposals/'+proposalId+'/responses';
+    const sendVote = (newOption, previousOption) => {
+
+        let param = previousOption !== null ? '?prev='+previousOption : '';
+
+        let path = config.apiUrl+'/meetings/'+meetingId+'/proposals/'+proposalId+'/responses'+param;
 
         let data = {
             userId: userId,
-            response: option
+            response: newOption
         }
 
         fetch(path, {
@@ -50,28 +54,6 @@ const ResponsesPanel = ({meetingData, proposalId}) => {
             });
     }
 
-    const handleResponses = () => {
-        setVotes({
-            AVAILABLE: 0,
-            IF_MUST: 0,
-            UNAVAILABLE: 0
-        })
-        setVotes((prevVotes) => ({
-            ...prevVotes,
-            [activeOption]: prevVotes[activeOption] + 1
-        }));
-        console.log(responses)
-        for (const response of responses) {
-            console.log(response)
-            console.log(response.response)
-            let option = response.response;
-            setVotes((prevVotes) => ({
-                ...prevVotes,
-                [option]: prevVotes[option] + 1
-            }));
-        }
-    }
-
     const fetchResponses = async () => {
         let path = config.apiUrl+'/meetings/'+meetingId+'/proposals/'+proposalId+'/responses';
         try {
@@ -79,38 +61,45 @@ const ResponsesPanel = ({meetingData, proposalId}) => {
             const responsesList = response.data.responsesList || [];
             console.log(responsesList)
             setResponses(responsesList);
-            handleResponses();
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
 
-    useEffect(() => {
-        fetchResponses();
-    }, [activeOption]);
-
     const handleVote = (option) => {
-        // decrease number of current option votes
-        setVotes((prevVotes) => ({
-            ...prevVotes,
-            [activeOption]: prevVotes[activeOption] - 1
-        }));
+        sendVote(option, chosenOption);
         // change active option
-        setActiveOption(option);
-        // increase number of new option votes
-        setVotes((prevVotes) => ({
-            ...prevVotes,
-            [option]: prevVotes[option] + 1
-        }));
-        sendVote(option);
+        setChosenOption(option);
     };
+
+    useEffect(() => {
+        fetchResponses().then();
+    }, [chosenOption]);
+
+    // Handling fetched responses
+    useEffect(() => {
+        let votes = {
+            AVAILABLE: 0,
+            IF_MUST: 0,
+            UNAVAILABLE: 0
+        };
+        for (const response of responses) {
+            let option = response.response;
+            if (typeof response.userId !== "undefined" && response.userId === userId) {
+                // user's response
+                setChosenOption(option);
+            }
+            votes[option]++;
+        }
+        setVotes(votes);
+    }, [responses]);
 
     return (
         <div>
             <Tooltip title="Available">
                 <IconButton
-                    onClick={() => handleVote('AVAILABLE')}
-                    color={activeOption === 'AVAILABLE' ? 'secondary' : 'default'}
+                    onClick={() => proposed ? handleVote('AVAILABLE') : null}
+                    color={chosenOption === 'AVAILABLE' ? 'secondary' : 'default'}
                 >
                     <CheckIcon/>
                     <span>{votes.AVAILABLE}</span>
@@ -119,8 +108,8 @@ const ResponsesPanel = ({meetingData, proposalId}) => {
 
             <Tooltip title="If must">
                 <IconButton
-                    onClick={() => handleVote('IF_MUST')}
-                    color={activeOption === 'IF_MUST' ? 'secondary' : 'default'}
+                    onClick={() => proposed ? handleVote('IF_MUST') : null}
+                    color={chosenOption === 'IF_MUST' ? 'secondary' : 'default'}
                 >
                     <PriorityHighIcon/>
                     <span>{votes.IF_MUST}</span>
@@ -129,8 +118,8 @@ const ResponsesPanel = ({meetingData, proposalId}) => {
 
             <Tooltip title="Unavailable">
                 <IconButton
-                    onClick={() => handleVote('UNAVAILABLE')}
-                    color={activeOption === 'UNAVAILABLE' ? 'secondary' : 'default'}
+                    onClick={() => proposed ? handleVote('UNAVAILABLE') : null}
+                    color={chosenOption === 'UNAVAILABLE' ? 'secondary' : 'default'}
                 >
                     <CloseIcon/>
                     <span>{votes.UNAVAILABLE}</span>

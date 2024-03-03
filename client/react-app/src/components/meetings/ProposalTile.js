@@ -72,7 +72,7 @@ const ProposalTile = (props) => {
                         />
                     }
                     {
-                        isChosen &&
+                        isChosen && status !== "PROPOSED" &&
                         <Chip
                             size="medium"
                             color="secondary"
