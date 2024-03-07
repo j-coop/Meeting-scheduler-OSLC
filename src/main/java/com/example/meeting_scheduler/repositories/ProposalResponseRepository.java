@@ -13,6 +13,6 @@ public interface ProposalResponseRepository extends JpaRepository<ProposalRespon
 
     List<ProposalResponse> findAllByMeetingProposal(MeetingProposal meetingProposal);
 
-    List<ProposalResponse> findAllByMeetingProposalAndUserId(MeetingProposal meetingProposal, UUID userId);
+    ProposalResponse findByMeetingProposalAndUserId(MeetingProposal meetingProposal, UUID userId);
 
 }

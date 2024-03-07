@@ -233,7 +233,12 @@ const CreateMeeting = () => {
 
             <div className={styles.userAdding}>
                 <div className={styles.searchBox}>
-                    <UserSearch chosen={chosenUsers} setChosen={setChosenUsers}/>
+                    <UserSearch
+                        chosen={chosenUsers}
+                        setChosen={setChosenUsers}
+                        maxResults={3}
+                        addPresent={true}
+                    />
                 </div>
                 <div className={styles.usersAdded}>
                     <div className={styles.usersAddedCaption}>

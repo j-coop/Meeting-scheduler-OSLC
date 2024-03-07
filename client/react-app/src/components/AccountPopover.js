@@ -43,10 +43,10 @@ const AccountPopover = (props) => {
                     fullWidth={true}
                     variant="text"
                 >
-                    <Link to={"/account"}><Button>Account</Button></Link>
-                    <Link to={"/meetings"}><Button>Meetings</Button></Link>
-                    <Link to={"/users"}><Button>Users</Button></Link>
-                    <Link to={"/settings"}><Button>Settings</Button></Link>
+                    <Link to={"/account"} onClick={props.handleClose}><Button>Account</Button></Link>
+                    <Link to={"/meetings"} onClick={props.handleClose}><Button>Meetings</Button></Link>
+                    <Link to={"/users"} onClick={props.handleClose}><Button>Users</Button></Link>
+                    <Link to={"/settings"} onClick={props.handleClose}><Button>Settings</Button></Link>
                     <Button onClick={logout}>Logout</Button>
                 </ButtonGroup>
             </div>

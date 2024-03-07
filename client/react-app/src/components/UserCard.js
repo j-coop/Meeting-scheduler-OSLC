@@ -46,7 +46,7 @@ const UserCard = (props) => {
                             color="neutral"
                             aria-label="add"
                             size="medium"
-                            onClick={addUser}
+                            onClick={props.setChosen !== null ? addUser : null}
                             style = {{
                                 float: "right"
                             }}

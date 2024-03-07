@@ -53,6 +53,9 @@ const UserSearch = (props) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
+    const max = props.maxResults;
+    const addPresent = props.addPresent;
+
     const handleSearch = async () => {
         try {
             // AJAX users request
@@ -86,14 +89,14 @@ const UserSearch = (props) => {
                 />
             </Search>
             <List>
-                {searchResults.slice(0,3).map(result => (
+                {searchResults.slice(0,max).map(result => (
                     <ListItem key={result.login}>
                         <UserCard
                             id={result.id}
                             login={result.login}
                             email={result.email}
                             name={result.fullName}
-                            addPresent={true}
+                            addPresent={addPresent}
                             chosen={props.chosen}
                             setChosen={props.setChosen}
                         />
