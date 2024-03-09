@@ -68,12 +68,6 @@ html, body {
     flex-grow: 1;
 }
 
-.footer {
-    flex-shrink: 0;
-    display: block;
-
-}
-
 .panel {
     padding: 20px;
     border-radius: 8px;
@@ -82,7 +76,60 @@ html, body {
 }
 
 .icon {
-    font-size: 64px;
+    font-size: 40px;
     display: block;
     margin: 0 auto;
+}
+
+.footer {
+    width: 100%;
+    height: 80px;
+    display: block;
+}
+
+.footerWrapper {
+    width: 100%;
+    height: 100%;
+    padding: 5px 5%;
+    display: flex;
+}
+
+.footerLogo {
+    float: left;
+    height: 100%;
+    flex: 0 0 auto;
+}
+
+.footerContainer {
+    float: left;
+    height: 100%;
+    flex: 1;
+}
+
+.footerContainerTop {
+    width: 100%;
+    height: 50%;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+.footerContainerBottom {
+    width: 100%;
+    height: 50%;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.footerContainerTopLeft {
+    float: left;
+    margin-left: 80px;
+}
+
+.footerContainerTopRight {
+    float: left;
+    margin-left: 80px;
+}
+
+a {
+    text-decoration: none;
 }

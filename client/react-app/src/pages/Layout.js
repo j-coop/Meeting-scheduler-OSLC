@@ -48,9 +48,7 @@ const Layout = () => {
                             </div>
                         </div>
                     </div>
-                    <footer className={styles.footer}>
-                        <Footer/>
-                    </footer>
+                    <Footer/>
                 </>
             </AuthProvider>
         </ColorModeProvider>

@@ -8,6 +8,7 @@ import CreateMeeting from "./pages/CreateMeeting";
 import Account from "./pages/Account";
 import Meetings from "./pages/Meetings";
 import Users from "./pages/Users";
+import About from "./pages/About";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                     <Route path="account" element={<Account/>}/>
                     <Route path="meetings" element={<Meetings/>}/>
                     <Route path="users" element={<Users/>}/>
+                    <Route path="/about" element={<About/>}/>
                 </Route>
                 <Route path="/signup" element={<SignUp/>}/>
             </Routes>
