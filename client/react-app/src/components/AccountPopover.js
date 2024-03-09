@@ -24,9 +24,6 @@ const AccountPopover = (props) => {
             }}
         >
             <UserCard
-                login={userLogin}
-                email={userEmail}
-                name={userName}
                 addPresent={false}
             />
             <div
@@ -43,10 +40,10 @@ const AccountPopover = (props) => {
                     fullWidth={true}
                     variant="text"
                 >
-                    <Link to={"/account"} onClick={props.handleClose}><Button>Account</Button></Link>
                     <Link to={"/meetings"} onClick={props.handleClose}><Button>Meetings</Button></Link>
                     <Link to={"/users"} onClick={props.handleClose}><Button>Users</Button></Link>
                     <Link to={"/settings"} onClick={props.handleClose}><Button>Settings</Button></Link>
+                    <Link to={"/about"} onClick={props.handleClose}><Button>About</Button></Link>
                     <Button onClick={logout}>Logout</Button>
                 </ButtonGroup>
             </div>

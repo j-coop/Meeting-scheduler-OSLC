@@ -21,8 +21,8 @@ const NavBar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/account" className={styles.navLink}>
-                            <Typography variant="h6" color="textPrimary">Account</Typography>
+                        <Link to="/settings" className={styles.navLink}>
+                            <Typography variant="h6" color="textPrimary">Settings</Typography>
                         </Link>
                     </li>
                     {

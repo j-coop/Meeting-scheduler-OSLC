@@ -93,9 +93,6 @@ const UserSearch = (props) => {
                     <ListItem key={result.login}>
                         <UserCard
                             id={result.id}
-                            login={result.login}
-                            email={result.email}
-                            name={result.fullName}
                             addPresent={addPresent}
                             chosen={props.chosen}
                             setChosen={props.setChosen}

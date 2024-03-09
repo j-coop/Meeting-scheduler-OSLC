@@ -1,6 +1,7 @@
 import {Avatar, Card, Chip, Fab, Stack, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
+import {useAuth} from "../context/AuthContext";
 
 
 const UserCard = (props) => {
@@ -11,13 +12,15 @@ const UserCard = (props) => {
 
     const [added, setAdded] = useState(false);
 
+    const {userLogin, userEmail, userName, logout} = useAuth();
+
     const addUser = () => {
         setAdded(true);
         let userData = {
             id: props.id,
-            login: props.login,
-            email: props.email,
-            name: props.name
+            login: userLogin,
+            email: userEmail,
+            name: userName
         }
         props.setChosen([...props.chosen, userData]);
     }
@@ -28,15 +31,15 @@ const UserCard = (props) => {
                 <Avatar variant="rounded" src="avatar.jpg" />
                 <div>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
-                        <Typography fontWeight="semiBold">{props.name}</Typography>
+                        <Typography fontWeight="semiBold">{userName}</Typography>
                         <Chip
                             size="small"
                             color={active ? 'secondary' : 'default'}
-                            label={props.login}
+                            label={userLogin}
                         />
                     </Stack>
                     <Typography variant="body2" color="text.secondary">
-                        {props.email}
+                        {userEmail}
                     </Typography>
                 </div>
                 {

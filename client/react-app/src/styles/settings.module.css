@@ -1,0 +1,24 @@
+.container {
+    padding-left: 20%;
+    padding-right: 20%;
+    min-height: 100vh;
+}
+
+.infoCard {
+    width: 100%;
+}
+
+.infoContent {
+    width: 100%;
+    padding: 20px;
+    line-height: 20px;
+}
+
+.settingsButtons {
+    width: 100%;
+    padding: 20px;
+}
+
+.changePanelContainer {
+    height: fit-content;
+}

@@ -5,7 +5,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import CreateMeeting from "./pages/CreateMeeting";
-import Account from "./pages/Account";
+import Settings from "./pages/Settings";
 import Meetings from "./pages/Meetings";
 import Users from "./pages/Users";
 import About from "./pages/About";
@@ -18,10 +18,10 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="create" element={<CreateMeeting/>}/>
-                    <Route path="account" element={<Account/>}/>
+                    <Route path="settings" element={<Settings/>}/>
                     <Route path="meetings" element={<Meetings/>}/>
                     <Route path="users" element={<Users/>}/>
-                    <Route path="/about" element={<About/>}/>
+                    <Route path="about" element={<About/>}/>
                 </Route>
                 <Route path="/signup" element={<SignUp/>}/>
             </Routes>

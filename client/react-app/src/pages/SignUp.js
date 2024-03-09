@@ -56,7 +56,7 @@ const SignUp = () => {
                     navigate("/");
                 }
                 else if (response.status === 409) {
-                    alert("Account with this email or login already exists");
+                    alert("Settings with this email or login already exists");
                 }
             })
             .catch(error => {
