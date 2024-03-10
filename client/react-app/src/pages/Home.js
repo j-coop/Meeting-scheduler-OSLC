@@ -24,10 +24,10 @@ const Home = () => {
                         Let your team do it for you with MeetIT. Just choose participants, set possible
                         times and see how seamlessly you can arrange meetings
                     </div>
-                    <div style={{fontSize: "40px"}}>
+                    <div style={{fontSize: "40px", marginTop: '20px'}}>
                         {
                             !isLoggedIn &&
-                            <HighlightButton value={"Sign up now"} size="40"/>
+                            <HighlightButton value={"Sign up now"} size="20"/>
                         }
                     </div>
                 </div>

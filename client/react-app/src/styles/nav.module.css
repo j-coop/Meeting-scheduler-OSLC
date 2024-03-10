@@ -1,3 +1,18 @@
+.navContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer {
+    flex: 0 0 auto;
+}
+
+.menuContainer {
+    flex: 1;
+    display: flex;
+}
+
 .appLogo {
     width: 70px;
     height: 70px;
@@ -14,6 +29,9 @@
 .navMenu {
     float: left;
     height: 70px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
 }
 
 .navMenu ul {
@@ -42,3 +60,64 @@ nav {
     color: black;
 }
 
+.menuToggle {
+    display: none;
+    cursor: pointer;
+}
+
+.navButtons {
+
+}
+
+.drawer {
+    min-width: 20vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0 5vw;
+    box-sizing: border-box;
+}
+
+.drawerLinks {
+    flex: 0 0 auto;
+}
+
+.drawerLinks ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 0;
+}
+
+.drawerLinks ul li {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.drawerButtons {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+@media screen and (max-width: 1250px) {
+    .menuContainer {
+        display: none;
+    }
+
+    .drawerLinks ul {
+        text-decoration: none;
+    }
+
+    .menuToggle {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .navButtons {
+        display: none;
+    }
+}

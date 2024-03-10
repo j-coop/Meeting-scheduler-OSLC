@@ -1,7 +1,10 @@
 .navButtons {
     height: 70px;
     float: right;
-    margin-top: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .navButtons button {
@@ -44,3 +47,12 @@
     background-color: rgba(114, 141, 203, 0.74);
     border-color: #304064;
 }
+
+
+.drawerButtons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+

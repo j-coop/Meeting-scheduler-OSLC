@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const AccountPopover = (props) => {
 
-    const {userLogin, userEmail, userName, logout} = useAuth();
+    const {userLogin, userEmail, logout} = useAuth();
 
     return (
         <Popover

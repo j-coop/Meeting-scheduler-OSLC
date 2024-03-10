@@ -3,48 +3,109 @@ import styles from "../styles/nav.module.css"
 import NavButtons from "./NavButtons";
 import Logo from "./Logo";
 import {useAuth} from "../context/AuthContext";
-import {Typography} from "@mui/material";
-import React from "react";
+import {Button, Drawer, Typography} from "@mui/material";
+import React, {useState} from "react";
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 const NavBar = () => {
 
     const {isLoggedIn} = useAuth();
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    }
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
     return (
         <nav>
-            <Logo/>
-            <div className={styles.navMenu}>
-                <ul>
-                    <li>
-                        <Link to="/" className={styles.navLink}>
-                            <Typography variant="h6" color="textPrimary">Home</Typography>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/settings" className={styles.navLink}>
-                            <Typography variant="h6" color="textPrimary">Settings</Typography>
-                        </Link>
-                    </li>
-                    {
-                        isLoggedIn &&
-                        (
-                            <>
-                                <li>
-                                    <Link to="/meetings" className={styles.navLink}>
-                                        <Typography variant="h6" color="textPrimary">Meetings</Typography>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/users" className={styles.navLink}>
-                                        <Typography variant="h6" color="textPrimary">Users</Typography>
-                                    </Link>
-                                </li>
-                            </>
-                        )
-                    }
-                </ul>
+            <div className={styles.navContainer}>
+                <div className={styles.logoContainer}>
+                    <Logo/>
+                </div>
+                <div className={styles.menuContainer}>
+                    <div className={styles.navMenu}>
+                        <ul>
+                            <li>
+                                <Link to="/" className={styles.navLink}>
+                                    <Typography variant="h6" color="textPrimary">Home</Typography>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/settings" className={styles.navLink}>
+                                    <Typography variant="h6" color="textPrimary">Settings</Typography>
+                                </Link>
+                            </li>
+                            {
+                                isLoggedIn &&
+                                (
+                                    <>
+                                        <li>
+                                            <Link to="/meetings" className={styles.navLink}>
+                                                <Typography variant="h6" color="textPrimary">Meetings</Typography>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/users" className={styles.navLink}>
+                                                <Typography variant="h6" color="textPrimary">Users</Typography>
+                                            </Link>
+                                        </li>
+                                    </>
+                                )
+                            }
+                        </ul>
+                    </div>
+                    <NavButtons vertical={false}/>
+                </div>
+                <div className={styles.menuToggle}>
+                    <Button onClick={toggleMenu}>
+                        <MenuIcon/>
+                    </Button>
+                </div>
             </div>
-            <NavButtons/>
+            <Drawer open={isMenuOpen} onClose={closeMenu}>
+                <div className={styles.drawer}>
+                    <div className={styles.drawerLinks}>
+                        <ul>
+                            <li>
+                                <Link to="/" className={styles.navLink}>
+                                    <Typography variant="h6" color="textPrimary">Home</Typography>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/settings" className={styles.navLink}>
+                                    <Typography variant="h6" color="textPrimary">Settings</Typography>
+                                </Link>
+                            </li>
+                            {
+                                isLoggedIn &&
+                                (
+                                    <>
+                                        <li>
+                                            <Link to="/meetings" className={styles.navLink}>
+                                                <Typography variant="h6" color="textPrimary">Meetings</Typography>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/users" className={styles.navLink}>
+                                                <Typography variant="h6" color="textPrimary">Users</Typography>
+                                            </Link>
+                                        </li>
+                                    </>
+                                )
+                            }
+                        </ul>
+                    </div>
+                    <div className={styles.drawerButtons}>
+                        <NavButtons vertical={true}/>
+                    </div>
+                </div>
+            </Drawer>
         </nav>
     )
 }

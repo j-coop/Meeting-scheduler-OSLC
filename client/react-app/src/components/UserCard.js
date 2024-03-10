@@ -12,15 +12,22 @@ const UserCard = (props) => {
 
     const [added, setAdded] = useState(false);
 
-    const {userLogin, userEmail, userName, logout} = useAuth();
+    const {userLogin, userEmail, userName} = useAuth();
+
+    const userData = props.userData;
+
+    const id = userData !== undefined ? userData.id : 0;
+    const login = userData !== undefined ? userData.login : userLogin;
+    const email = userData !== undefined ? userData.email : userEmail;
+    const name = userData !== undefined ? userData.fullName : userName;
 
     const addUser = () => {
         setAdded(true);
         let userData = {
-            id: props.id,
-            login: userLogin,
-            email: userEmail,
-            name: userName
+            id: id,
+            login: login,
+            email: email,
+            fullName: name
         }
         props.setChosen([...props.chosen, userData]);
     }
@@ -31,15 +38,15 @@ const UserCard = (props) => {
                 <Avatar variant="rounded" src="avatar.jpg" />
                 <div>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
-                        <Typography fontWeight="semiBold">{userName}</Typography>
+                        <Typography fontWeight="semiBold">{name}</Typography>
                         <Chip
                             size="small"
                             color={active ? 'secondary' : 'default'}
-                            label={userLogin}
+                            label={login}
                         />
                     </Stack>
                     <Typography variant="body2" color="text.secondary">
-                        {userEmail}
+                        {email}
                     </Typography>
                 </div>
                 {

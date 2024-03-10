@@ -4,9 +4,6 @@ import {useState} from "react";
 import config from "../config";
 import { useNavigate } from 'react-router-dom';
 
-function signUp() {
-
-}
 
 const SignUp = () => {
 

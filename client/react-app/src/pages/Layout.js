@@ -37,7 +37,7 @@ const Layout = () => {
     return (
         <ColorModeProvider>
             <AuthProvider>
-                <>
+                <div className={styles.bodyContainer}>
                     <div className={styles.contentsWrapper}>
                         <div className="navbar">
                             <NavBar/>
@@ -48,8 +48,10 @@ const Layout = () => {
                             </div>
                         </div>
                     </div>
-                    <Footer/>
-                </>
+                    <div className={styles.footerPageContainer}>
+                        <Footer/>
+                    </div>
+                </div>
             </AuthProvider>
         </ColorModeProvider>
     )

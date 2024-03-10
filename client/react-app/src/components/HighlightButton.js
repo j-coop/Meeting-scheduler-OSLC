@@ -44,7 +44,8 @@ function HighlightButton(props) {
                         color="textPrimary"
                         sx={{
                             textTransform: 'none',
-                            letterSpacing: '1px'
+                            letterSpacing: '1px',
+                            fontSize: (props.size ? `${props.size}px` : '15px')
                         }}
                     >
                         {props.value}

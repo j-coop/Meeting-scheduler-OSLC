@@ -92,7 +92,7 @@ const UserSearch = (props) => {
                 {searchResults.slice(0,max).map(result => (
                     <ListItem key={result.login}>
                         <UserCard
-                            id={result.id}
+                            userData={result}
                             addPresent={addPresent}
                             chosen={props.chosen}
                             setChosen={props.setChosen}

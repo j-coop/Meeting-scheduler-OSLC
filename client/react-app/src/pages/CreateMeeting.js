@@ -249,9 +249,7 @@ const CreateMeeting = () => {
                             {chosenUsers.map(user => (
                                 <ListItem key={user.login}>
                                     <UserCard
-                                        login={user.login}
-                                        email={user.email}
-                                        name={user.name}
+                                        userData={user}
                                         addPresent={false}
                                         chosen={null}
                                         setChosen={null}

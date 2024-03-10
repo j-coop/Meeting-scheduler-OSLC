@@ -11,7 +11,7 @@ const Footer = () => {
 
     return (
         <Fragment>
-            <Box width={"100%"} sx={{bgcolor: "background.paper", marginTop: "20px"}}>
+            <Box width={"100%"} sx={{bgcolor: "background.paper"}}>
                 <footer className={styles.footer}>
                     <div className={styles.footerWrapper}>
                         <div className={styles.footerLogo}>

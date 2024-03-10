@@ -3,7 +3,6 @@ import styles from "../../styles/meetingPanel.module.css"
 import ProposalsList from "./ProposalsList";
 import MeetingActionsPanel from "./MeetingActionsPanel";
 import {useAuth} from "../../context/AuthContext";
-import {useState} from "react";
 import {Button} from "@mui/material";
 import config from "../../config";
 
