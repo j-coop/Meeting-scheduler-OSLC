@@ -1,4 +1,4 @@
-import StandardButton from "../StandardButton";
+import StandardButton from "../buttons/StandardButton";
 import config from "../../config";
 import {useMeetingContext} from "../../context/MeetingContext";
 

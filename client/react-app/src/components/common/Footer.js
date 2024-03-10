@@ -3,7 +3,7 @@ import {Box, Stack, Typography} from "@mui/material";
 import Logo from "./Logo";
 import {Link} from "react-router-dom";
 import GitHubIcon from '@mui/icons-material/GitHub';
-import styles from "../styles/home.module.css";
+import styles from "../../styles/home.module.css";
 
 
 const Footer = () => {

@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
-import styles from "../styles/nav.module.css"
+import styles from "../../styles/nav.module.css"
 import NavButtons from "./NavButtons";
-import Logo from "./Logo";
-import {useAuth} from "../context/AuthContext";
+import Logo from "../common/Logo";
+import {useAuth} from "../../context/AuthContext";
 import {Button, Drawer, Typography} from "@mui/material";
 import React, {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';

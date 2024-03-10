@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/navbar/NavBar";
 import {AuthProvider} from "../context/AuthContext";
 import React, {useEffect} from 'react'
 import {ColorModeProvider} from "../context/ColorModeContext";
-import Footer from "../components/Footer";
+import Footer from "../components/common/Footer";
 import styles from "../styles/home.module.css"
 
 

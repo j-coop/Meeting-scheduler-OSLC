@@ -1,13 +1,13 @@
-import styles from "../styles/navButtons.module.css"
-import {useAuth} from "../context/AuthContext";
-import HighlightButton from "./HighlightButton";
+import styles from "../../styles/navButtons.module.css"
+import {useAuth} from "../../context/AuthContext";
+import HighlightButton from "../buttons/HighlightButton";
 import React, {useEffect, useState} from "react";
 import SignInPopup from "./SignInPopup";
 import {FormControlLabel, Stack} from "@mui/material";
-import ModeSwitch from "./ModeSwitch";
-import {useColorMode} from "../context/ColorModeContext";
-import LogInOutButton from "./LogInOutButton";
-import CreateMeetingButton from "./CreateMeetingButton";
+import ModeSwitch from "../buttons/ModeSwitch";
+import {useColorMode} from "../../context/ColorModeContext";
+import LogInOutButton from "../buttons/LogInOutButton";
+import CreateMeetingButton from "../buttons/CreateMeetingButton";
 
 
 const NavButtons = ({vertical}) => {

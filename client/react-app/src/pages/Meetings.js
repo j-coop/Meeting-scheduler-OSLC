@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../context/AuthContext";
 import MeetingCard from "../components/meetings/MeetingCard";
 import styles from "../styles/meetings.module.css"
-import CreateMeetingButton from "../components/CreateMeetingButton";
+import CreateMeetingButton from "../components/buttons/CreateMeetingButton";
 import {MeetingContextProvider} from "../context/MeetingContext";
 
 const Meetings = () => {

@@ -1,7 +1,7 @@
 import {Card, Chip, Stack, Typography} from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import {formatDuration} from "../../utils/FormatDate";
-import StandardButton from "../StandardButton";
+import StandardButton from "../buttons/StandardButton";
 import ResponsesPanel from "./ResponsesPanel";
 import config from "../../config";
 import {useMeetingContext} from "../../context/MeetingContext";

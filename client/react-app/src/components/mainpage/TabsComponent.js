@@ -3,7 +3,7 @@ import {useState} from "react";
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import styles from '../styles/home.module.css'
+import styles from '../../styles/home.module.css'
 
 const TabsComponent = () => {
 

@@ -1,5 +1,5 @@
-import logo from "../resources/logo.png";
-import styles from "../styles/nav.module.css";
+import logo from "../../resources/logo.png";
+import styles from "../../styles/nav.module.css";
 import {Link} from "react-router-dom";
 import {Typography} from "@mui/material";
 

@@ -1,4 +1,4 @@
-import Logo from "../components/Logo";
+import Logo from "../components/common/Logo";
 import styles from "../styles/signup.module.css"
 import {useState} from "react";
 import config from "../config";

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
-import {useAuth} from "../context/AuthContext";
-import config from "../config";
+import {useAuth} from "../../context/AuthContext";
+import config from "../../config";
 
 
 const SignInPopup = ({ open, onClose }) => {

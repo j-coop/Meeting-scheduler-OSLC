@@ -1,5 +1,5 @@
 import styles from '../styles/settings.module.css'
-import StandardButton from "./StandardButton";
+import StandardButton from "./buttons/StandardButton";
 import {Stack, TextField} from "@mui/material";
 
 const ChangePanel = ({valueType}) => {

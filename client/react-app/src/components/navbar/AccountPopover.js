@@ -1,6 +1,6 @@
 import {Button, ButtonGroup, Popover, Typography} from "@mui/material";
-import UserCard from "./UserCard";
-import {useAuth} from "../context/AuthContext";
+import UserCard from "../UserCard";
+import {useAuth} from "../../context/AuthContext";
 import {Link} from "react-router-dom";
 
 

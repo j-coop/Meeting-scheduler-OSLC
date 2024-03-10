@@ -6,7 +6,7 @@ import styles from "../styles/createMeeting.module.css"
 import {momentLocalizer} from "react-big-calendar";
 import moment from "moment";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import WeekCalendar from "../components/WeekCalendar";
+import WeekCalendar from "../components/calendar/WeekCalendar";
 import UserCard from "../components/UserCard";
 import config from "../config";
 import {formatDateTime} from "../utils/FormatDate"

@@ -7,7 +7,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import HomeIcon from '@mui/icons-material/Home';
-import styles from '../styles/home.module.css'
+import styles from '../../styles/home.module.css'
 
 const ReassurancePanel = () => {
 

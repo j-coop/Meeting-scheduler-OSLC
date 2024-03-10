@@ -1,9 +1,9 @@
-import TabsComponent from "../components/TabsComponent";
+import TabsComponent from "../components/mainpage/TabsComponent";
 import styles from "../styles/home.module.css"
 import main_photo from "../resources/image.jpg"
-import HighlightButton from "../components/HighlightButton";
+import HighlightButton from "../components/buttons/HighlightButton";
 import {useAuth} from "../context/AuthContext";
-import ReassurancePanel from "../components/ReassurancePanel";
+import ReassurancePanel from "../components/mainpage/ReassurancePanel";
 
 const Home = () => {
 

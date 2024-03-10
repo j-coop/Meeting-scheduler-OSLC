@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
-import {useAuth} from "../context/AuthContext";
+import {useAuth} from "../../context/AuthContext";
 import React from "react";
-import AccountPopover from "./AccountPopover";
+import AccountPopover from "../navbar/AccountPopover";
 import {Button, Typography} from "@mui/material";
 
 

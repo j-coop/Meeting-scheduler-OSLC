@@ -1,13 +1,27 @@
-import React, { Fragment, useState, useCallback, useMemo } from 'react'
+import React, {Fragment, useState, useCallback, useMemo, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import { Calendar, Views, DateLocalizer } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import CalendarPopup from "./CalendarPopup";
 
 export default function WeekCalendar({ localizer, duration, proposals, setProposals }) {
-    //const [myEvents, setEvents] = useState([])
 
     const myEvents = proposals;
     const setEvents = setProposals;
+
+    const [openedDate, setOpenedDate] = useState(null);
+    const [openPopup, setOpenPopup] = useState(false);
+
+    const onDialogClose = () => {
+        setOpenPopup(false);
+    }
+
+    const handleRemove = (date) => {
+        const start = date.start;
+        const end = date.end;
+        const updatedEvents = myEvents.filter(event => event.start !== start || event.end !== end);
+        setEvents(updatedEvents);
+    }
 
     const handleSelectSlot = useCallback(
         ({ start, end }) => {
@@ -22,11 +36,16 @@ export default function WeekCalendar({ localizer, duration, proposals, setPropos
 
     const handleSelectEvent = useCallback(
         ({ start, end }) => {
-            const updatedEvents = myEvents.filter(event => event !== { start, end });
-            setEvents(updatedEvents);
+            setOpenedDate({ start, end });
         },
         [myEvents, setEvents]
     )
+
+    useEffect(() => {
+        if (openedDate !== null) {
+            setOpenPopup(true);
+        }
+    }, [openedDate]);
 
     const { defaultDate, scrollToTime, formats } = useMemo(
         () => ({
@@ -84,6 +103,12 @@ export default function WeekCalendar({ localizer, duration, proposals, setPropos
                             showMore: total => `+${total} more`,
                         }
                     }
+                />
+                <CalendarPopup
+                    date={openedDate}
+                    open={openPopup}
+                    onClose={onDialogClose}
+                    handleRemove={handleRemove}
                 />
             </div>
         </Fragment>
