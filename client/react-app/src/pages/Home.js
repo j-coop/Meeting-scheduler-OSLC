@@ -34,6 +34,7 @@ const Home = () => {
                 <div className={styles.bannerRight}>
                     <img alt={"main-photo"} src={main_photo} className={styles.mainPhoto}/>
                 </div>
+                <div className={styles.clearfix}></div>
             </div>
             <ReassurancePanel/>
             <TabsComponent/>

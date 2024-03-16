@@ -4,7 +4,7 @@ import {useAuth} from "../context/AuthContext";
 import EditIcon from '@mui/icons-material/Edit';
 import {Fab, Stack, Typography} from "@mui/material";
 import {useState} from "react";
-import ChangePanel from "../components/ChangePanel";
+import ChangePanel from "../components/settings/ChangePanel";
 
 
 const Settings = () => {

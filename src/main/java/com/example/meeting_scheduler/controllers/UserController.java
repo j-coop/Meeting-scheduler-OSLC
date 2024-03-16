@@ -101,4 +101,9 @@ public class UserController {
         return ResponseEntity.created(URI.create("/users/"+user.getUserId())).build();
     }
 
+    @PutMapping("/{id}/email")
+    public ResponseEntity<Void> changeEmail() {
+        return null;
+    }
+
 }

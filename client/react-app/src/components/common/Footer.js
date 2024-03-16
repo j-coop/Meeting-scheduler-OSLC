@@ -21,7 +21,7 @@ const Footer = () => {
                             <div className={styles.footerContainerTop}>
                                 <div className={styles.footerContainerTopLeft}>
                                     <Link to={"/about"}>
-                                        <Typography align={"left"} color={"text.primary"}>
+                                        <Typography align={"left"} color={"text.primary"} className={styles.footerText}>
                                             About
                                         </Typography>
                                     </Link>
@@ -29,8 +29,8 @@ const Footer = () => {
                                 <div className={styles.footerContainerTopRight}>
                                     <a href="https://github.com/j-coop/Meeting-scheduler-OSLC" target="_blank">
                                         <Stack direction="row" alignItems="center" flexGap={1}>
-                                            <GitHubIcon sx={{color: 'text.primary', marginRight: '3px'}}/>
-                                            <Typography variant="body1" color="text.primary">
+                                            <GitHubIcon sx={{color: 'text.primary', marginRight: '3px'}} className={styles.footerText}/>
+                                            <Typography variant="body1" color="text.primary" className={styles.footerText}>
                                                 Github page
                                             </Typography>
                                         </Stack>
@@ -38,7 +38,9 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className={styles.footerContainerBottom}>
-                                <Typography align={"right"}>MeetIT@2024 Jakub Bednarz ETI PG</Typography>
+                                <Typography align={"right"} className={styles.footerText}>
+                                    MeetIT@2024 Jakub Bednarz ETI PG
+                                </Typography>
                             </div>
                         </div>
                     </div>

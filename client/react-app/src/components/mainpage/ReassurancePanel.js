@@ -20,8 +20,9 @@ const ReassurancePanel = () => {
                             <CheckCircleIcon className={styles.icon} color="primary"/>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h6" align="center">Easy to use - start right away with intuitive
-                                interface</Typography>
+                            <Typography variant="h6" align="center" className={styles.panelText}>
+                                Easy to use - start right away with intuitive interface
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -31,7 +32,9 @@ const ReassurancePanel = () => {
                             <AccessTimeIcon className={styles.icon} color="primary"/>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h6" align="center">Create your meeting in 5 minutes</Typography>
+                            <Typography variant="h6" align="center" className={styles.panelText}>
+                                Create your meeting in 5 minutes
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -41,7 +44,9 @@ const ReassurancePanel = () => {
                             <AllInclusiveIcon className={styles.icon} color="primary"/>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h6" align="center">Unlimited meetings - no limits on usage</Typography>
+                            <Typography variant="h6" align="center" className={styles.panelText}>
+                                Unlimited meetings - no limits on usage
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -51,7 +56,9 @@ const ReassurancePanel = () => {
                             <HomeIcon className={styles.icon} color="primary"/>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h6" align="center">Keep your schedule in one place</Typography>
+                            <Typography variant="h6" align="center" className={styles.panelText}>
+                                Keep your schedule in one place
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Grid>

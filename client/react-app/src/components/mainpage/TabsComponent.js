@@ -4,8 +4,11 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import styles from '../../styles/home.module.css'
+import tabsData from '../../texts/eng/tabs_text.json'
 
 const TabsComponent = () => {
+
+    const tab1Text = ""
 
     const [value, setValue] = useState("1");
 
@@ -25,90 +28,45 @@ const TabsComponent = () => {
                             '& .MuiTab-root': {
                                 '&.Mui-selected': {
                                     '& .MuiTab-indicator': {
-                                        backgroundColor: tabsColors[value]
-                                    },
-                                },
-                            },
+                                        backgroundColor: tabsData.tabs[value - 1].color // Set the indicator color from JSON
+                                    }
+                                }
+                            }
                         }}
-                        indicatorColor={tabsColors[value-1]}
                     >
-                        <Tab label="Item One" value="1" sx={
-                            {
-                                backgroundColor: 'background.paper',
-                                '&.Mui-selected':
-                                    {
-                                        backgroundColor: 'blue',
-                                        color: "white"
+                        {tabsData.tabs.map((tab, index) => (
+                            <Tab
+                                key={index}
+                                label={tab.header}
+                                value={(index + 1).toString()}
+                                sx={{
+                                    backgroundColor: 'background.paper',
+                                    color: 'text.primary',
+                                    borderRight: '1px solid',
+                                    '&.Mui-selected': {
+                                        backgroundColor: tab.color, // Set the tab background color from JSON
+                                        color: 'white'
                                     },
-                                '.PrivateTabIndicator-root':
-                                    {
-                                        backgroundColor: 'blue',
-                                    },
-                            }
-                        }/>
-                        <Tab label="Item Two" value="2" sx={
-                            {
-                                backgroundColor: 'background.paper',
-                                '&.Mui-selected':
-                                    {
-                                        backgroundColor: 'red',
-                                        color: "white"
-                                    },
-                                '.PrivateTabIndicator-root':
-                                    {
-                                        backgroundColor: 'red',
-                                    },
-                            }
-                        }/>
-                        <Tab label="Item Three" value="3" sx={
-                            {
-                                backgroundColor: 'background.paper',
-                                '&.Mui-selected':
-                                    {
-                                        backgroundColor: 'green',
-                                        color: "white"
-                                    },
-                                '.PrivateTabIndicator-root':
-                                    {
-                                        backgroundColor: 'green',
-                                    },
-                            }
-                        }/>
+                                    '.PrivateTabIndicator-root': {
+                                        backgroundColor: tab.color // Set the tab indicator color from JSON
+                                    }
+                                }}
+                            />
+                        ))}
                     </TabList>
                 </Box>
-                <TabPanel value="1">
-                    Item One <br/>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida est pharetra, ultricies massa
-                    sed, consectetur ipsum. Nunc enim augue, scelerisque vel lectus quis, facilisis pharetra libero.
-                    Donec dolor mauris, gravida vitae tortor non, euismod tincidunt neque. Praesent accumsan, ligula
-                    eget ultrices euismod, tortor libero ultricies ligula, in porta nulla orci at neque. Vivamus
-                    ullamcorper posuere orci quis luctus. Cras purus tortor, sollicitudin vitae urna nec, convallis
-                    malesuada nisl. Vivamus gravida turpis sed mauris pretium ullamcorper. Etiam pharetra ipsum nunc, a
-                    luctus nibh rutrum vitae. Sed elementum nulla ac velit euismod ornare. In at tincidunt metus, at
-                    dapibus eros.
-                </TabPanel>
-                <TabPanel value="2">
-                    Item Two <br/>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida est pharetra, ultricies massa
-                    sed, consectetur ipsum. Nunc enim augue, scelerisque vel lectus quis, facilisis pharetra libero.
-                    Donec dolor mauris, gravida vitae tortor non, euismod tincidunt neque. Praesent accumsan, ligula
-                    eget ultrices euismod, tortor libero ultricies ligula, in porta nulla orci at neque. Vivamus
-                    ullamcorper posuere orci quis luctus. Cras purus tortor, sollicitudin vitae urna nec, convallis
-                    malesuada nisl. Vivamus gravida turpis sed mauris pretium ullamcorper. Etiam pharetra ipsum nunc, a
-                    luctus nibh rutrum vitae. Sed elementum nulla ac velit euismod ornare. In at tincidunt metus, at
-                    dapibus eros.
-                </TabPanel>
-                <TabPanel value="3">
-                    Item Three <br/>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida est pharetra, ultricies massa
-                    sed, consectetur ipsum. Nunc enim augue, scelerisque vel lectus quis, facilisis pharetra libero.
-                    Donec dolor mauris, gravida vitae tortor non, euismod tincidunt neque. Praesent accumsan, ligula
-                    eget ultrices euismod, tortor libero ultricies ligula, in porta nulla orci at neque. Vivamus
-                    ullamcorper posuere orci quis luctus. Cras purus tortor, sollicitudin vitae urna nec, convallis
-                    malesuada nisl. Vivamus gravida turpis sed mauris pretium ullamcorper. Etiam pharetra ipsum nunc, a
-                    luctus nibh rutrum vitae. Sed elementum nulla ac velit euismod ornare. In at tincidunt metus, at
-                    dapibus eros.
-                </TabPanel>
+                {tabsData.tabs.map((tab, index) => (
+                    <TabPanel key={index} value={(index + 1).toString()}>
+                        <div className={styles.tabContainer}>
+                            <div className={styles.tabText}>
+                                {tab.text}
+                            </div>
+                            <div className={styles.tabImage}>
+
+                            </div>
+                        </div>
+                    </TabPanel>
+                ))}
             </TabContext>
         </div>
     );
