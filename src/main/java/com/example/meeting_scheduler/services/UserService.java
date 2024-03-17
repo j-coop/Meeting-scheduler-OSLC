@@ -7,6 +7,7 @@ import com.example.meeting_scheduler.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -56,7 +57,7 @@ public class UserService {
     }
 
     @Transactional
-    public User addUser(String login, String fullName, String email, String timezone, String password) {
+    public User addUser(String login, String fullName, String email, ZoneId timezone, String password) {
         User user = User.builder()
                 .userId(UUID.randomUUID())
                 .login(login)

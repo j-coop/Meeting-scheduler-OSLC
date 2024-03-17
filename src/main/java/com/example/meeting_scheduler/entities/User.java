@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public class User implements Serializable {
     private String email;
 
     @Column(name="timezone")
-    private String timezone;
+    private ZoneId timezone;
 
     @Column(name="password")
     private String password;

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -59,7 +60,12 @@ public class DataInitializer {
                 "hermiona123@hogwart.mg", "hendrysteven147@wst.co.uk", "h.potter@hogwart.mg",
                 "JackSparrow@carribean.ca", "JohnLennon@beatles.co.uk", "BigMike@nba.com", "Roger.Federer@atp.eu",
                 "LeoMessi10@barca.es", "LeoDiCaprio@hollywood.com", "Xavi6@barca.es", "carlitos@atp.eu"};
-        String[] timezones = {"UTC+1", "UTC+0", "UTC-6", "UTC+9"};
+        ZoneId[] timezones = {
+                ZoneId.of(ZoneId.SHORT_IDS.get("ECT")),
+                ZoneId.of(ZoneId.SHORT_IDS.get("CST")),
+                ZoneId.of(ZoneId.SHORT_IDS.get("CTT")),
+                ZoneId.of(ZoneId.SHORT_IDS.get("PST"))
+        };
 
         User[] users = new User[14];
         Meeting[] meetings = new Meeting[5];

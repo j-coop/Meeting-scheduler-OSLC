@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {Fab, Stack, Typography} from "@mui/material";
 import {useState} from "react";
 import ChangePanel from "../components/settings/ChangePanel";
+import TimeZonePicker from "../components/TimeZonePicker";
 
 
 const Settings = () => {
@@ -88,6 +89,10 @@ const Settings = () => {
                     loginWindowOpen &&
                     <ChangePanel valueType="login"/>
                 }
+            </div>
+            <div className={styles.accountSettings}>
+                <hr/>
+                <TimeZonePicker/>
             </div>
             <div className={styles.settingsButtons}>
                 <Fab variant="extended" size="small" color="primary" onClick={handlePasswordChange}>
