@@ -10,7 +10,7 @@ const CalendarPopup = ({date, open, onClose, handleRemove}) => {
         onClose();
     }
 
-    const infoString = formatDuration(date.start, date.end);
+    const infoString = date ? formatDuration(date.start, date.end) : "";
 
     return (
         <div>

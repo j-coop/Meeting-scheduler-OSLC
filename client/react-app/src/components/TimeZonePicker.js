@@ -6,6 +6,10 @@ import {useAuth} from "../context/AuthContext";
 const TimeZonePicker = ({ onChange }) => {
 
     const {userTimezone} = useAuth();
+    const userTimezoneObject = userTimezone ? {
+        label: userTimezone,
+        offset: `(GMT${moment.tz(userTimezone).format('Z')}) ${userTimezone}`,
+    } : null;
 
     const [timeZones, setTimeZones] = useState([]);
 
@@ -22,7 +26,7 @@ const TimeZonePicker = ({ onChange }) => {
         fetchTimeZones();
     }, []);
 
-    const [selectedTimeZone, setSelectedTimeZone] = useState(null);
+    const [selectedTimeZone, setSelectedTimeZone] = useState(userTimezoneObject);
 
     const handleTimeZoneChange = (event, value) => {
         setSelectedTimeZone(value);

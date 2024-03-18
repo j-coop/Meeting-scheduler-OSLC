@@ -59,6 +59,7 @@ const CreateMeeting = () => {
 
     const addMeetingProposals = (meetingId) => {
         for (let proposal of proposals) {
+            alert(proposal.start);
             let proposalStartTime = new Date(proposal.start);
             let proposalEndTime = new Date(proposal.end);
 

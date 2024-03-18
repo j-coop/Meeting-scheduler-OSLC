@@ -4,6 +4,7 @@ import {alpha, debounce, InputBase, List, ListItem, styled} from "@mui/material"
 import axios from "axios";
 import config from "../config";
 import SearchIcon from '@mui/icons-material/Search';
+import {useAuth} from "../context/AuthContext";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -56,6 +57,8 @@ const UserSearch = (props) => {
     const max = props.maxResults;
     const addPresent = props.addPresent;
 
+    const {userLogin} = useAuth();
+
     const handleSearch = async () => {
         try {
             // AJAX users request
@@ -89,7 +92,10 @@ const UserSearch = (props) => {
                 />
             </Search>
             <List>
-                {searchResults.slice(0,max).map(result => (
+                {searchResults
+                    .filter(result => result.login !== userLogin)
+                    .slice(0,max)
+                    .map(result => (
                     <ListItem key={result.login}>
                         <UserCard
                             userData={result}

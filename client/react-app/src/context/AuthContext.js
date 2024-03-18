@@ -1,4 +1,5 @@
 import {createContext, useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 const AuthContext = createContext();
@@ -11,6 +12,8 @@ export const AuthProvider = ({children}) => {
     const [userId, setUserId] = useState("");
     const [userData, setUserData] = useState(null);
     const [userTimezone, setUserTimezone] = useState(null);
+
+    const navigate = useNavigate();
 
     const login = (token, login, data) => {
         localStorage.setItem('token', token);
@@ -36,6 +39,7 @@ export const AuthProvider = ({children}) => {
         setUserId(null);
         setUserData(null);
         setUserTimezone(null);
+        navigate('/');
     };
 
     return (

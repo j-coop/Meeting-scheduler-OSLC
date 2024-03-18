@@ -1,9 +1,6 @@
 import React from 'react';
 import { Typography, Grid } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import SecurityIcon from '@mui/icons-material/Security';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import VerifiedIcon from '@mui/icons-material/Verified';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import HomeIcon from '@mui/icons-material/Home';

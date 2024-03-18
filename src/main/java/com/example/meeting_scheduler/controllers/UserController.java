@@ -3,10 +3,12 @@ package com.example.meeting_scheduler.controllers;
 import com.example.meeting_scheduler.dto.dto_builders.UserDTOsBuilder;
 import com.example.meeting_scheduler.dto.user.UserCreateDTO;
 import com.example.meeting_scheduler.dto.user.UserDTO;
+import com.example.meeting_scheduler.dto.user.UserUpdateDTO;
 import com.example.meeting_scheduler.dto.user.UsersDTO;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.services.UserService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -101,9 +103,18 @@ public class UserController {
         return ResponseEntity.created(URI.create("/users/"+user.getUserId())).build();
     }
 
-    @PutMapping("/{id}/email")
-    public ResponseEntity<Void> changeEmail() {
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(
+            @RequestBody UserUpdateDTO updateDTO,
+            @PathVariable UUID id
+    ) {
+        User user = userService.findByUserId(id);
+        if (user == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        if (userService.updateUser(user, updateDTO)) {
+            return ResponseEntity.ok().build();
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }

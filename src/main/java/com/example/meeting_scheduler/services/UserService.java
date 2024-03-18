@@ -1,5 +1,6 @@
 package com.example.meeting_scheduler.services;
 
+import com.example.meeting_scheduler.dto.user.UserUpdateDTO;
 import com.example.meeting_scheduler.entities.Meeting;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
@@ -82,5 +83,21 @@ public class UserService {
     public void addMeetingParticipation(User user, MeetingParticipation meetingParticipation) {
         user.getMeetings().add(meetingParticipation);
         this.saveUser(user);
+    }
+
+    @Transactional
+    public boolean updateUser(User user, UserUpdateDTO updateDTO) {
+        if (user == null) return false;
+        // check authorisation
+        if (Objects.equals(user.getPassword(), updateDTO.getCurrentPassword())) {
+            user.setLogin(updateDTO.getLogin());
+            user.setFullName(updateDTO.getFullName());
+            user.setEmail(updateDTO.getEmail());
+            user.setTimezone(updateDTO.getTimezone());
+            user.setPassword(updateDTO.getPassword());
+            this.saveUser(user);
+            return true;
+        }
+        return false;
     }
 }
