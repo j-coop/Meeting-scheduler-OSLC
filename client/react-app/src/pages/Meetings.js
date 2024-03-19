@@ -32,7 +32,7 @@ const Meetings = () => {
             <div className={styles.meetingsContainer}>
                 {
                     meetings.map(meeting => (
-                        <div>
+                        <div key={meeting}>
                             <MeetingContextProvider>
                                 <MeetingCard
                                     meetingData={meeting}

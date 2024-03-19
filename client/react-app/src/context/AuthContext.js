@@ -1,5 +1,6 @@
 import {createContext, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import config from "../config";
 
 
 const AuthContext = createContext();
@@ -10,13 +11,37 @@ export const AuthProvider = ({children}) => {
     const [userEmail, setUserEmail] = useState("");
     const [userName, setUserName] = useState("");
     const [userId, setUserId] = useState("");
+    const [userPassword, setUserPassword] = useState("");
     const [userData, setUserData] = useState(null);
     const [userTimezone, setUserTimezone] = useState(null);
 
     const navigate = useNavigate();
 
+    const getUserData = async (login) => {
+        try {
+            const response = await fetch(config.apiUrl+'/users/login/'+login, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                return await response.json();
+            } else {
+                console.log("User data error");
+                return {};
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return {};
+        }
+    };
+
     const login = (token, login, data) => {
-        localStorage.setItem('token', token);
+        if (token) {
+            localStorage.setItem('token', token);
+        }
         if (!localStorage.getItem('userData')) {
             localStorage.setItem('userData', JSON.stringify(data));
         }
@@ -25,6 +50,7 @@ export const AuthProvider = ({children}) => {
         setUserEmail(data.email);
         setUserName(data.fullName);
         setUserId(data.userId);
+        setUserPassword(data.password);
         setUserData(data);
         setUserTimezone(data.timezone);
     };
@@ -37,6 +63,7 @@ export const AuthProvider = ({children}) => {
         setUserEmail(null);
         setUserName(null);
         setUserId(null);
+        setUserPassword(null);
         setUserData(null);
         setUserTimezone(null);
         navigate('/');
@@ -49,10 +76,12 @@ export const AuthProvider = ({children}) => {
             userEmail,
             userName,
             userId,
+            userPassword,
             userData,
             userTimezone,
             login,
-            logout
+            logout,
+            getUserData
         }}>
             {children}
         </AuthContext.Provider>

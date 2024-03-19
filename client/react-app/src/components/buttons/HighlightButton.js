@@ -1,28 +1,33 @@
 import {Link} from "react-router-dom";
 import {useAuth} from "../../context/AuthContext";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import AccountPopover from "../navbar/AccountPopover";
 import {Button, Typography} from "@mui/material";
 
 
-function HighlightButton(props) {
+const HighlightButton = (props) => {
     const {isLoggedIn,} = useAuth();
 
-    const [isOpen, setIsOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     const [anchorEl, setAnchorEl] = useState(null);
+    //const anchorEl = React.useRef();
+
+    useEffect(() => {
+        console.log(open)
+    }, [open]);
 
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        //setIsOpen(true);
+        //setAnchorEl(event.currentTarget);
+        setOpen(true);
     };
 
     const handleClose = () => {
-        //setIsOpen(false);
+        //setOpen(false);
         setAnchorEl(null);
     };
 
-    const open = Boolean(anchorEl);
+    //const open = Boolean(anchorEl);
     const id = open ? 'popover-account' : undefined;
 
 
@@ -31,6 +36,7 @@ function HighlightButton(props) {
             <Link to={isLoggedIn ? null : "/signup"}>
                 <Button
                     id="accountButton"
+                    //ref={anchorEl}
                     onClick={handleClick}
                     variant="contained"
                     color="secondary"
@@ -57,10 +63,10 @@ function HighlightButton(props) {
                 </Button>
             </Link>
             <AccountPopover
-                id = {id}
+                id = 'popover-account'
                 open = {open}
                 handleClose = {handleClose}
-                anchorEl = {anchorEl}
+                anchorEl={anchorEl}
             />
         </>
     )

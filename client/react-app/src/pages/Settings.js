@@ -13,31 +13,52 @@ import config from "../config";
 
 const Settings = () => {
 
-    const {userLogin, userEmail, userName, userId, userPassword} = useAuth();
+    const {userLogin, userEmail, userName, userId, userPassword, getUserData, login, userTimezone} = useAuth();
 
-    const [login, setLogin] = useState(userLogin);
+    const [_login, set_login] = useState(userLogin);
     const [email, setEmail] = useState(userEmail);
     const [name, setName] = useState(userName);
-    const [timezone, setTimezone] = useState();
+    const [timezone, setTimezone] = useState(userTimezone);
 
     const [nameWindowOpen, setNameWindowOpen] = useState(false);
     const [emailWindowOpen, setEmailWindowOpen] = useState(false);
     const [loginWindowOpen, setLoginWindowOpen] = useState(false);
 
     const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+    const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
 
     const handleConfirmClose = () => {
         setIsConfirmDialogOpen(false);
     }
 
-    const handleCorfirmation = () => {
+    const handleResetClose = () => {
+        setIsResetDialogOpen(false);
+    }
+
+    const handleWindowsClose = (valueType) => {
+        switch (valueType) {
+            case "login":
+                setLoginWindowOpen(false);
+                break;
+            case "email":
+                setEmailWindowOpen(false);
+                break;
+            case "name":
+                setNameWindowOpen(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    const handleCorfirmation = (newPassword) => {
 
         const updateData = {
-            login: login,
+            login: _login,
             fullName: name,
             email: email,
-            timezone: "",
-            password: "",
+            timezone: timezone,
+            password: newPassword !== undefined ? newPassword : userPassword,
             currentPassword: userPassword
         }
 
@@ -51,7 +72,11 @@ const Settings = () => {
         })
             .then(async response => {
                 if (response.ok) {
-                    alert("User data changed successfully");
+                    if (newPassword) alert("Your password has been changed")
+                    else alert("User data changed successfully");
+
+                    const data = await getUserData(_login);
+                    login(null, _login, data);
                 } else {
                     alert("Error");
                 }
@@ -61,7 +86,15 @@ const Settings = () => {
             });
     }
 
+    const handleResetConfirmation = (newPassword) => {
+        handleCorfirmation(newPassword);
+    }
+
     const openConfirmDialog = () => {
+        setIsConfirmDialogOpen(true);
+    }
+
+    const openResetDialog = () => {
         setIsConfirmDialogOpen(true);
     }
 
@@ -78,7 +111,7 @@ const Settings = () => {
     }
 
     const handlePasswordChange = () => {
-        alert("password to be changed")
+        setIsResetDialogOpen(true);
     }
 
     const iconSx = {
@@ -94,7 +127,7 @@ const Settings = () => {
             </div>
             <div className={styles.infoContent}>
                 <Stack direction="row" alignItems="center" flexGap={1}>
-                    <Typography variant="body1" color="text.primary">
+                    <Typography variant="body1" color={name === userName ? "text.primary" : "secondary"}>
                         Name: {name}
                     </Typography>
                     <EditIcon
@@ -104,11 +137,11 @@ const Settings = () => {
                 </Stack>
                 {
                     nameWindowOpen &&
-                    <ChangePanel valueType="name"/>
+                    <ChangePanel valueType="name" setName={setName} onConfirm={handleWindowsClose}/>
                 }
                 <br/>
                 <Stack direction="row" alignItems="center" flexGap={1}>
-                    <Typography variant="body1" color="text.primary">
+                    <Typography variant="body1" color={email === userEmail ? "text.primary" : "secondary"}>
                         Email: {email}
                     </Typography>
                     <EditIcon
@@ -118,12 +151,12 @@ const Settings = () => {
                 </Stack>
                 {
                     emailWindowOpen &&
-                    <ChangePanel valueType="email"/>
+                    <ChangePanel valueType="email" setEmail={setEmail} onConfirm={handleWindowsClose}/>
                 }
                 <br/>
                 <Stack direction="row" alignItems="center" flexGap={1}>
-                    <Typography variant="body1" color="text.primary">
-                        Login: {login}
+                    <Typography variant="body1" color={_login === userLogin ? "text.primary" : "secondary"}>
+                        Login: {_login}
                     </Typography>
                     <EditIcon
                         sx={iconSx}
@@ -132,7 +165,7 @@ const Settings = () => {
                 </Stack>
                 {
                     loginWindowOpen &&
-                    <ChangePanel valueType="login"/>
+                    <ChangePanel valueType="login" setLogin={set_login} onConfirm={handleWindowsClose}/>
                 }
             </div>
             <div className={styles.accountSettings}>
@@ -140,23 +173,34 @@ const Settings = () => {
                 <TimeZonePicker timezone={timezone} setTimezone={setTimezone}/>
             </div>
             <div className={styles.settingsButtons}>
-                <Fab variant="extended" size="small" color="primary" onClick={handlePasswordChange}>
-                    <EditIcon sx={{ color: 'text.primary', marginLeft: '10px', mr: 1 }} />
-                    <Typography variant="body1" color="text.primary">
-                        Reset password
-                    </Typography>
-                </Fab>
-                <Fab variant="extended" size="small" color="secondary" onClick={openConfirmDialog}>
-                    <DoneOutlineIcon sx={{ color: 'text.primary', marginLeft: '10px', mr: 1 }} />
-                    <Typography variant="body1" color="text.primary">
-                        Save
-                    </Typography>
-                </Fab>
+                <div className={styles.passwordButton}>
+                    <Fab variant="extended" size="small" color="primary" onClick={handlePasswordChange}>
+                        <EditIcon sx={{ color: 'text.primary', marginLeft: '10px', mr: 1 }} />
+                        <Typography variant="body1" color="text.primary">
+                            Reset password
+                        </Typography>
+                    </Fab>
+                </div>
+                <div className={styles.saveButton}>
+                    <Fab variant="extended" size="small" color="secondary" onClick={openConfirmDialog}>
+                        <DoneOutlineIcon sx={{ color: 'text.primary', marginLeft: '10px', mr: 1 }} />
+                        <Typography variant="body1" color="text.primary">
+                            Save
+                        </Typography>
+                    </Fab>
+                </div>
             </div>
             <ConfirmPassword
                 onClose={handleConfirmClose}
                 open={isConfirmDialogOpen}
                 onConfirmation={handleCorfirmation}
+                reset={false}
+            />
+            <ConfirmPassword
+                onClose={handleResetClose}
+                open={isResetDialogOpen}
+                onConfirmation={handleResetConfirmation}
+                reset={true}
             />
         </div>
     )

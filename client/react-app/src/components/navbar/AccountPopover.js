@@ -4,16 +4,16 @@ import {useAuth} from "../../context/AuthContext";
 import {Link} from "react-router-dom";
 
 
-const AccountPopover = (props) => {
+const AccountPopover = ({id, open, handleClose, anchorEl}) => {
 
     const {userLogin, userEmail, logout} = useAuth();
 
     return (
         <Popover
-            id={props.id}
-            open={props.open}
-            anchorEl={props.anchorEl}
-            onClose={props.handleClose}
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right',
@@ -40,10 +40,10 @@ const AccountPopover = (props) => {
                     fullWidth={true}
                     variant="text"
                 >
-                    <Link to={"/meetings"} onClick={props.handleClose}><Button>Meetings</Button></Link>
-                    <Link to={"/users"} onClick={props.handleClose}><Button>Users</Button></Link>
-                    <Link to={"/settings"} onClick={props.handleClose}><Button>Settings</Button></Link>
-                    <Link to={"/about"} onClick={props.handleClose}><Button>About</Button></Link>
+                    <Link to={"/meetings"} onClick={handleClose}><Button>Meetings</Button></Link>
+                    <Link to={"/users"} onClick={handleClose}><Button>Users</Button></Link>
+                    <Link to={"/settings"} onClick={handleClose}><Button>Settings</Button></Link>
+                    <Link to={"/about"} onClick={handleClose}><Button>About</Button></Link>
                     <Button onClick={logout}>Logout</Button>
                 </ButtonGroup>
             </div>

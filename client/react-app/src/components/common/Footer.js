@@ -28,7 +28,7 @@ const Footer = () => {
                                 </div>
                                 <div className={styles.footerContainerTopRight}>
                                     <a href="https://github.com/j-coop/Meeting-scheduler-OSLC" target="_blank">
-                                        <Stack direction="row" alignItems="center" flexGap={1}>
+                                        <Stack direction="row" alignItems="center" >
                                             <GitHubIcon sx={{color: 'text.primary', marginRight: '3px'}} className={styles.footerText}/>
                                             <Typography variant="body1" color="text.primary" className={styles.footerText}>
                                                 Github page

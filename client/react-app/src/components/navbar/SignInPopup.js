@@ -8,28 +8,7 @@ const SignInPopup = ({ open, onClose }) => {
     const [userLogin, setUserLogin] = useState('');
     const [userPassword, setUserPassword] = useState('');
 
-    const {login} = useAuth();
-
-    const getUserData = async (login) => {
-        try {
-            const response = await fetch(config.apiUrl+'/users/login/'+login, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                return await response.json();
-            } else {
-                console.log("User data error");
-                return {};
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            return {};
-        }
-    };
+    const {login, getUserData} = useAuth();
 
     const handleSignIn = async () => {
 

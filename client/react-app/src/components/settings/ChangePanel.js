@@ -3,22 +3,28 @@ import StandardButton from "../buttons/StandardButton";
 import {Stack, TextField} from "@mui/material";
 import {useState} from "react";
 
-const ChangePanel = ({valueType}) => {
+const ChangePanel = ({valueType, setName, setEmail, setLogin, onConfirm}) => {
 
     const [value1, setValue1] = useState("");
     const [value2, setValue2] = useState("");
 
 
     const changeLogin = () => {
-
+        if (setLogin) {
+            setLogin(value1);
+        }
     }
 
     const changeEmail = () => {
-
+        if (setEmail) {
+            setEmail(value1);
+        }
     }
 
     const changeName = () => {
-
+        if (setName) {
+            setName(value1);
+        }
     }
 
 
@@ -31,7 +37,12 @@ const ChangePanel = ({valueType}) => {
     };
 
     const handleConfirm = () => {
+        // check if values are equal
         if (value1 === value2) {
+            if (value1 === "") {
+                alert("Field can't be empty!");
+                return;
+            }
             // send change request to server
             switch (valueType) {
                 case "login":
@@ -46,6 +57,8 @@ const ChangePanel = ({valueType}) => {
                 default:
                     break;
             }
+            // close the window
+            onConfirm(valueType);
         }
         else {
             alert("Values must be identical!");

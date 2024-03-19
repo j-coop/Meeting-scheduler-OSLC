@@ -3,7 +3,7 @@ import { Autocomplete, TextField, Typography } from '@mui/material';
 import moment from 'moment-timezone';
 import {useAuth} from "../context/AuthContext";
 
-const TimeZonePicker = ({ onChange }) => {
+const TimeZonePicker = ({ timezone, setTimezone }) => {
 
     const {userTimezone} = useAuth();
     const userTimezoneObject = userTimezone ? {
@@ -30,8 +30,8 @@ const TimeZonePicker = ({ onChange }) => {
 
     const handleTimeZoneChange = (event, value) => {
         setSelectedTimeZone(value);
-        if (onChange) {
-            onChange(value);
+        if (setTimezone && value) {
+            setTimezone(value.label);
         }
     };
 
