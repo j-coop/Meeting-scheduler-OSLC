@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const monthNames = {
     '01': 'January',
     '02': 'February',
@@ -59,6 +61,63 @@ export function formatISO8601(dateTimeString) {
 
     // Construct the final formatted string
     return `${formattedDate} ${formattedTime} ${formattedTimezone}`;
+}
+
+export function parseISO8601ToDate(dateString) {
+    // Split the string into date and time components
+    const [datePart, timePart] = dateString.split('T');
+
+    // Extract date components
+    const [year, month, day] = datePart.split('-').map(Number);
+
+    // Handle shorthand UTC format with Z
+    if (dateString.includes('Z')) {
+        const time = timePart.split('Z')[0];
+        const [hour, minute, second] = time.split(':').map(Number);
+
+        // Create a Date object
+        return new Date(Date.UTC(year, month - 1, day, hour, minute, second));
+    }
+
+    // Extract sign
+    const sign = dateString.includes('+') ? '+' : '-';
+
+    // Extract time components
+    const [time, timeZoneOffsetPart] = timePart.split(sign);
+    const [hour, minute, second] = time.split(':').map(Number);
+
+    // Extract time zone offset components
+    const [hoursOffset, minutesOffset] = timeZoneOffsetPart.split(':');
+    const timeZoneOffset = (sign === '-' ? -1 : 1) * (Number(hoursOffset) * 60 + Number(minutesOffset));
+
+    // Create a Date object
+    return new Date(Date.UTC(year, month - 1, day, hour, minute, second) - timeZoneOffset * 60000);
+}
+
+export function parseDateToISO8601(date) {
+    const isoString = date.toISOString();
+    const timeZoneOffset = date.getTimezoneOffset();
+    const offsetHours = Math.abs(Math.floor(timeZoneOffset / 60)).toString().padStart(2, '0');
+    const offsetMinutes = (Math.abs(timeZoneOffset) % 60).toString().padStart(2, '0');
+    const offsetSign = timeZoneOffset < 0 ? '+' : '-';
+    const offsetString = `${offsetSign}${offsetHours}:${offsetMinutes}`;
+    return isoString.slice(0, -1) + offsetString;
+}
+
+export function setTimeZone(date, timeZone) {
+    // Get the current time zone offset in minutes
+    const currentOffset = -date.getTimezoneOffset();
+
+    // Get the target time zone offset in minutes
+    const targetOffset = moment.tz(timeZone).utcOffset();
+
+    // Calculate the time difference between the current time zone and the target time zone
+    const diffMinutes = currentOffset - targetOffset;
+
+    // Adjust the date object by the time difference
+    date.setMinutes(date.getMinutes() - diffMinutes);
+
+    return date;
 }
 
 export function formatDuration(startDateTimeString, endDateTimeString) {

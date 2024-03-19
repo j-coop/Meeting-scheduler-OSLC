@@ -9,7 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import WeekCalendar from "../components/calendar/WeekCalendar";
 import UserCard from "../components/UserCard";
 import config from "../config";
-import {formatDateTime} from "../utils/FormatDate"
+import {formatDateTime, parseDateToISO8601} from "../utils/FormatDate"
 import {useNavigate} from "react-router-dom";
 
 
@@ -59,12 +59,13 @@ const CreateMeeting = () => {
 
     const addMeetingProposals = (meetingId) => {
         for (let proposal of proposals) {
-            alert(proposal.start);
             let proposalStartTime = new Date(proposal.start);
             let proposalEndTime = new Date(proposal.end);
 
-            let formattedStartTime = formatDateTime(proposalStartTime);
-            let formattedEndTime = formatDateTime(proposalEndTime);
+            console.log(proposalStartTime)
+            let formattedStartTime = parseDateToISO8601(proposalStartTime);
+            let formattedEndTime = parseDateToISO8601(proposalEndTime);
+            console.log(formattedStartTime)
 
             let data = {
                 startTime: formattedStartTime,
