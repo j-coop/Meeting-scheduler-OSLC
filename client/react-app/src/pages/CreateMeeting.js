@@ -255,7 +255,6 @@ const CreateMeeting = () => {
                                         addPresent={false}
                                         chosen={null}
                                         setChosen={null}
-                                        width="70%"
                                     />
                                 </ListItem>
                             ))}
@@ -265,7 +264,7 @@ const CreateMeeting = () => {
             </div>
 
             <div className={styles.createMeetingButton}>
-            <Button
+                <Button
                     variant="contained"
                     color="primary"
                     sx={{
