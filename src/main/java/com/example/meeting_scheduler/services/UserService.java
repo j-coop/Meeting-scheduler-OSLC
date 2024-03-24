@@ -6,6 +6,7 @@ import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
@@ -17,9 +18,11 @@ import java.util.UUID;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -65,7 +68,7 @@ public class UserService {
                 .fullName(fullName)
                 .email(email)
                 .timezone(timezone)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .meetings(new ArrayList<>())
                 .build();
         this.saveUser(user);
@@ -76,7 +79,8 @@ public class UserService {
     public boolean checkLogin(String login, String password) {
         User user = userRepository.findByLogin(login);
         if (user == null) return false;
-        return Objects.equals(user.getPassword(), password);
+        // checks if password provided matches stored hash
+        return passwordEncoder.matches(password, user.getPassword());
     }
 
     @Transactional
@@ -89,12 +93,12 @@ public class UserService {
     public boolean updateUser(User user, UserUpdateDTO updateDTO) {
         if (user == null) return false;
         // check authorisation
-        if (Objects.equals(user.getPassword(), updateDTO.getCurrentPassword())) {
+        if (passwordEncoder.matches(user.getPassword(), updateDTO.getCurrentPassword())) {
             user.setLogin(updateDTO.getLogin());
             user.setFullName(updateDTO.getFullName());
             user.setEmail(updateDTO.getEmail());
             user.setTimezone(updateDTO.getTimezone());
-            user.setPassword(updateDTO.getPassword());
+            user.setPassword(passwordEncoder.encode(updateDTO.getPassword()));
             this.saveUser(user);
             return true;
         }

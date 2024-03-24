@@ -10,21 +10,23 @@ const HighlightButton = (props) => {
 
     const [open, setOpen] = useState(false);
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    //const anchorEl = React.useRef();
+    //const [anchorEl, setAnchorEl] = useState(null);
+    const anchorEl = React.useRef();
 
     useEffect(() => {
         console.log(open)
+        //setOpen(true);
     }, [open]);
 
     const handleClick = (event) => {
         //setAnchorEl(event.currentTarget);
         setOpen(true);
+        console.log("setting to true")
     };
 
     const handleClose = () => {
-        //setOpen(false);
-        setAnchorEl(null);
+        setOpen(false);
+        //setAnchorEl(null);
     };
 
     //const open = Boolean(anchorEl);
@@ -32,11 +34,11 @@ const HighlightButton = (props) => {
 
 
     return (
-        <>
+        <div>
             <Link to={isLoggedIn ? null : "/signup"}>
                 <Button
-                    id="accountButton"
-                    //ref={anchorEl}
+                    id="id"
+                    ref={anchorEl}
                     onClick={handleClick}
                     variant="contained"
                     color="secondary"
@@ -66,9 +68,9 @@ const HighlightButton = (props) => {
                 id = 'popover-account'
                 open = {open}
                 handleClose = {handleClose}
-                anchorEl={anchorEl}
+                anchorEl={() => anchorEl.current}
             />
-        </>
+        </div>
     )
 }
 

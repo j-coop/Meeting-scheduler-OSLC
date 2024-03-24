@@ -2,6 +2,7 @@ import {useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {useAuth} from "../../context/AuthContext";
 import config from "../../config";
+import {hashPassword} from "../../utils/PasswordHashing";
 
 
 const SignInPopup = ({ open, onClose }) => {
@@ -11,6 +12,8 @@ const SignInPopup = ({ open, onClose }) => {
     const {login, getUserData} = useAuth();
 
     const handleSignIn = async () => {
+
+        let hashedPassword = await hashPassword(userPassword);
 
         fetch(config.apiUrl+'/users/login?login='+userLogin+'&password='+userPassword, {
             method: 'POST',

@@ -12,6 +12,7 @@ import com.example.meeting_scheduler.services.MeetingService;
 import com.example.meeting_scheduler.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ public class DataInitializer {
     private final MeetingService meetingService;
     private final MeetingParticipationService meetingParticipationService;
     private final MeetingProposalService meetingProposalService;
+    private final PasswordEncoder passwordEncoder;
 
     private static final Random random = new Random(147);
 
@@ -33,12 +35,14 @@ public class DataInitializer {
     public DataInitializer(UserService userService,
                            MeetingService meetingService,
                            MeetingParticipationService meetingParticipationService,
-                           MeetingProposalService meetingProposalService)
+                           MeetingProposalService meetingProposalService,
+                           PasswordEncoder passwordEncoder)
     {
         this.userService = userService;
         this.meetingService = meetingService;
         this.meetingParticipationService = meetingParticipationService;
         this.meetingProposalService = meetingProposalService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -75,7 +79,7 @@ public class DataInitializer {
                     userIDs[i], userLogins[i],
                     userNames[i], userEmails[i],
                     timezones[random.nextInt(timezones.length)],
-                    userPasswords[i], new ArrayList<MeetingParticipation>());
+                    hashPassword(userPasswords[i]), new ArrayList<MeetingParticipation>());
             users[i] = user;
         }
 
@@ -236,5 +240,9 @@ public class DataInitializer {
             array[i] = array[index];
             array[index] = temp;
         }
+    }
+
+    private String hashPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 }
