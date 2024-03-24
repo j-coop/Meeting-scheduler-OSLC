@@ -51,33 +51,34 @@ const MeetingPanel = (props) => {
 
     return (
         <div>
+            <hr/>
             {
                 userStatus === "JOINED" ?
                     <div className={styles.container}>
-                        <hr/>
-
-                        <div className={styles.left}>
-                            <div className={styles.proposals}>
-                                <ProposalsList
-                                    meetingData={meetingData}
-                                    owner={userId === meetingData.organiser}
-                                />
+                        <div className={styles.content}>
+                            <div className={styles.left}>
+                                <div className={styles.proposals}>
+                                    <ProposalsList
+                                        meetingData={meetingData}
+                                        owner={userId === meetingData.organiser}
+                                    />
+                                </div>
                             </div>
-                            <div className={styles.actions}>
-                                <hr/>
-                                <MeetingActionsPanel
-                                    meetingData={meetingData}
-                                    owner={userId === meetingData.organiser}
-                                />
+                            <div className={styles.right}>
+                                <div className={styles.participants}>
+                                    <ParticipantsList
+                                        id={meetingData.id}
+                                        ownerId={meetingData.organiser}
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div className={styles.right}>
-                            <div className={styles.participants}>
-                                <ParticipantsList
-                                    id={meetingData.id}
-                                    ownerId={meetingData.organiser}
-                                />
-                            </div>
+                        <div className={styles.actions}>
+                            <hr/>
+                            <MeetingActionsPanel
+                                meetingData={meetingData}
+                                owner={userId === meetingData.organiser}
+                            />
                         </div>
                     </div>
                     :

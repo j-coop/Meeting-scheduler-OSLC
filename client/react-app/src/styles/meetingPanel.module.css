@@ -1,18 +1,24 @@
 .container {
     box-sizing: border-box;
     height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    height: 85%;
 }
 
 .left {
     width: 70%;
-    float: left;
     height: 100%;
     padding: 5px;
 }
 
 .right {
     width: 30%;
-    float: left;
     height: 100%;
     padding: 5px;
 }
@@ -43,4 +49,26 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .container {
+        height: fit-content;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 100%;
+        padding: 0;
+    }
+
+    .right {
+        width: 100%;
+        padding: 0;
+    }
+
 }
