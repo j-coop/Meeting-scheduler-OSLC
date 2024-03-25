@@ -1,0 +1,19 @@
+{
+  "tabs": [
+    {
+      "header": "Create meeting",
+      "text": "Just choose the right button from the menu or your meetings panel ans fill in all the necessary data. Give your meeting a good meaningful title and a short description so that your intentions are clear to everyone. Choose the expected meeting duration or give a specific custom duration of your own. And don't forget to add all of the meeting date and time propositions that suit you in the calendar, the duration will be set based on your previous choice. Most important of all? Add everyone you want to meet by their logins or emails. Just click create and your first meeting is ready to go!\n",
+      "color": "#006699"
+    },
+    {
+      "header": "Have your say",
+      "text": "All the meetings you've been added to will appear in your meetings panel. New meetings will appear as invatations, that you can accept if you want to participate. Once you do that, you will be able to vote on proposed meeting dates, expressing your ability to attend at that time. Available, unavailable or something in between? Log in all your choices to have your say on the schedule. Everyone participating can see the current votes and change their mind at any time. Unless it's time to meet up already...\n",
+      "color": "#cc3300"
+    },
+    {
+      "header": "Make informed decision",
+      "text": "Once you as the organiser know when others are available, you can go ahead and schedule the meeting whenever you're ready. Just click the right button and and the chosen proposal will be designated as the meeting date. Your meeting, your choice - you can choose any proposal you deem adequate based on votes or cancel the meeting altogether at any point. And once the meeting has been held, you can mark it as completed and leave your recap notes for any future reference.\n",
+      "color": "#004d00"
+    }
+  ]
+}

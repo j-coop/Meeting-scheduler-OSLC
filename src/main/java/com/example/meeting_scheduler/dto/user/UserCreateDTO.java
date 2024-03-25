@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.ZoneId;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -13,6 +15,6 @@ public class UserCreateDTO {
     private String login;
     private String fullName;
     private String email;
-    private String timezone;
+    private ZoneId timezone;
     private String password;
 }

@@ -15,6 +15,7 @@ import com.example.meeting_scheduler.entities.Meeting;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.MeetingProposal;
 import com.example.meeting_scheduler.entities.User;
+import com.example.meeting_scheduler.entities.enums.ParticipationStatus;
 import com.example.meeting_scheduler.services.MeetingParticipationService;
 import com.example.meeting_scheduler.services.MeetingProposalService;
 import com.example.meeting_scheduler.services.MeetingService;
@@ -59,16 +60,70 @@ public class MeetingController {
         return ResponseEntity.ok(meetingDTO);
     }
 
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<Void> cancelMeeting(@PathVariable UUID id) {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        meetingService.cancelMeeting(meeting);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/schedule")
+    public ResponseEntity<Void> scheduleMeeting(
+            @PathVariable UUID id,
+            @RequestParam UUID proposalId
+    )
+    {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        MeetingProposal meetingProposal = meetingProposalService.findByProposalId(proposalId);
+        if (meetingProposal == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        if (meetingProposal.getMeeting() != meeting) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        meetingService.scheduleMeeting(meeting, proposalId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/complete")
+    public ResponseEntity<Void> markMeetingCompleted(@PathVariable UUID id) {
+        Meeting meeting = meetingService.findByMeetingId(id);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        meetingService.markCompleted(meeting);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/user/{login}")
-    public ResponseEntity<MeetingsDTO> getMeetingsByUser(@PathVariable String login) {
+    public ResponseEntity<MeetingsDTO> getMeetingsByUser(
+            @PathVariable String login,
+            @RequestParam Boolean includeDeclined
+    )
+    {
         User user = userService.findByLogin(login);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
         List<MeetingParticipation> participations = meetingParticipationService.findAllByUser(user);
-        List<Meeting> meetings = participations.stream()
-                .map(MeetingParticipation::getMeeting)
-                .toList();
+        List<Meeting> meetings;
+        if (includeDeclined != null && !includeDeclined) {
+            meetings = participations.stream()
+                    .filter(participation -> participation.getUserStatus() != ParticipationStatus.DECLINED)
+                    .map(MeetingParticipation::getMeeting)
+                    .toList();
+        }
+        else {
+            meetings = participations.stream()
+                    .map(MeetingParticipation::getMeeting)
+                    .toList();
+        }
         return ResponseEntity.ok(MeetingDTOsBuilder.meetingsToDTO(meetings));
     }
 
@@ -138,6 +193,31 @@ public class MeetingController {
 
         return ResponseEntity.created(URI.create("/meetings/"+
                 meeting.getMeetingId()+"/participations/"+meetingParticipation.getParticipationId())).build();
+    }
+
+    @PostMapping("/{meetingId}/participations/{participationId}/status")
+    public ResponseEntity<Void> changeParticipationStatus(
+            @PathVariable UUID meetingId,
+            @PathVariable UUID participationId,
+            @RequestParam Boolean accepted
+    )
+    {
+        Meeting meeting = meetingService.findByMeetingId(meetingId);
+        if (meeting == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        MeetingParticipation meetingParticipation = meetingParticipationService.findByParticipationId(participationId);
+        if (meetingParticipation == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        if (accepted) {
+            meetingParticipation.setUserStatus(ParticipationStatus.JOINED);
+        }
+        else {
+            meetingParticipation.setUserStatus(ParticipationStatus.DECLINED);
+        }
+        meetingParticipationService.saveMeetingParticipation(meetingParticipation);
+        return ResponseEntity.ok().build();
     }
 
 }

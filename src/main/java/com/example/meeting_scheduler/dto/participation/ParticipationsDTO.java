@@ -24,6 +24,7 @@ public class ParticipationsDTO {
     public static class Participation {
         private UUID id;
         private UUID userId;
+        private String userLogin;
         private ParticipationStatus userStatus;
     }
 

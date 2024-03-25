@@ -13,6 +13,7 @@ public class ParticipationDTOsBuilder {
                 .map(participation -> new ParticipationsDTO.Participation(
                         participation.getParticipationId(),
                         participation.getUser().getUserId(),
+                        participation.getUser().getLogin(),
                         participation.getUserStatus()
                 )).toList();
         return new ParticipationsDTO(participations1);

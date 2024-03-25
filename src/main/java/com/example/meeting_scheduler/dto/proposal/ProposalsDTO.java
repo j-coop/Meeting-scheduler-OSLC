@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,9 +26,8 @@ public class ProposalsDTO {
     @AllArgsConstructor
     public static class Proposal {
         private UUID id;
-        private LocalDate date;
-        private LocalTime startTime;
-        private LocalTime endTime;
+        private ZonedDateTime startTime;
+        private ZonedDateTime endTime;
     }
 
     private List<ProposalsDTO.Proposal> proposalsList;

@@ -1,8 +1,11 @@
-GET http://localhost:8080/users/login/Carlitos
+GET http://localhost:8080/users/login/jbed
 Accept: application/json
 
 <> 2024-01-13T235954.200.json
 <> 2024-01-13T235833.200.json
+###
+GET http://localhost:8080/users?search=a
+Accept: application/json
 
 ###
 GET http://localhost:8080/users/id/8fad63fb-f729-455d-b5cd-ae26b8e05b7b
@@ -43,5 +46,24 @@ Content-Type: application/json
 {
   "userId": "8fhd63fb-f729-455d-b5cd-ae26b8e05b7b"
 }
+
+###
+POST http://localhost:8080/meetings/b9d2765a-eecb-45e4-9f92-8333813266aa/participations
+Content-Type: application/json
+
+{
+  "userId": "8fhd63fb-f729-455d-b5cd-ae26b8e05b7b"
+}
+
+###
+
+###
+GET http://localhost:8080/meetings/7c2f9193-c6bc-4511-adc8-6d0573d1ca39
+Accept: application/json
+
+###
+###
+GET http://localhost:8080/meetings/7c2f9193-c6bc-4511-adc8-6d0573d1ca39/proposals
+Accept: application/json
 
 ###

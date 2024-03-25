@@ -3,25 +3,44 @@ package com.example.meeting_scheduler.controllers;
 import com.example.meeting_scheduler.dto.dto_builders.UserDTOsBuilder;
 import com.example.meeting_scheduler.dto.user.UserCreateDTO;
 import com.example.meeting_scheduler.dto.user.UserDTO;
+import com.example.meeting_scheduler.dto.user.UserUpdateDTO;
+import com.example.meeting_scheduler.dto.user.UsersDTO;
 import com.example.meeting_scheduler.entities.MeetingParticipation;
 import com.example.meeting_scheduler.entities.User;
 import com.example.meeting_scheduler.services.UserService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping
+    public ResponseEntity<UsersDTO> getUsers(@RequestParam String search) {
+        try {
+            List<User> users = userService.findByLoginSearch(search);
+            if (users == null) {
+                users = List.of();
+            }
+            return ResponseEntity.ok(UserDTOsBuilder.usersToUsersDTO(users));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @GetMapping("/id/{id}")
@@ -54,9 +73,27 @@ public class UserController {
         return ResponseEntity.ok(userDTO);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UUID> checkLogin(
+            @RequestParam String login,
+            @RequestParam String password
+    )
+    {
+        if (userService.checkLogin(login, password)) {
+            // return sign in token
+            return ResponseEntity.ok(UUID.randomUUID());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     public ResponseEntity<Void> addUser(@RequestBody UserCreateDTO userCreateDTO) {
-        User user = userService.addUser(
+        User user = userService.findByEmail(userCreateDTO.getEmail());
+        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        user = userService.findByLogin(userCreateDTO.getLogin());
+        if (user != null) return ResponseEntity.status(HttpStatus.CONFLICT).build();
+
+        user = userService.addUser(
                 userCreateDTO.getLogin(),
                 userCreateDTO.getFullName(),
                 userCreateDTO.getEmail(),
@@ -64,6 +101,20 @@ public class UserController {
                 userCreateDTO.getPassword()
         );
         return ResponseEntity.created(URI.create("/users/"+user.getUserId())).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(
+            @RequestBody UserUpdateDTO updateDTO,
+            @PathVariable UUID id
+    ) {
+        User user = userService.findByUserId(id);
+        if (user == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        if (userService.updateUser(user, updateDTO)) {
+            return ResponseEntity.ok().build();
+        }
+        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }

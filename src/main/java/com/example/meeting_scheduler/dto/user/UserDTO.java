@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class UserDTO {
     private String login;
     private String fullName;
     private String email;
-    private String timezone;
+    private ZoneId timezone;
     private String password;
     private List<UUID> meetingParticipations;
 }

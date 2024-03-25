@@ -12,10 +12,13 @@ import com.example.meeting_scheduler.services.MeetingService;
 import com.example.meeting_scheduler.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Component
@@ -24,6 +27,7 @@ public class DataInitializer {
     private final MeetingService meetingService;
     private final MeetingParticipationService meetingParticipationService;
     private final MeetingProposalService meetingProposalService;
+    private final PasswordEncoder passwordEncoder;
 
     private static final Random random = new Random(147);
 
@@ -31,12 +35,14 @@ public class DataInitializer {
     public DataInitializer(UserService userService,
                            MeetingService meetingService,
                            MeetingParticipationService meetingParticipationService,
-                           MeetingProposalService meetingProposalService)
+                           MeetingProposalService meetingProposalService,
+                           PasswordEncoder passwordEncoder)
     {
         this.userService = userService;
         this.meetingService = meetingService;
         this.meetingParticipationService = meetingParticipationService;
         this.meetingProposalService = meetingProposalService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -58,7 +64,12 @@ public class DataInitializer {
                 "hermiona123@hogwart.mg", "hendrysteven147@wst.co.uk", "h.potter@hogwart.mg",
                 "JackSparrow@carribean.ca", "JohnLennon@beatles.co.uk", "BigMike@nba.com", "Roger.Federer@atp.eu",
                 "LeoMessi10@barca.es", "LeoDiCaprio@hollywood.com", "Xavi6@barca.es", "carlitos@atp.eu"};
-        String[] timezones = {"UTC+1", "UTC+0", "UTC-6", "UTC+9"};
+        ZoneId[] timezones = {
+                ZoneId.of(ZoneId.SHORT_IDS.get("ECT")),
+                ZoneId.of(ZoneId.SHORT_IDS.get("CST")),
+                ZoneId.of(ZoneId.SHORT_IDS.get("CTT")),
+                ZoneId.of(ZoneId.SHORT_IDS.get("PST"))
+        };
 
         User[] users = new User[14];
         Meeting[] meetings = new Meeting[5];
@@ -68,7 +79,7 @@ public class DataInitializer {
                     userIDs[i], userLogins[i],
                     userNames[i], userEmails[i],
                     timezones[random.nextInt(timezones.length)],
-                    userPasswords[i], new ArrayList<MeetingParticipation>());
+                    hashPassword(userPasswords[i]), new ArrayList<MeetingParticipation>());
             users[i] = user;
         }
 
@@ -103,7 +114,7 @@ public class DataInitializer {
 
         for (int i=0; i<num_meetings; i++) {
             meetings[i] = new Meeting(meetingIDs[i], titles[i], descriptions[i], organizers[i], meetingStatuses[i],
-                    recaps[i], 0, meetingProposals[i], meetingParticipations[i]);
+                    recaps[i], null, meetingProposals[i], meetingParticipations[i]);
         }
 
         // Save users and meetings
@@ -144,15 +155,15 @@ public class DataInitializer {
             proposal.setProposalId(UUID.randomUUID());
             proposal.setMeeting(meeting);
 
-            // Generate a random date (within the next 30 days)
-            LocalDate randomDate = LocalDate.now().plusDays(random.nextInt(30));
-
             // Generate a random hour and minute
             int randomHour = random.nextInt(24);
             int randomMinute = random.nextInt(60);
 
-            proposal.setDate(randomDate);
-            LocalTime startTime = LocalTime.of(randomHour, randomMinute);
+            ZonedDateTime startTime = ZonedDateTime.now()
+                    .plusDays(random.nextInt(30))
+                    .plusHours(randomHour)
+                    .plusMinutes(randomMinute);
+
             proposal.setStartTime(startTime);
             proposal.setEndTime(startTime.plusHours(random.nextInt(2) + 1));
 
@@ -161,6 +172,12 @@ public class DataInitializer {
 
             // Save meeting proposal
             meetingProposalService.saveMeetingProposal(proposal);
+
+            // Set as chosen proposal
+            meeting.setChosenProposal(proposal.getProposalId());
+
+            // Save meeting with chosen proposal
+            meetingService.saveMeeting(meeting);
 
             proposals.add(proposal);
         }
@@ -223,5 +240,9 @@ public class DataInitializer {
             array[i] = array[index];
             array[index] = temp;
         }
+    }
+
+    private String hashPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 }

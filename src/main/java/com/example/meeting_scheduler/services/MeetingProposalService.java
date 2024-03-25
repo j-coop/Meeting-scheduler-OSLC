@@ -45,16 +45,16 @@ public class MeetingProposalService {
         MeetingProposal meetingProposal = MeetingProposal.builder()
                 .proposalId(UUID.randomUUID())
                 .meeting(meeting)
-                .date(dto.getDate())
                 .startTime(dto.getStartTime())
                 .endTime(dto.getEndTime())
                 .responses(new ArrayList<>())
                 .build();
 
+        this.saveMeetingProposal(meetingProposal);
+
         // Add proposal to meeting's list
         meetingService.addMeetingProposal(meeting, meetingProposal);
 
-        this.saveMeetingProposal(meetingProposal);
         return meetingProposal;
     }
 }

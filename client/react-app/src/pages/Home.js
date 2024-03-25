@@ -1,9 +1,14 @@
-import TabsComponent from "../components/TabsComponent";
+import TabsComponent from "../components/mainpage/TabsComponent";
 import styles from "../styles/home.module.css"
 import main_photo from "../resources/image.jpg"
-import HighlightButton from "../components/HighlightButton";
+import HighlightButton from "../components/buttons/HighlightButton";
+import {useAuth} from "../context/AuthContext";
+import ReassurancePanel from "../components/mainpage/ReassurancePanel";
 
 const Home = () => {
+
+    const {isLoggedIn} = useAuth();
+
     return (
         <>
             <div className={styles.banner}>
@@ -19,14 +24,19 @@ const Home = () => {
                         Let your team do it for you with MeetIT. Just choose participants, set possible
                         times and see how seamlessly you can arrange meetings
                     </div>
-                    <div style={{fontSize: "40px"}}>
-                        <HighlightButton value={"Sign up now"} size="40"/>
+                    <div style={{fontSize: "40px", marginTop: '20px'}}>
+                        {
+                            !isLoggedIn &&
+                            <HighlightButton value={"Sign up now"} size="20"/>
+                        }
                     </div>
                 </div>
                 <div className={styles.bannerRight}>
                     <img alt={"main-photo"} src={main_photo} className={styles.mainPhoto}/>
                 </div>
+                <div className={styles.clearfix}></div>
             </div>
+            <ReassurancePanel/>
             <TabsComponent/>
         </>
     )

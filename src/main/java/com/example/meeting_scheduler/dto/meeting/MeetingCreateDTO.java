@@ -12,7 +12,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class MeetingCreateDTO {
-    private UUID meetingId;
     private String title;
     private String description;
     private UUID organiser;

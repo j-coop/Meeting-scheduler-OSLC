@@ -52,10 +52,12 @@ public class MeetingService {
                 .organiser(dto.getOrganiser())
                 .status(MeetingStatus.PROPOSED)
                 .meetingRecap("")
-                .chosenProposal(-1)
+                .chosenProposal(null)
                 .participations(new ArrayList<>())
                 .proposals(new ArrayList<>())
                 .build();
+
+        this.saveMeeting(meeting);
 
         // Add organizer's participation
         ParticipationCreateDTO createDTO = new ParticipationCreateDTO(dto.getOrganiser());
@@ -76,6 +78,25 @@ public class MeetingService {
     @Transactional
     public void addMeetingParticipation(Meeting meeting, MeetingParticipation meetingParticipation) {
         meeting.getParticipations().add(meetingParticipation);
+        this.saveMeeting(meeting);
+    }
+
+    @Transactional
+    public void cancelMeeting(Meeting meeting) {
+        meeting.setStatus(MeetingStatus.CANCELLED);
+        this.saveMeeting(meeting);
+    }
+
+    @Transactional
+    public void scheduleMeeting(Meeting meeting, UUID chosenProposal) {
+        meeting.setChosenProposal(chosenProposal);
+        meeting.setStatus(MeetingStatus.SCHEDULED);
+        this.saveMeeting(meeting);
+    }
+
+    @Transactional
+    public void markCompleted(Meeting meeting) {
+        meeting.setStatus(MeetingStatus.COMPLETED);
         this.saveMeeting(meeting);
     }
 }

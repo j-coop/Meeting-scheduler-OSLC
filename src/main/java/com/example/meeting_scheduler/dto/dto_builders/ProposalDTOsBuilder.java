@@ -11,7 +11,6 @@ public class ProposalDTOsBuilder {
         List<ProposalsDTO.Proposal> proposals1 = proposals.stream()
                 .map(proposal -> new ProposalsDTO.Proposal(
                         proposal.getProposalId(),
-                        proposal.getDate(),
                         proposal.getStartTime(),
                         proposal.getEndTime()
                 )).toList();
