@@ -60,7 +60,10 @@ const NavBar = () => {
                             }
                         </ul>
                     </div>
-                    <NavButtons vertical={false}/>
+                    {
+                        !isMenuOpen &&
+                        <NavButtons vertical={false}/>
+                    }
                 </div>
                 <div className={styles.menuToggle}>
                     <Button onClick={toggleMenu}>
@@ -68,44 +71,48 @@ const NavBar = () => {
                     </Button>
                 </div>
             </div>
-            <Drawer open={isMenuOpen} onClose={closeMenu}>
-                <div className={styles.drawer}>
-                    <div className={styles.drawerLinks}>
-                        <ul>
-                            <li>
-                                <Link to="/" className={styles.navLink}>
-                                    <Typography variant="h6" color="textPrimary">Home</Typography>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/settings" className={styles.navLink}>
-                                    <Typography variant="h6" color="textPrimary">Settings</Typography>
-                                </Link>
-                            </li>
-                            {
-                                isLoggedIn &&
-                                (
-                                    <>
-                                        <li>
-                                            <Link to="/meetings" className={styles.navLink}>
-                                                <Typography variant="h6" color="textPrimary">Meetings</Typography>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/users" className={styles.navLink}>
-                                                <Typography variant="h6" color="textPrimary">Users</Typography>
-                                            </Link>
-                                        </li>
-                                    </>
-                                )
-                            }
-                        </ul>
+            {
+                isMenuOpen &&
+                <Drawer open={isMenuOpen} onClose={closeMenu}>
+                    <div className={styles.drawer}>
+                        <div className={styles.drawerLinks}>
+                            <ul>
+                                <li>
+                                    <Link to="/" className={styles.navLink}>
+                                        <Typography variant="h6" color="textPrimary">Home</Typography>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/settings" className={styles.navLink}>
+                                        <Typography variant="h6" color="textPrimary">Settings</Typography>
+                                    </Link>
+                                </li>
+                                {
+                                    isLoggedIn &&
+                                    (
+                                        <>
+                                            <li>
+                                                <Link to="/meetings" className={styles.navLink}>
+                                                    <Typography variant="h6" color="textPrimary">Meetings</Typography>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/users" className={styles.navLink}>
+                                                    <Typography variant="h6" color="textPrimary">Users</Typography>
+                                                </Link>
+                                            </li>
+                                        </>
+                                    )
+                                }
+                            </ul>
+                        </div>
+                        <div className={styles.drawerButtons}>
+                            <NavButtons vertical={true}/>
+                        </div>
                     </div>
-                    <div className={styles.drawerButtons}>
-                        <NavButtons vertical={true}/>
-                    </div>
-                </div>
-            </Drawer>
+                </Drawer>
+            }
+
         </nav>
     )
 }

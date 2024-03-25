@@ -1,24 +1,35 @@
 import {Link} from "react-router-dom";
 import {useAuth} from "../../context/AuthContext";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import AccountPopover from "../navbar/AccountPopover";
 import {Button, Typography} from "@mui/material";
 
 
 const HighlightButton = (props) => {
-    const {isLoggedIn,} = useAuth();
+    const {isLoggedIn} = useAuth();
 
-    const [open, setOpen] = useState(false);
+    //const [open, setOpen] = useState(false);
+
+    const {open,setOpen} = useAuth();
 
     //const [anchorEl, setAnchorEl] = useState(null);
-    const anchorEl = React.useRef();
+    const anchorEl = useRef();
+
+    const setRef = (element) => {
+        anchorEl.current = element; // Assign the element to the ref
+    };
+
+    useEffect(() => {
+        console.log("rerender")
+    }, []);
 
     useEffect(() => {
         console.log(open)
         //setOpen(true);
     }, [open]);
 
-    const handleClick = (event) => {
+    const handleClick = () => {
+        //console.log(event.currentTarget)
         //setAnchorEl(event.currentTarget);
         setOpen(true);
         console.log("setting to true")
@@ -37,8 +48,8 @@ const HighlightButton = (props) => {
         <div>
             <Link to={isLoggedIn ? null : "/signup"}>
                 <Button
-                    id="id"
-                    ref={anchorEl}
+                    id="popover-account"
+                    ref={setRef}
                     onClick={handleClick}
                     variant="contained"
                     color="secondary"
@@ -69,6 +80,7 @@ const HighlightButton = (props) => {
                 open = {open}
                 handleClose = {handleClose}
                 anchorEl={() => anchorEl.current}
+                //anchorEl={anchorEl}
             />
         </div>
     )

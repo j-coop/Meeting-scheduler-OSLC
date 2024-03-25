@@ -12,6 +12,7 @@ const AccountPopover = ({id, open, handleClose, anchorEl}) => {
         <Popover
             id={id}
             open={open}
+            onLoad={()=>{console.log("load")}}
             anchorEl={anchorEl}
             onClose={handleClose}
             anchorOrigin={{

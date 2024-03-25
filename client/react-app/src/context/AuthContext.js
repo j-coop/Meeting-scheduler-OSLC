@@ -14,6 +14,8 @@ export const AuthProvider = ({children}) => {
     const [userPassword, setUserPassword] = useState("");
     const [userData, setUserData] = useState(null);
     const [userTimezone, setUserTimezone] = useState(null);
+    //
+    const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -81,7 +83,8 @@ export const AuthProvider = ({children}) => {
             userTimezone,
             login,
             logout,
-            getUserData
+            getUserData,
+            open, setOpen
         }}>
             {children}
         </AuthContext.Provider>
