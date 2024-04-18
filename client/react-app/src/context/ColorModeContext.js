@@ -3,7 +3,7 @@ import {blue, green, grey, indigo, teal} from "@mui/material/colors";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 
 
-const ColorModeContext = createContext();
+const ColorModeContext = createContext(undefined);
 
 export const ColorModeProvider = ({children}) => {
 
