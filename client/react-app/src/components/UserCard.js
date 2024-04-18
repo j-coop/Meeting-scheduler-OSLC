@@ -2,9 +2,14 @@ import {Avatar, Card, Chip, Fab, Stack, Typography} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {useState} from "react";
 import {useAuth} from "../context/AuthContext";
+import {Link} from "react-router-dom";
 
 
 const UserCard = (props) => {
+
+    const compact = props.compact !== undefined ? props.compact : false;
+
+    const onClick = props.onClick !== undefined ? props.onClick : null;
 
     const active = true;
 
@@ -34,38 +39,56 @@ const UserCard = (props) => {
 
     return (
         <Card sx={{ p: 2.5, width: (props.width ? props.width : "100%") }}>
-            <Stack direction="row" alignItems="center" spacing={2} useFlexGap>
-                <Avatar variant="rounded" src="avatar.jpg" />
-                <div>
+            <Link to={"/settings"} onClick={onClick}>
+                <Stack direction={compact ? "column" : "row"} alignItems="center" spacing={compact ? 1 : 2} useFlexGap>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
-                        <Typography fontWeight="semiBold">{name}</Typography>
-                        <Chip
-                            size="small"
-                            color={active ? 'secondary' : 'default'}
-                            label={login}
-                        />
+                        <Avatar variant="rounded" src="avatar.jpg" />
+                        {
+                            compact &&
+                            <Stack direction="column" alignItems="center"  useFlexGap>
+                                <Typography fontWeight="semiBold" color="text.primary">{name}</Typography>
+                                <Chip
+                                    size="small"
+                                    color={active ? 'secondary' : 'default'}
+                                    label={login}
+                                />
+                            </Stack>
+                        }
                     </Stack>
-                    <Typography variant="body2" color="text.secondary">
-                        {email}
-                    </Typography>
-                </div>
-                {
-                    addPresent ?
-                        <Fab
-                            disabled={added}
-                            color="neutral"
-                            aria-label="add"
-                            size="medium"
-                            onClick={props.setChosen !== null ? addUser : null}
-                            style = {{
-                                float: "right"
-                            }}
-                        >
-                            <AddIcon />
-                        </Fab>
-                        :<></>
-                }
-            </Stack>
+                    <div>
+                        {
+                            !compact &&
+                            <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
+                                <Typography fontWeight="semiBold" color="text.primary">{name}</Typography>
+                                <Chip
+                                    size="small"
+                                    color={active ? 'secondary' : 'default'}
+                                    label={login}
+                                />
+                            </Stack>
+                        }
+                        <Typography variant="body2" color="text.secondary">
+                            {email}
+                        </Typography>
+                    </div>
+                    {
+                        addPresent ?
+                            <Fab
+                                disabled={added}
+                                color="neutral"
+                                aria-label="add"
+                                size="medium"
+                                onClick={props.setChosen !== null ? addUser : null}
+                                style = {{
+                                    float: "right"
+                                }}
+                            >
+                                <AddIcon />
+                            </Fab>
+                            :<></>
+                    }
+                </Stack>
+            </Link>
         </Card>
     )
 }

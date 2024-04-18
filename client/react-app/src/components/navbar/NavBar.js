@@ -7,6 +7,7 @@ import {Button, Drawer, Typography} from "@mui/material";
 import React, {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import UserCard from "../UserCard";
 
 const NavBar = () => {
 
@@ -37,8 +38,8 @@ const NavBar = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/settings" className={styles.navLink}>
-                                    <Typography variant="h6" color="textPrimary">Settings</Typography>
+                                <Link to="/users" className={styles.navLink}>
+                                    <Typography variant="h6" color="textPrimary">Users</Typography>
                                 </Link>
                             </li>
                             {
@@ -51,8 +52,8 @@ const NavBar = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/users" className={styles.navLink}>
-                                                <Typography variant="h6" color="textPrimary">Users</Typography>
+                                            <Link to="/settings" className={styles.navLink}>
+                                                <Typography variant="h6" color="textPrimary">Settings</Typography>
                                             </Link>
                                         </li>
                                     </>
@@ -67,7 +68,7 @@ const NavBar = () => {
                 </div>
                 <div className={styles.menuToggle}>
                     <Button onClick={toggleMenu}>
-                        <MenuIcon/>
+                    <MenuIcon/>
                     </Button>
                 </div>
             </div>
@@ -75,16 +76,26 @@ const NavBar = () => {
                 isMenuOpen &&
                 <Drawer open={isMenuOpen} onClose={closeMenu}>
                     <div className={styles.drawer}>
+                        <div>
+                            <Logo onClick={closeMenu}/>
+                        </div>
+                        <div style={{marginTop: "5px"}}>
+                            <UserCard
+                                addPresent={false}
+                                compact={true}
+                                onClick={closeMenu}
+                            />
+                        </div>
                         <div className={styles.drawerLinks}>
                             <ul>
                                 <li>
-                                    <Link to="/" className={styles.navLink}>
+                                    <Link to="/" className={styles.navLink} onClick={closeMenu}>
                                         <Typography variant="h6" color="textPrimary">Home</Typography>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/settings" className={styles.navLink}>
-                                        <Typography variant="h6" color="textPrimary">Settings</Typography>
+                                    <Link to="/users" className={styles.navLink} onClick={closeMenu}>
+                                        <Typography variant="h6" color="textPrimary">Users</Typography>
                                     </Link>
                                 </li>
                                 {
@@ -92,13 +103,13 @@ const NavBar = () => {
                                     (
                                         <>
                                             <li>
-                                                <Link to="/meetings" className={styles.navLink}>
+                                                <Link to="/meetings" className={styles.navLink} onClick={closeMenu}>
                                                     <Typography variant="h6" color="textPrimary">Meetings</Typography>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="/users" className={styles.navLink}>
-                                                    <Typography variant="h6" color="textPrimary">Users</Typography>
+                                                <Link to="/settings" className={styles.navLink} onClick={closeMenu}>
+                                                    <Typography variant="h6" color="textPrimary">Settings</Typography>
                                                 </Link>
                                             </li>
                                         </>
@@ -107,7 +118,7 @@ const NavBar = () => {
                             </ul>
                         </div>
                         <div className={styles.drawerButtons}>
-                            <NavButtons vertical={true}/>
+                            <NavButtons vertical={true} onClick={closeMenu}/>
                         </div>
                     </div>
                 </Drawer>
