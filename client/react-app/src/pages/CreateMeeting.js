@@ -263,6 +263,7 @@ const CreateMeeting = () => {
                                         addPresent={false}
                                         chosen={null}
                                         setChosen={null}
+                                        onClick={null}
                                     />
                                 </ListItem>
                             ))}

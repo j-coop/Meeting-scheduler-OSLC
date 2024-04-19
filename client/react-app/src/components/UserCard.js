@@ -39,7 +39,7 @@ const UserCard = (props) => {
 
     return (
         <Card sx={{ p: 2.5, width: (props.width ? props.width : "100%") }}>
-            <Link to={"/settings"} onClick={onClick}>
+            <Link to={onClick !== null ? "/settings" : null} onClick={onClick}>
                 <Stack direction={compact ? "column" : "row"} alignItems="center" spacing={compact ? 1 : 2} useFlexGap>
                     <Stack direction="row" alignItems="center" spacing={1} useFlexGap>
                         <Avatar variant="rounded" src="avatar.jpg" />

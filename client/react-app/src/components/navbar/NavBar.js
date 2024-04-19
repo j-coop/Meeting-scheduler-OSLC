@@ -6,7 +6,6 @@ import {useAuth} from "../../context/AuthContext";
 import {Button, Drawer, Typography} from "@mui/material";
 import React, {useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import UserCard from "../UserCard";
 
 const NavBar = () => {
@@ -79,13 +78,16 @@ const NavBar = () => {
                         <div>
                             <Logo onClick={closeMenu}/>
                         </div>
-                        <div style={{marginTop: "5px"}}>
-                            <UserCard
-                                addPresent={false}
-                                compact={true}
-                                onClick={closeMenu}
-                            />
-                        </div>
+                        {
+                            isLoggedIn &&
+                            <div style={{marginTop: "5px"}}>
+                                <UserCard
+                                    addPresent={false}
+                                    compact={true}
+                                    onClick={closeMenu}
+                                />
+                            </div>
+                        }
                         <div className={styles.drawerLinks}>
                             <ul>
                                 <li>
