@@ -3,14 +3,14 @@ import {useAuth} from "../../context/AuthContext";
 import HighlightButton from "../buttons/HighlightButton";
 import React, {useEffect, useState} from "react";
 import SignInPopup from "./SignInPopup";
-import {FormControlLabel, Stack} from "@mui/material";
+import {FormControlLabel} from "@mui/material";
 import ModeSwitch from "../buttons/ModeSwitch";
 import {useColorMode} from "../../context/ColorModeContext";
 import LogInOutButton from "../buttons/LogInOutButton";
 import CreateMeetingButton from "../buttons/CreateMeetingButton";
 
 
-const NavButtons = ({vertical}) => {
+const NavButtons = ({vertical, onClick}) => {
     const {isLoggedIn, login} = useAuth();
 
     const colorMode = useColorMode();
@@ -33,19 +33,22 @@ const NavButtons = ({vertical}) => {
         flexDirection: 'row'
     };
 
-    const LoggedInterface = () => {
+    const LoggedInterface = ({popupPresent}) => {
         const {userLogin} = useAuth();
         return (
             <div style={vertical === true ? verticalStyle : horizontalStyle}>
                 <LogInOutButton logged={true}/>
-                <div style={vertical === true ? {marginTop: '10px'} : {}}>
-                    <HighlightButton value={userLogin}/>
-                </div>
+                {
+                    (popupPresent === undefined || popupPresent) &&
+                    <div style={vertical === true ? {marginTop: '10px'} : {}}>
+                        <HighlightButton value={userLogin}/>
+                    </div>
+                }
             </div>
         )
     }
 
-    const NotLoggedInterface = () => {
+    const NotLoggedInterface = ({popupPresent}) => {
 
         const [signInOpen, setSignInOpen] = useState(false);
 
@@ -57,9 +60,12 @@ const NavButtons = ({vertical}) => {
             <div style={vertical === true ? verticalStyle : horizontalStyle}>
                 <LogInOutButton logged={false} signIn={signInOpen} setSignIn={setSignInOpen}/>
                 <SignInPopup open={signInOpen} onClose={handleSignInClose}/>
-                <div style={vertical === true ? {marginTop: '10px'} : {}}>
-                    <HighlightButton value="Sign up"/>
-                </div>
+                {
+                    (popupPresent === undefined || popupPresent) &&
+                    <div style={vertical === true ? {marginTop: '10px'} : {}}>
+                        <HighlightButton value="Sign up"/>
+                    </div>
+                }
             </div>
         )
     }
@@ -82,8 +88,11 @@ const NavButtons = ({vertical}) => {
                         control={<ModeSwitch sx={{m: 1}} onClick={handleModeChange}/>}
                         label=""
                     />
-                    {isLoggedIn ? <LoggedInterface/> : <NotLoggedInterface/>}
-                    <CreateMeetingButton vertical={true}/>
+                    {isLoggedIn ?
+                        <LoggedInterface popupPresent={false}/> :
+                        <NotLoggedInterface popupPresent={false}/>
+                    }
+                    <CreateMeetingButton vertical={true} onClick={onClick}/>
             </div>
             :
             <div className={styles.navButtons}>

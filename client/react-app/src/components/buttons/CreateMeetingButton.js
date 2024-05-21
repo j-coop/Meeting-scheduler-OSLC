@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 
 
-const CreateMeetingButton = ({vertical}) => {
+const CreateMeetingButton = ({vertical, onClick}) => {
 
     return (
         <div style={vertical ? {marginTop: '10px'} : {display: 'flex', alignItems: 'center'}}>
@@ -19,6 +19,7 @@ const CreateMeetingButton = ({vertical}) => {
                         paddingLeft: "15px",
                         paddingRight: "15px"
                     }}
+                    onClick={onClick !== undefined ? onClick : null}
                 >
                     <Typography
                         variant="body2"

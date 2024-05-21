@@ -1,7 +1,7 @@
 import {Button, List, ListItem, TextField, Typography} from "@mui/material";
 import {ToggleButton, ToggleButtonGroup} from "@mui/lab";
 import UserSearch from "../components/UserSearch";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "../styles/createMeeting.module.css"
 import {momentLocalizer} from "react-big-calendar";
 import moment from "moment";
@@ -9,8 +9,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import WeekCalendar from "../components/calendar/WeekCalendar";
 import UserCard from "../components/UserCard";
 import config from "../config";
-import {formatDateTime, parseDateToISO8601} from "../utils/FormatDate"
+import {parseDateToISO8601} from "../utils/FormatDate"
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../context/AuthContext";
 
 
 const CreateMeeting = () => {
@@ -33,12 +34,14 @@ const CreateMeeting = () => {
 
     const navigate = useNavigate();
 
+    const {isLoggedIn} = useAuth();
+
     const handleChange = (
         event,
         newValue
     ) => {
+        if (newValue === null) return;
         setDurationState(newValue);
-        if (newValue === durationState) return;
         if (newValue === "custom") {
             if (!isCustom) {
                 setIsCustom(true);
@@ -51,11 +54,11 @@ const CreateMeeting = () => {
         }
     };
 
-    const handleCustomInputChange = () => {
+    useEffect(() => {
         if (isCustom) {
             setDurationValue(customInputValue);
         }
-    }
+    }, [customInputValue]);
 
     const addMeetingProposals = (meetingId) => {
         for (let proposal of proposals) {
@@ -123,6 +126,11 @@ const CreateMeeting = () => {
     }
 
     const handleMeetingCreate = () => {
+
+        if (!isLoggedIn) {
+            alert("You must be logged in to create meetings!");
+            return;
+        }
 
         let data = {
             title: title,
@@ -209,7 +217,7 @@ const CreateMeeting = () => {
                         value={customInputValue}
                         onChange={(event) => {
                             setCustomInputValue(parseInt(event.target.value));
-                            handleCustomInputChange(customInputValue);
+                            //handleCustomInputChange(customInputValue);
                         }}
                     />
                 </div>
@@ -255,6 +263,7 @@ const CreateMeeting = () => {
                                         addPresent={false}
                                         chosen={null}
                                         setChosen={null}
+                                        onClick={null}
                                     />
                                 </ListItem>
                             ))}

@@ -8,6 +8,11 @@ const AccountPopover = ({id, open, handleClose, anchorEl}) => {
 
     const {userLogin, userEmail, logout} = useAuth();
 
+    const handleLogoutButton = () => {
+        logout();
+        handleClose();
+    }
+
     return (
         <Popover
             id={id}
@@ -45,7 +50,7 @@ const AccountPopover = ({id, open, handleClose, anchorEl}) => {
                     <Link to={"/users"} onClick={handleClose}><Button>Users</Button></Link>
                     <Link to={"/settings"} onClick={handleClose}><Button>Settings</Button></Link>
                     <Link to={"/about"} onClick={handleClose}><Button>About</Button></Link>
-                    <Button onClick={logout}>Logout</Button>
+                    <Button onClick={handleLogoutButton}>Logout</Button>
                 </ButtonGroup>
             </div>
         </Popover>
