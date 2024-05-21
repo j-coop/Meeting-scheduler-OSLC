@@ -1,3 +1,51 @@
+GET http://localhost:8080/oslc/userservice
+Accept: application/rdf+xml
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-05-21T151605.200.xml
+
+###
+
+GET http://localhost:8080/oslc/meetingservice
+Accept: application/rdf+xml
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-05-21T151602.200.xml
+
+###
+
+GET http://localhost:8080/oslc
+Accept: application/rdf+xml
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-05-21T151557.200.xml
+
+###
+
+GET http://localhost:8080/users?search=a
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-05-21T150858.200.json
+
+###
+
+GET http://localhost:8080/users/login/jbed
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
 GET http://localhost:8080/meetings/7c2f9193-c6bc-4511-adc8-6d0573d1ca39/proposals
 Accept: application/json
 Connection: Keep-Alive
@@ -508,56 +556,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2024-01-13T225111.200.json
-
-###
-
-GET http://localhost:8080/meetings/user/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T224736.404.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T224732.200.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T224621.200.json
-
-###
-
-GET http://localhost:8080/users/login/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T224558.200.json
-
-###
-
-GET http://localhost:8080/meetings/user/Carlitos
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2024-01-13T224509.404.json
 
 ###
 
